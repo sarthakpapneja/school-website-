@@ -1,5 +1,49 @@
 import { motion } from 'framer-motion';
-import { Trophy, Zap, Bus, Monitor, Sun, Book } from 'lucide-react';
+import { Trophy, Zap, Bus, Sun, Book } from 'lucide-react';
+import { useTilt } from '../hooks/useTilt';
+
+const BentoCard = ({ item, idx }) => {
+    const { ref, rotateX, rotateY, handleMouseMove, handleMouseLeave } = useTilt();
+
+    return (
+        <motion.div
+            ref={ref}
+            onMouseMove={handleMouseMove}
+            onMouseLeave={handleMouseLeave}
+            initial={{ opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ delay: idx * 0.1 }}
+            style={{ rotateX, rotateY, transformStyle: 'preserve-3d' }}
+            className={`relative rounded-3xl overflow-hidden group ${item.colSpan} shadow-xl hover:shadow-2xl transition-shadow cursor-pointer`}
+        >
+            <div className="absolute inset-0" style={{ transform: 'translateZ(-20px)' }}>
+                <img
+                    src={item.img}
+                    alt={item.title}
+                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                />
+                <div className={`absolute inset-0 opacity-60 transition-opacity group-hover:opacity-70 ${item.bg === 'bg-gold' ? 'bg-yellow-600 mix-blend-multiply' : 'bg-slate-900 mix-blend-multiply'}`}></div>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+            </div>
+
+            <div className="absolute bottom-0 left-0 p-8 w-full" style={{ transform: 'translateZ(50px)' }}>
+                <div className="bg-white/10 backdrop-blur-md p-3 rounded-xl w-fit mb-4 border border-white/20">
+                    {item.icon}
+                </div>
+                <h3 className="text-2xl font-bold text-white mb-2 font-serif">{item.title}</h3>
+                <p className="text-slate-200 text-sm font-medium leading-relaxed max-w-sm">
+                    {item.desc}
+                </p>
+                <motion.div
+                    initial={{ width: 0 }}
+                    whileInView={{ width: '40%' }}
+                    className="h-1 bg-gold mt-4 rounded-full"
+                />
+            </div>
+        </motion.div>
+    );
+};
 
 const BentoGrid = () => {
     const items = [
@@ -53,39 +97,7 @@ const BentoGrid = () => {
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-[300px]">
                     {items.map((item, idx) => (
-                        <motion.div
-                            key={idx}
-                            initial={{ opacity: 0, scale: 0.95 }}
-                            whileInView={{ opacity: 1, scale: 1 }}
-                            viewport={{ once: true }}
-                            transition={{ delay: idx * 0.1 }}
-                            className={`relative rounded-3xl overflow-hidden group ${item.colSpan} shadow-xl hover:shadow-2xl transition-shadow`}
-                        >
-                            <div className="absolute inset-0">
-                                <img
-                                    src={item.img}
-                                    alt={item.title}
-                                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                                />
-                                <div className={`absolute inset-0 opacity-60 transition-opacity group-hover:opacity-70 ${item.bg === 'bg-gold' ? 'bg-yellow-600 mix-blend-multiply' : 'bg-slate-900 mix-blend-multiply'}`}></div>
-                                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
-                            </div>
-
-                            <div className="absolute bottom-0 left-0 p-8 w-full">
-                                <div className="bg-white/10 backdrop-blur-md p-3 rounded-xl w-fit mb-4 border border-white/20">
-                                    {item.icon}
-                                </div>
-                                <h3 className="text-2xl font-bold text-white mb-2 font-serif">{item.title}</h3>
-                                <p className="text-slate-200 text-sm font-medium leading-relaxed max-w-sm">
-                                    {item.desc}
-                                </p>
-                                <motion.div
-                                    initial={{ width: 0 }}
-                                    whileInView={{ width: '40%' }}
-                                    className="h-1 bg-gold mt-4 rounded-full"
-                                />
-                            </div>
-                        </motion.div>
+                        <BentoCard key={idx} item={item} idx={idx} />
                     ))}
                 </div>
             </div>

@@ -1,6 +1,9 @@
 import { motion } from 'framer-motion';
+import { useMagnetic } from '../hooks/useMagnetic';
 
 const Message = () => {
+    const { ref: magneticRef, position } = useMagnetic(0.3);
+
     return (
         <section className="py-24 px-6 bg-white overflow-hidden" id="about">
             <div className="container mx-auto">
@@ -57,9 +60,13 @@ const Message = () => {
                         </div>
 
                         <div className="mt-12 flex items-center gap-6">
-                            <button className="bg-royal-blue text-white px-8 py-4 rounded-xl font-bold hover:bg-slate-800 transition-all shadow-lg hover:shadow-royal-blue/20">
+                            <motion.button
+                                ref={magneticRef}
+                                animate={{ x: position.x, y: position.y }}
+                                className="bg-royal-blue text-white px-8 py-4 rounded-xl font-bold hover:bg-slate-800 transition-all shadow-lg hover:shadow-royal-blue/20"
+                            >
                                 Read Full Message
-                            </button>
+                            </motion.button>
                             <div className="w-20 h-[1px] bg-slate-200"></div>
                             <p className="text-slate-400 text-sm italic">Seek Wisdom Since 1995</p>
                         </div>
