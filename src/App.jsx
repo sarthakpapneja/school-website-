@@ -26,7 +26,10 @@ import SmoothScroll from './components/SmoothScroll';
 import ProspectusModal from './components/ProspectusModal';
 
 function App() {
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(true); // Keep for potential future use or prop drilling
+  const [showPreloader, setShowPreloader] = useState(() => {
+    return !sessionStorage.getItem('athenia_preloader_seen');
+  });
   const [isApplyOpen, setIsApplyOpen] = useState(false);
   const [isVideoOpen, setIsVideoOpen] = useState(false);
   const [isPortalOpen, setIsPortalOpen] = useState(false);
@@ -42,12 +45,18 @@ function App() {
   const openFeature = (feature) => setActiveFeature(feature);
   const openProspectus = () => setIsProspectusOpen(true);
 
+  const handlePreloaderComplete = () => {
+    setLoading(false);
+    setShowPreloader(false);
+    sessionStorage.setItem('athenia_preloader_seen', 'true');
+  };
+
   return (
     <div className="bg-midnight min-h-screen font-sans selection:bg-champagne selection:text-midnight relative overflow-x-hidden">
       <div className="film-grain" />
       <SmoothScroll />
 
-      <Preloader onComplete={() => setLoading(false)} />
+      {showPreloader && <Preloader onComplete={handlePreloaderComplete} />}
 
       <ScrollProgress />
       <Toaster
