@@ -36,7 +36,7 @@ const MessageModal = ({ isOpen, onClose }) => {
                                 />
                                 <div className="absolute inset-0 bg-gradient-to-t from-midnight via-transparent to-transparent"></div>
                                 <div className="absolute bottom-10 left-10">
-                                    <h3 className="font-serif text-3xl font-bold text-ivory">Dr. Elena Ross</h3>
+                                    <h3 className="font-serif text-3xl font-bold text-ivory">Mrs. Leena Dua</h3>
                                     <p className="text-champagne font-bold text-xs tracking-widest uppercase">Principal & Lead Mentor</p>
                                 </div>
                             </div>
