@@ -24,7 +24,7 @@ const Footer = ({ onPortalClick, onRequestProspectus }) => {
 
 
     return (
-        <footer className="bg-midnight pt-32 pb-16 px-6 border-t border-white/5 relative overflow-hidden">
+        <footer id="contact" className="bg-midnight pt-32 pb-16 px-6 border-t border-white/5 relative overflow-hidden">
             <div className="container mx-auto relative z-10">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-20 mb-32">
                     <div className="col-span-1 lg:col-span-1">

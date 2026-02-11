@@ -31,7 +31,7 @@ const MessageModal = ({ isOpen, onClose }) => {
                             <div className="w-full lg:w-2/5 relative h-[400px] lg:h-auto overflow-hidden">
                                 <img
                                     src={principalImage}
-                                    className="w-full h-full object-cover"
+                                    className="w-full h-full object-cover object-top"
                                     alt="Principal"
                                 />
                                 <div className="absolute inset-0 bg-gradient-to-t from-midnight via-transparent to-transparent"></div>
