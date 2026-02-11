@@ -14,12 +14,12 @@ const MessageModal = ({ isOpen, onClose }) => {
                 className="fixed inset-0 z-[100] overflow-y-auto bg-midnight/95 backdrop-blur-3xl"
                 onClick={onClose}
             >
-                <div className="min-h-screen w-full flex items-center justify-center p-6 py-12">
+                <div className="min-h-screen w-full flex items-start justify-center p-6 py-20">
                     <motion.div
                         initial={{ opacity: 0, scale: 0.9, y: 30 }}
                         animate={{ opacity: 1, scale: 1, y: 0 }}
                         exit={{ opacity: 0, scale: 0.9, y: 30 }}
-                        className="bg-midnight-light border border-white/10 rounded-[3.5rem] w-full max-w-5xl overflow-hidden shadow-2xl relative"
+                        className="bg-midnight-light border border-white/10 rounded-[3.5rem] w-full max-w-5xl overflow-hidden shadow-2xl relative my-auto"
                         onClick={(e) => e.stopPropagation()}
                     >
                         <button onClick={onClose} className="absolute top-10 right-10 z-10 p-4 glass rounded-full text-ivory/50 hover:text-champagne transition-colors group">
@@ -28,10 +28,10 @@ const MessageModal = ({ isOpen, onClose }) => {
 
                         <div className="flex flex-col lg:flex-row">
                             {/* Image Side */}
-                            <div className="w-full lg:w-2/5 relative h-[400px] lg:h-auto overflow-hidden">
+                            <div className="w-full lg:w-2/5 relative h-[400px] lg:h-auto overflow-hidden bg-midnight">
                                 <img
                                     src={principalImage}
-                                    className="w-full h-full object-cover object-top"
+                                    className="w-full h-full object-contain"
                                     alt="Principal"
                                 />
                                 <div className="absolute inset-0 bg-gradient-to-t from-midnight via-transparent to-transparent"></div>
