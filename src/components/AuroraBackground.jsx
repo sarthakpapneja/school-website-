@@ -1,10 +1,8 @@
-import { motion } from 'framer-motion';
-
 const AuroraBackground = () => {
     return (
-        <div className="fixed inset-0 pointer-events-none -z-10 overflow-hidden">
-            <div className="absolute top-0 left-0 w-full h-full aurora-glow"></div>
-            <div className="absolute inset-0 bg-white/40"></div>
+        <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden bg-midnight">
+            <div className="absolute inset-0 aurora-premium" />
+            <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] opacity-10 pointer-events-none" />
         </div>
     );
 };

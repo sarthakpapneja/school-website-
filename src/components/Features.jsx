@@ -1,102 +1,129 @@
 import { motion } from 'framer-motion';
-import { Award, Globe, Heart, ShieldCheck, Target, Zap } from 'lucide-react';
+import { BookOpen, Target, Award, ArrowUpRight, Trophy, Globe2, Users, Sparkles } from 'lucide-react';
 import { useTilt } from '../hooks/useTilt';
 
-const FeatureCard = ({ icon: Icon, title, desc, delay }) => {
-    const { ref, rotateX, rotateY, handleMouseMove, handleMouseLeave } = useTilt({ maxRotation: 10, stiffness: 100, damping: 20 });
+const FeatureCard = ({ icon: Icon, title, desc, delay, onClick }) => {
+    const { ref, rotateX, rotateY, handleMouseMove, handleMouseLeave } = useTilt();
 
     return (
         <motion.div
             ref={ref}
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
+            onClick={onClick}
+            style={{ rotateX, rotateY, transformStyle: 'preserve-3d' }}
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay }}
+            transition={{ duration: 0.8, delay }}
             viewport={{ once: true }}
-            style={{ rotateX, rotateY, transformStyle: 'preserve-3d' }}
-            className="group bg-white p-10 rounded-[2.5rem] shadow-sm hover:shadow-2xl transition-all duration-500 border border-slate-100 relative overflow-hidden cursor-pointer"
+            className="group bg-white/5 p-12 rounded-[3.5rem] border border-white/5 hover:border-champagne/30 transition-all duration-700 cursor-pointer overflow-hidden relative"
         >
-            <div className="absolute top-0 right-0 w-32 h-32 bg-slate-50 rounded-full -mr-16 -mt-16 group-hover:bg-gold/10 transition-colors duration-500"></div>
+            <div className="absolute -bottom-20 -right-20 w-64 h-64 bg-champagne/5 rounded-full blur-[80px] group-hover:bg-champagne/10 transition-all duration-700"></div>
 
-            <div
-                className="w-16 h-16 bg-royal-blue/5 rounded-2xl flex items-center justify-center text-royal-blue mb-8 group-hover:bg-royal-blue group-hover:text-white transition-all duration-500"
-                style={{ transform: 'translateZ(30px)' }}
-            >
-                <Icon size={32} />
+            <div className="w-20 h-20 glass rounded-3xl flex items-center justify-center text-champagne mb-10 transition-all duration-500 group-hover:scale-110 group-hover:bg-champagne group-hover:text-midnight shadow-2xl shadow-champagne/5" style={{ transform: 'translateZ(60px)' }}>
+                <Icon size={40} />
             </div>
 
-            <h3 className="font-serif text-2xl font-bold text-slate-900 mb-4" style={{ transform: 'translateZ(40px)' }}>{title}</h3>
-            <p className="text-slate-600 leading-relaxed text-sm" style={{ transform: 'translateZ(20px)' }}>
-                {desc}
-            </p>
+            <div style={{ transform: 'translateZ(40px)' }}>
+                <h3 className="font-serif text-3xl font-bold text-ivory mb-6 leading-tight group-hover:text-champagne transition-colors">{title}</h3>
+                <p className="text-ivory/50 leading-relaxed text-lg font-light mb-10">{desc}</p>
+            </div>
 
-            <div className="mt-8 flex items-center gap-2 text-gold font-bold text-xs uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                Learn More <span className="text-lg">→</span>
+            <div className="mt-auto flex items-center justify-between group-hover:text-champagne transition-colors" style={{ transform: 'translateZ(30px)' }}>
+                <div className="flex flex-col">
+                    <span className="text-ivory/30 text-[10px] font-bold tracking-[0.3em] uppercase mb-1">Pillar Of</span>
+                    <span className="text-champagne font-bold text-xs tracking-widest uppercase">Excellence</span>
+                </div>
+                <div className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center group-hover:border-champagne group-hover:bg-champagne group-hover:text-midnight transition-all">
+                    <ArrowUpRight size={20} />
+                </div>
             </div>
         </motion.div>
     );
 };
 
-const Features = () => {
-    const pillars = [
-        {
-            icon: Award,
-            title: "Academic Rigor",
-            desc: "Consistently ranked among the top schools for CBSE results and innovation in teaching."
-        },
-        {
-            icon: Globe,
-            title: "Global Outlook",
-            desc: "Our students are prepared for global challenges through international exchange programs."
-        },
-        {
-            icon: Heart,
-            title: "Holistic Care",
-            desc: "Supporting emotional and physical well-being through dedicated counseling and nutrition."
-        },
-        {
-            icon: ShieldCheck,
-            title: "Secure Environment",
-            desc: "24/7 surveillance and GPS-tracked transport ensuring complete peace of mind for parents."
-        },
-        {
-            icon: Target,
-            title: "Values Driven",
-            desc: "Instilling 'Seek Wisdom' as a way of life, fostering integrity, respect, and responsibility."
-        },
-        {
-            icon: Zap,
-            title: "Modern Edge",
-            desc: "Smart classrooms, robotics labs, and 100% solar energy integration at our core."
-        }
-    ];
+const features = [
+    {
+        title: "Ivy League Fast-Track",
+        description: "85% of our graduates matriculate into the top 10 global universities.",
+        icon: <Trophy size={28} className="text-champagne" />
+    },
+    {
+        title: "Global Citizenship",
+        description: "Semesters abroad in Kyoto, Paris, and Cape Town included in the curriculum.",
+        icon: <Globe2 size={28} className="text-champagne" />
+    },
+    {
+        title: "Boutique Mentorship",
+        description: "A 4:1 student-faculty ratio ensures hyper-personalized academic guidance.",
+        icon: <Users size={28} className="text-champagne" />
+    }
+];
 
+const Features = ({ onLearnMore }) => {
     return (
-        <section className="py-24 px-6 bg-slate-50 relative overflow-hidden" id="features">
-            {/* Decorative Elements */}
-            <div className="absolute top-40 left-0 w-72 h-72 bg-royal-blue/5 rounded-full blur-3xl -ml-36"></div>
-            <div className="absolute bottom-40 right-0 w-96 h-96 bg-gold/10 rounded-full blur-3xl -mr-48"></div>
+        <section className="py-32 bg-midnight relative overflow-hidden" id="philosophy">
+            {/* Background Blend */}
+            <div className="absolute right-0 top-0 w-1/2 h-full hidden md:block opacity-20 pointer-events-none">
+                <div className="absolute inset-0 bg-gradient-to-r from-midnight via-midnight/80 to-transparent z-10" />
+                <img
+                    src="https://images.unsplash.com/photo-1541339907198-e08756dedf3f?q=80&w=2070&auto=format&fit=crop"
+                    alt="Campus Library"
+                    className="w-full h-full object-cover"
+                />
+            </div>
 
-            <div className="container mx-auto relative z-10">
-                <div className="text-center mb-20">
-                    <span className="text-gold font-bold text-xs tracking-[0.2em] uppercase mb-2 block">Our Core Pillars</span>
-                    <h2 className="font-serif text-4xl md:text-5xl font-bold text-royal-blue leading-tight mb-6">
-                        Why Visionaries Choose <br className="hidden md:block" /> Athenia High School
-                    </h2>
-                    <div className="h-1.5 w-24 bg-gold mx-auto"></div>
-                </div>
+            <div className="container mx-auto px-6 relative z-20">
+                <div className="grid md:grid-cols-2 gap-16 items-center">
+                    <div>
+                        <motion.div
+                            initial={{ opacity: 0, x: -30 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            transition={{ duration: 0.8 }}
+                        >
+                            <span className="flex items-center gap-2 text-champagne font-bold tracking-[0.3em] uppercase text-xs mb-6">
+                                <Sparkles size={14} />
+                                The Athenia Standard
+                            </span>
+                            <motion.h2
+                                initial={{ opacity: 0, y: 30 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                className="font-serif text-5xl md:text-7xl font-bold text-ivory leading-tight mb-8"
+                            >
+                                The Athenia <br /><span className="text-champagne italic">Advantage</span>
+                            </motion.h2>
+                            <p className="text-ivory/70 text-lg leading-relaxed mb-12 max-w-lg font-light">
+                                We don't just educate; we curate the environment for greatness.
+                                Every aspect of Athenia is designed to propel students toward elite outcomes.
+                            </p>
+                        </motion.div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {pillars.map((pillar, idx) => (
-                        <FeatureCard
-                            key={idx}
-                            icon={pillar.icon}
-                            title={pillar.title}
-                            desc={pillar.desc}
-                            delay={idx * 0.1}
-                        />
-                    ))}
+                        <div className="space-y-6">
+                            {features.map((feature, index) => (
+                                <motion.div
+                                    key={index}
+                                    initial={{ opacity: 0, x: -20 }}
+                                    whileInView={{ opacity: 1, x: 0 }}
+                                    transition={{ delay: index * 0.2, duration: 0.6 }}
+                                    onClick={() => onLearnMore(feature)}
+                                    className="p-6 rounded-xl border border-white/5 bg-white/5 hover:bg-white/10 hover:border-champagne/30 transition-all cursor-pointer group backdrop-blur-sm"
+                                >
+                                    <div className="flex items-start gap-6">
+                                        <div className="p-3 rounded-full bg-champagne/10 group-hover:bg-champagne/20 transition-colors">
+                                            {feature.icon}
+                                        </div>
+                                        <div>
+                                            <h3 className="text-xl font-serif text-ivory mb-2 group-hover:text-champagne transition-colors">{feature.title}</h3>
+                                            <p className="text-ivory/60 font-light text-sm leading-relaxed">{feature.description}</p>
+                                        </div>
+                                    </div>
+                                </motion.div>
+                            ))}
+                        </div>
+                    </div>
+
+                    {/* Visual spacer for the background image area */}
+                    <div className="hidden md:block" />
                 </div>
             </div>
         </section>

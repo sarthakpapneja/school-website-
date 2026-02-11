@@ -1,0 +1,20 @@
+{
+  "applications": [
+    {
+      "id": 1770835064776,
+      "name": "sarthak papneja",
+      "email": "s@test.com",
+      "phone": "7668840110",
+      "grade": "1-5",
+      "message": "",
+      "date": "2026-02-11T18:37:44.776Z"
+    }
+  ],
+  "newsletter": [
+    {
+      "email": "test@example.com",
+      "date": "2026-02-11T18:23:26.672Z"
+    }
+  ],
+  "contact": []
+}

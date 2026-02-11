@@ -1,38 +1,56 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, ChevronRight } from 'lucide-react';
-import { useMagnetic } from '../hooks/useMagnetic';
+import { Menu, X, ArrowRight } from 'lucide-react';
+import logo from '../assets/logo.jpeg';
 
-const Navbar = () => {
-    const [scrolled, setScrolled] = useState(false);
-    const [isOpen, setIsOpen] = useState(false);
-    const [activeSection, setActiveSection] = useState('home');
-    const { ref: magneticRef, position } = useMagnetic(0.3);
+const NavLink = ({ href, children, mobile = false, onClick }) => {
+    if (mobile) {
+        return (
+            <a
+                href={href}
+                onClick={onClick}
+                className="block py-4 text-4xl font-serif text-ivory hover:text-champagne transition-colors border-b border-white/5"
+            >
+                <motion.div
+                    initial={{ x: -20, opacity: 0 }}
+                    animate={{ x: 0, opacity: 1 }}
+                    className="flex items-center justify-between"
+                >
+                    {children}
+                    <ArrowRight size={20} className="opacity-0 -translate-x-4 group-hover:opacity-100 group-hover:translate-x-0 transition-all text-champagne" />
+                </motion.div>
+            </a>
+        );
+    }
+
+    return (
+        <a
+            href={href}
+            className="relative px-4 py-2 text-sm text-ivory/80 hover:text-white transition-colors uppercase tracking-widest font-medium z-10 group overflow-hidden"
+        >
+            <span className="relative z-10 duration-300 group-hover:text-midnight transition-colors">{children}</span>
+            <span className="absolute inset-0 bg-champagne transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left -z-0 ease-out" />
+        </a>
+    );
+};
+
+const Navbar = ({ onApplyClick, onPortalClick }) => {
+    const [isScrolled, setIsScrolled] = useState(false);
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
     useEffect(() => {
         const handleScroll = () => {
-            setScrolled(window.scrollY > 50);
-
-            const sections = ['home', 'about', 'admissions', 'infrastructure', 'academics', 'gallery', 'hall-of-fame', 'contact'];
-            const current = sections.find(section => {
-                const element = document.getElementById(section);
-                if (element) {
-                    const rect = element.getBoundingClientRect();
-                    return rect.top <= 100 && rect.bottom >= 100;
-                }
-                return false;
-            });
-            if (current) setActiveSection(current);
+            setIsScrolled(window.scrollY > 50);
         };
         window.addEventListener('scroll', handleScroll);
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
     const navLinks = [
-        { name: 'Home', href: '#home' },
-        { name: 'About', href: '#about' },
-        { name: 'Academics', href: '#academics' },
+        { name: 'Philosophy', href: '#philosophy' },
         { name: 'Admissions', href: '#admissions' },
+        { name: 'Academics', href: '#academics' },
+        { name: 'Heritage', href: '#heritage' },
         { name: 'Contact', href: '#contact' },
     ];
 
@@ -40,77 +58,113 @@ const Navbar = () => {
         <motion.nav
             initial={{ y: -100 }}
             animate={{ y: 0 }}
-            className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? 'bg-white/90 backdrop-blur-md shadow-lg py-4' : 'bg-transparent py-6'
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${isScrolled ? 'py-4' : 'py-8'
                 }`}
         >
-            <div className="container mx-auto px-6 flex justify-between items-center">
-                <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 bg-royal-blue rounded-full flex items-center justify-center text-white">
-                        <span className="font-serif font-bold text-xl">A</span>
-                    </div>
-                    <div className={`font-serif font-bold text-2xl tracking-tight ${scrolled ? 'text-slate-900' : 'text-white'}`}>
-                        Athenia <span className="text-gold">High</span>
-                    </div>
-                </div>
+            <div
+                className={`absolute inset-0 transition-all duration-700 ${isScrolled ? 'bg-midnight/60 backdrop-blur-xl border-b border-white/5 shadow-2xl shadow-black/20' : 'bg-transparent'
+                    }`}
+            />
 
-                {/* Desktop Menu */}
-                <div className="hidden md:flex items-center gap-8">
+            <div className="container mx-auto px-6 relative flex items-center justify-between">
+                {/* Logo */}
+                <a href="#" className="flex items-center gap-3 group">
+                    <div className={`w-10 h-10 rounded-full flex items-center justify-center transition-all duration-500 overflow-hidden ${isScrolled ? 'bg-champagne text-midnight' : 'bg-white/10 text-ivory glass'}`}>
+                        <img src={logo} alt="Athenia High Logo" className="w-full h-full object-cover" />
+                    </div>
+                    <span className="text-xl md:text-2xl font-serif font-bold text-ivory tracking-tight group-hover:text-champagne transition-colors duration-300">
+                        ATHENIA HIGH
+                    </span>
+                </a>
+
+                {/* Desktop Nav */}
+                <div className="hidden md:flex items-center gap-2">
                     {navLinks.map((link) => (
-                        <a
-                            key={link.name}
-                            href={link.href}
-                            className={`text-sm font-medium tracking-wide hover:text-gold transition-all relative group ${activeSection === link.href.replace('#', '')
-                                ? 'text-gold'
-                                : scrolled ? 'text-slate-700' : 'text-white/90'
-                                }`}
-                        >
+                        <NavLink key={link.name} href={link.href}>
                             {link.name}
-                            <span className={`absolute -bottom-1 left-0 h-0.5 bg-gold transition-all ${activeSection === link.href.replace('#', '') ? 'w-full' : 'w-0 group-hover:w-full'
-                                }`}></span>
-                        </a>
+                        </NavLink>
                     ))}
-                    <motion.button
-                        ref={magneticRef}
-                        animate={{ x: position.x, y: position.y }}
-                        className="bg-gold hover:bg-yellow-600 text-white px-6 py-2 rounded-full font-medium transition-shadow transform hover:scale-105 shadow-lg flex items-center gap-2"
-                    >
-                        Apply Now <ChevronRight size={16} />
-                    </motion.button>
                 </div>
 
-                {/* Mobile Menu Button */}
+                {/* Actions */}
+                <div className="hidden md:flex items-center gap-4">
+                    <button
+                        onClick={onPortalClick}
+                        className="text-ivory/60 hover:text-champagne text-xs uppercase tracking-widest font-bold px-4 transition-colors"
+                    >
+                        Portal
+                    </button>
+                    <button
+                        onClick={onApplyClick}
+                        className="bg-champagne text-midnight hover:bg-white px-6 py-2.5 rounded-full text-xs font-bold uppercase tracking-widest transition-all hover:scale-105 shadow-[0_0_20px_rgba(212,175,55,0.3)] hover:shadow-[0_0_30px_rgba(212,175,55,0.5)]"
+                    >
+                        Enroll Now
+                    </button>
+                </div>
+
+                {/* Mobile Toggle */}
                 <button
-                    className="md:hidden text-gold"
-                    onClick={() => setIsOpen(!isOpen)}
+                    className="md:hidden text-ivory z-50 relative w-10 h-10 flex items-center justify-center rounded-full glass"
+                    onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                 >
-                    {isOpen ? <X size={28} /> : <Menu size={28} />}
+                    {isMobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
                 </button>
             </div>
 
-            {/* Mobile Menu Overlay */}
+            {/* Mobile Menu */}
             <AnimatePresence>
-                {isOpen && (
+                {isMobileMenuOpen && (
                     <motion.div
-                        initial={{ opacity: 0, height: 0 }}
-                        animate={{ opacity: 1, height: 'auto' }}
-                        exit={{ opacity: 0, height: 0 }}
-                        className="md:hidden bg-white border-t border-slate-100 absolute w-full"
+                        initial={{ opacity: 0, clipPath: "circle(0% at 100% 0)" }}
+                        animate={{ opacity: 1, clipPath: "circle(150% at 100% 0)" }}
+                        exit={{ opacity: 0, clipPath: "circle(0% at 100% 0)" }}
+                        transition={{ duration: 0.7, ease: [0.76, 0, 0.24, 1] }}
+                        className="fixed inset-0 bg-midnight z-40 flex flex-col justify-center px-8"
                     >
-                        <div className="flex flex-col p-6 gap-4">
-                            {navLinks.map((link) => (
-                                <a
+                        <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-5 pointer-events-none"></div>
+
+                        <div className="space-y-2 relative z-10">
+                            <span className="text-champagne text-xs font-bold tracking-[0.5em] uppercase mb-8 block">Navigation</span>
+                            {navLinks.map((link, idx) => (
+                                <motion.div
                                     key={link.name}
-                                    href={link.href}
-                                    className="text-slate-800 font-medium text-lg"
-                                    onClick={() => setIsOpen(false)}
+                                    initial={{ opacity: 0, x: 50 }}
+                                    animate={{ opacity: 1, x: 0 }}
+                                    transition={{ delay: 0.1 * idx, duration: 0.5 }}
                                 >
-                                    {link.name}
-                                </a>
+                                    <NavLink href={link.href} mobile onClick={() => setIsMobileMenuOpen(false)}>
+                                        {link.name}
+                                    </NavLink>
+                                </motion.div>
                             ))}
-                            <button className="bg-royal-blue text-white w-full py-3 rounded-xl font-bold mt-4">
-                                Student Portal
-                            </button>
                         </div>
+
+                        <motion.div
+                            initial={{ opacity: 0, y: 50 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 0.5 }}
+                            className="mt-12 space-y-4"
+                        >
+                            <button
+                                onClick={() => {
+                                    onPortalClick();
+                                    setIsMobileMenuOpen(false);
+                                }}
+                                className="w-full py-4 glass rounded-xl text-ivory uppercase tracking-widest text-sm font-bold flex items-center justify-center gap-2 hover:bg-white/10"
+                            >
+                                Access Portal
+                            </button>
+                            <button
+                                onClick={() => {
+                                    onApplyClick();
+                                    setIsMobileMenuOpen(false);
+                                }}
+                                className="w-full py-4 bg-champagne rounded-xl text-midnight uppercase tracking-widest text-sm font-bold shadow-lg shadow-champagne/20"
+                            >
+                                Enroll Now
+                            </button>
+                        </motion.div>
                     </motion.div>
                 )}
             </AnimatePresence>

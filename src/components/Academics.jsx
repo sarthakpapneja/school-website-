@@ -1,125 +1,168 @@
-import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { BookOpen, GraduationCap, Users, FileText, CheckCircle } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { BookOpen, FlaskConical, Globe, Palette } from 'lucide-react';
 
-const tabs = [
+const departments = [
     {
-        id: 'curriculum',
-        label: 'Curriculum',
-        icon: <BookOpen size={18} />,
-        content: {
-            title: "Academic Rigor",
-            text: "Our curriculum is designed to challenge and inspire. Affiliated with CBSE, we offer a balanced blend of scholastic and co-scholastic activities.",
-            points: ["STEAM Integration", "Project-Based Learning", "Coding & Robotics", "Public Speaking"]
-        }
+        id: 'stem',
+        name: 'S.T.E.M. Institute',
+        description: 'Pioneering research in quantum computing and biotechnology within our state-of-the-art labs.',
+        icon: <FlaskConical className="text-champagne" size={24} />,
+        image: "https://images.unsplash.com/photo-1532094349884-543bc11b234d?q=80&w=2070&auto=format&fit=crop"
     },
     {
-        id: 'admissions',
-        label: 'Admissions',
-        icon: <FileText size={18} />,
-        content: {
-            title: "Join Our Family",
-            text: "We welcome students who are eager to learn and grow. Our admission process is transparent and merit-based.",
-            points: ["Online Application", "Entrance Assessment", "Parent Interview", "Scholarship Opportunities"]
-        }
+        id: 'humanities',
+        name: 'Global Humanities',
+        description: 'Critical analysis of history, philosophy, and literature to understand the human condition.',
+        icon: <Globe className="text-champagne" size={24} />,
+        image: "https://images.unsplash.com/photo-1457369804613-52c61a468e7d?q=80&w=2070&auto=format&fit=crop"
     },
     {
-        id: 'results',
-        label: 'Results',
-        icon: <GraduationCap size={18} />,
-        content: {
-            title: "Proven Excellence",
-            text: "Consistently achieving top results in board examinations. Our students secure placements in prestigious universities worldwide.",
-            points: ["100% Pass Rate", "District Toppers", "National Olympiad Winners", "Sports Achievements"]
-        }
+        id: 'arts',
+        name: 'Conservatory of Arts',
+        description: 'Nurturing creative expression through visual arts, music, and dramatic performance.',
+        icon: <Palette className="text-champagne" size={24} />,
+        image: "https://images.unsplash.com/photo-1547826039-bfc35e0f1ea8?q=80&w=1972&auto=format&fit=crop"
     },
     {
-        id: 'faculty',
-        label: 'Faculty',
-        icon: <Users size={18} />,
-        content: {
-            title: "Mentors for Life",
-            text: "Our educators are not just teachers but mentors who guide students through their formative years with patience and expertise.",
-            points: ["Qualified & Experienced", "Continuous Training", "Student-Centric Approach", "Dedicated Counselors"]
-        }
+        id: 'classics',
+        name: 'The Classics',
+        description: 'Study of Latin, Greek, and ancient civilizations to ground modern leadership in timeless wisdom.',
+        icon: <BookOpen className="text-champagne" size={24} />,
+        image: "https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?q=80&w=2070&auto=format&fit=crop"
     }
 ];
 
 const Academics = () => {
-    const [activeTab, setActiveTab] = useState('curriculum');
-
     return (
-        <section className="py-24 px-6 bg-slate-50" id="academics">
-            <div className="container mx-auto max-w-6xl">
-                <div className="text-center mb-16">
-                    <span className="text-gold font-bold text-xs tracking-[0.2em] uppercase mb-2 block">Academic Excellence</span>
-                    <h2 className="font-serif text-4xl md:text-5xl font-bold text-royal-blue">Pathways to Success</h2>
-                    <div className="h-1 w-20 bg-gold mt-6 mx-auto"></div>
+        <section className="py-24 bg-midnight relative overflow-hidden" id="academics">
+            {/* Background Texture */}
+            <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/stardust.png')] opacity-5 pointer-events-none"></div>
+
+            <div className="container mx-auto px-6 relative z-10">
+                <motion.div
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.8 }}
+                    className="text-center mb-16"
+                >
+                    <span className="text-champagne font-bold tracking-[0.2em] uppercase text-sm">Academic Excellence</span>
+                    <h2 className="font-serif text-5xl md:text-6xl text-ivory mt-4 mb-6">Curriculum of <span className="italic text-champagne">Distinction</span></h2>
+                    <p className="text-ivory/60 max-w-2xl mx-auto text-lg font-light leading-relaxed">
+                        Our rigorous curriculum is designed to challenge the intellect and cultivate the character of future world leaders.
+                    </p>
+                </motion.div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    {departments.map((dept, index) => (
+                        <motion.div
+                            key={dept.id}
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            transition={{ delay: index * 0.1, duration: 0.6 }}
+                            className="group relative h-80 rounded-2xl overflow-hidden glass border border-white/5 cursor-pointer"
+                        >
+                            {/* Background Image */}
+                            <div className="absolute inset-0">
+                                <img
+                                    src={dept.image}
+                                    alt={dept.name}
+                                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 opacity-40 group-hover:opacity-60"
+                                />
+                                <div className="absolute inset-0 bg-gradient-to-t from-midnight via-midnight/50 to-transparent opacity-90 group-hover:opacity-70 transition-opacity duration-500" />
+                            </div>
+
+                            {/* Content */}
+                            <div className="absolute inset-0 p-8 flex flex-col justify-end">
+                                <div className="mb-4 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+                                    <div className="w-12 h-12 rounded-full bg-champagne/10 backdrop-blur-md flex items-center justify-center mb-4 border border-champagne/20 group-hover:bg-champagne group-hover:text-midnight transition-colors duration-300">
+                                        {dept.icon}
+                                    </div>
+                                    <h3 className="text-3xl font-serif text-ivory mb-2 group-hover:text-champagne transition-colors">{dept.name}</h3>
+                                    <p className="text-ivory/70 font-light leading-relaxed opacity-0 group-hover:opacity-100 transition-opacity duration-500 delay-75 transform translate-y-4 group-hover:translate-y-0">
+                                        {dept.description}
+                                    </p>
+                                </div>
+                            </div>
+                        </motion.div>
+                    ))}
                 </div>
+            </div>
 
-                <div className="flex flex-col md:flex-row gap-12">
-                    {/* Tabs Navigation */}
-                    <div className="w-full md:w-1/3 flex flex-col gap-4">
-                        {tabs.map((tab) => (
-                            <button
-                                key={tab.id}
-                                onClick={() => setActiveTab(tab.id)}
-                                className={`flex items-center gap-4 p-6 rounded-2xl text-left transition-all duration-300 ${activeTab === tab.id
-                                        ? 'bg-royal-blue text-white shadow-xl shadow-royal-blue/20 scale-105'
-                                        : 'bg-white text-slate-600 hover:bg-slate-100'
-                                    }`}
-                            >
-                                <div className={`p-2 rounded-lg ${activeTab === tab.id ? 'bg-white/20' : 'bg-slate-200 text-slate-500'}`}>
-                                    {tab.icon}
+            {/* Standard Checklists */}
+            <div className="mt-32 max-w-6xl mx-auto">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
+                    {/* Classwork */}
+                    <motion.div
+                        initial={{ opacity: 0, x: -30 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.8 }}
+                        className="group relative bg-midnight-light/50 backdrop-blur-sm p-10 rounded-[2.5rem] border border-white/5 hover:border-champagne/30 transition-colors duration-500 overflow-hidden"
+                    >
+                        <div className="absolute top-0 right-0 w-64 h-64 bg-champagne/5 rounded-full blur-[80px] -translate-y-1/2 translate-x-1/2 pointer-events-none" />
+
+                        <div className="relative z-10">
+                            <h4 className="font-serif text-3xl text-ivory mb-8 pb-6 border-b border-white/5 flex items-center justify-between">
+                                <span>Classwork <span className="block text-xs font-sans font-bold tracking-[0.3em] text-champagne mt-2 uppercase">Protocol</span></span>
+                                <BookOpen className="text-champagne/20 group-hover:text-champagne/60 transition-colors duration-500" size={48} />
+                            </h4>
+
+                            <ul className="space-y-5">
+                                {[
+                                    "Index completion with topic number, name, page no, and date.",
+                                    "Check for spelling, grammar, and syntax corrections.",
+                                    "Math/Science: Steps shown, relevant formulae, scientific methods.",
+                                    "Neatness, order, and legible handwriting.",
+                                    "Completeness of work; ensure incomplete work is finished.",
+                                    "No loose papers; encourage real-time notebook entry."
+                                ].map((item, i) => (
+                                    <li key={i} className="flex items-start gap-4 text-ivory/70 font-light text-sm group/item">
+                                        <span className="mt-1 w-1.5 h-1.5 rounded-full bg-champagne/40 group-hover/item:bg-champagne group-hover/item:scale-150 transition-all duration-300" />
+                                        <span className="group-hover/item:text-ivory transition-colors duration-300">{item}</span>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                    </motion.div>
+
+                    {/* Homework */}
+                    <motion.div
+                        initial={{ opacity: 0, x: 30 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.8 }}
+                        className="group relative bg-midnight-light/50 backdrop-blur-sm p-10 rounded-[2.5rem] border border-white/5 hover:border-champagne/30 transition-colors duration-500 overflow-hidden"
+                    >
+                        <div className="absolute bottom-0 left-0 w-64 h-64 bg-champagne/5 rounded-full blur-[80px] translate-y-1/2 -translate-x-1/2 pointer-events-none" />
+
+                        <div className="relative z-10">
+                            <h4 className="font-serif text-3xl text-ivory mb-8 pb-6 border-b border-white/5 flex items-center justify-between">
+                                <span>Homework <span className="block text-xs font-sans font-bold tracking-[0.3em] text-champagne mt-2 uppercase">Protocol</span></span>
+                                <div className="text-champagne/20 group-hover:text-champagne/60 transition-colors duration-500">
+                                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round"><path d="M12 20h9" /><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z" /></svg>
                                 </div>
-                                <span className="font-serif font-bold text-lg">{tab.label}</span>
-                            </button>
-                        ))}
-                    </div>
+                            </h4>
 
-                    {/* Tab Content */}
-                    <div className="w-full md:w-2/3 bg-white rounded-[2.5rem] p-8 md:p-12 shadow-2xl relative overflow-hidden min-h-[400px]">
-                        <div className="absolute top-0 right-0 w-64 h-64 bg-gold/10 rounded-full -mr-20 -mt-20 blur-3xl"></div>
-
-                        <AnimatePresence mode="wait">
-                            <motion.div
-                                key={activeTab}
-                                initial={{ opacity: 0, x: 20 }}
-                                animate={{ opacity: 1, x: 0 }}
-                                exit={{ opacity: 0, x: -20 }}
-                                transition={{ duration: 0.3 }}
-                                className="relative z-10"
-                            >
-                                <h3 className="font-serif text-3xl font-bold text-royal-blue mb-6">
-                                    {tabs.find(t => t.id === activeTab).content.title}
-                                </h3>
-                                <p className="text-slate-600 text-lg leading-relaxed mb-8">
-                                    {tabs.find(t => t.id === activeTab).content.text}
-                                </p>
-
-                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                                    {tabs.find(t => t.id === activeTab).content.points.map((point, idx) => (
-                                        <motion.div
-                                            key={idx}
-                                            initial={{ opacity: 0, y: 10 }}
-                                            animate={{ opacity: 1, y: 0 }}
-                                            transition={{ delay: idx * 0.1 }}
-                                            className="flex items-center gap-3 bg-slate-50 p-4 rounded-xl border border-slate-100"
-                                        >
-                                            <CheckCircle className="text-gold w-5 h-5 flex-shrink-0" />
-                                            <span className="font-medium text-slate-800">{point}</span>
-                                        </motion.div>
-                                    ))}
-                                </div>
-
-                                <div className="mt-10">
-                                    <button className="text-royal-blue font-bold text-sm tracking-widest uppercase hover:text-gold transition-colors flex items-center gap-2 group">
-                                        Learn More <span className="text-xl group-hover:translate-x-1 transition-transform">→</span>
-                                    </button>
-                                </div>
-                            </motion.div>
-                        </AnimatePresence>
-                    </div>
+                            <ul className="space-y-5">
+                                {[
+                                    "Completeness of assigned work.",
+                                    "Correct spellings, grammar, syntax, and methodology.",
+                                    "Timely submission of work.",
+                                    "Proper indexing with relevant details.",
+                                    "Parent updates every 15 days via Email (Paperless Policy).",
+                                    "Cultivate pre-read/post-read habits for independent learning."
+                                ].map((item, i) => (
+                                    <li key={i} className="flex items-start gap-4 text-ivory/70 font-light text-sm group/item">
+                                        <span className="mt-1 w-1.5 h-1.5 rounded-full bg-champagne/40 group-hover/item:bg-champagne group-hover/item:scale-150 transition-all duration-300" />
+                                        <span className="group-hover/item:text-ivory transition-colors duration-300">{item}</span>
+                                    </li>
+                                ))}
+                                {/* Special Highlight Item */}
+                                <li className="flex items-start gap-4 text-champagne font-medium text-sm bg-champagne/5 p-4 rounded-xl border border-champagne/10">
+                                    <span className="mt-1 w-1.5 h-1.5 rounded-full bg-champagne animate-pulse" />
+                                    No Homework for Grade 1 & 2.
+                                </li>
+                            </ul>
+                        </div>
+                    </motion.div>
                 </div>
             </div>
         </section>

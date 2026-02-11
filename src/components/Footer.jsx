@@ -1,87 +1,123 @@
-import { Facebook, Instagram, Twitter, Youtube, MapPin, Phone, Mail } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { GraduationCap, Facebook, Twitter, Instagram, Linkedin, Send } from 'lucide-react';
+import logo from '../assets/logo.jpeg';
+import axios from 'axios';
+import toast from 'react-hot-toast';
+import { useState } from 'react';
 
-const Footer = () => {
+const Footer = ({ onPortalClick, onRequestProspectus }) => {
+    const [email, setEmail] = useState('');
+    const [loading, setLoading] = useState(false);
+
+    const handleSubscribe = async (e) => {
+        e.preventDefault();
+        if (!email) return;
+        setLoading(true);
+
+        // Simulate API call
+        setTimeout(() => {
+            toast.success('Joined the inner circle!');
+            setEmail('');
+            setLoading(false);
+        }, 1500);
+    };
+
+
     return (
-        <footer className="bg-slate-900 text-white pt-24 pb-12 overflow-hidden relative" id="contact">
-            <div className="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-royal-blue via-gold to-royal-blue"></div>
-
-            <div className="container mx-auto px-6 relative z-10">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-20">
-
-                    {/* Brand */}
+        <footer className="bg-midnight pt-32 pb-16 px-6 border-t border-white/5 relative overflow-hidden">
+            <div className="container mx-auto relative z-10">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-20 mb-32">
                     <div className="col-span-1 lg:col-span-1">
-                        <div className="flex items-center gap-3 mb-6">
-                            <div className="w-10 h-10 bg-royal-blue rounded-full flex items-center justify-center text-white border border-white/20">
-                                <span className="font-serif font-bold text-xl">A</span>
+                        <div className="flex items-center gap-3 mb-8">
+                            <div className="w-10 h-10 bg-champagne rounded-lg flex items-center justify-center text-midnight overflow-hidden">
+                                <img src={logo} alt="Athenia High Logo" className="w-full h-full object-cover" />
                             </div>
-                            <div className="font-serif font-bold text-2xl tracking-tight">
-                                Athenia <span className="text-gold">High</span>
-                            </div>
+                            <span className="font-serif text-3xl font-bold text-ivory">Athenia</span>
                         </div>
-                        <p className="text-slate-400 text-sm leading-relaxed mb-6">
-                            Empowering the next generation of leaders through holistic education and unwavering values.
+                        <p className="text-ivory/40 leading-relaxed font-light text-lg mb-10">
+                            A boutique learning sanctuary where artisanal mentorship meets global innovation.
                         </p>
-                        <div className="flex gap-4">
-                            {[Facebook, Instagram, Twitter, Youtube].map((Icon, idx) => (
-                                <a key={idx} href="#" className="w-10 h-10 rounded-full bg-white/5 hover:bg-gold hover:text-royal-blue flex items-center justify-center transition-all duration-300">
-                                    <Icon size={18} />
-                                </a>
-                            ))}
+                        <div className="flex gap-6">
+                            <a href="https://www.facebook.com/share/1DcStV7kKP" target="_blank" rel="noopener noreferrer" className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center text-ivory/40 hover:text-champagne hover:border-champagne transition-all">
+                                <Facebook size={20} />
+                            </a>
+                            <a href="https://www.instagram.com/atheniaschool" target="_blank" rel="noopener noreferrer" className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center text-ivory/40 hover:text-champagne hover:border-champagne transition-all">
+                                <Instagram size={20} />
+                            </a>
+                            <a href="https://youtube.com/@atheniasaharanpur3962" target="_blank" rel="noopener noreferrer" className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center text-ivory/40 hover:text-champagne hover:border-champagne transition-all">
+                                <span className="sr-only">YouTube</span>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-youtube"><path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17" /><path d="m10 15 5-3-5-3z" /></svg>
+                            </a>
                         </div>
                     </div>
 
-                    {/* Quick Links */}
                     <div>
-                        <h4 className="font-bold text-lg mb-6 text-gold font-serif">Quick Links</h4>
-                        <ul className="space-y-4 text-slate-300 text-sm">
-                            {['About Us', 'Admissions', 'Academics', 'Infrastructure', 'Careers'].map((link) => (
-                                <li key={link}><a href="#" className="hover:text-white transition-colors"> {link}</a></li>
+                        <h4 className="font-serif text-xl font-bold text-ivory mb-10">Quick Links</h4>
+                        <ul className="flex flex-col gap-5">
+                            {['About Athenia', 'Academic Life', 'Admissions', 'Student Portal', 'Careers'].map((link) => (
+                                <li key={link}>
+                                    <button
+                                        onClick={link === 'Student Portal' ? onPortalClick : undefined}
+                                        className="text-ivory/40 hover:text-champagne transition-colors text-lg font-light"
+                                    >
+                                        {link}
+                                    </button>
+                                </li>
                             ))}
                         </ul>
                     </div>
 
-                    {/* Contact */}
                     <div>
-                        <h4 className="font-bold text-lg mb-6 text-gold font-serif">Contact Us</h4>
-                        <ul className="space-y-6 text-slate-300 text-sm">
-                            <li className="flex gap-4">
-                                <MapPin className="w-5 h-5 text-gold flex-shrink-0" />
-                                <span>123 Knowledge Park, <br /> Education City, State 560001</span>
+                        <h4 className="font-serif text-xl font-bold text-ivory mb-10">Contact Detail</h4>
+                        <ul className="flex flex-col gap-6 text-ivory/40 font-light text-lg">
+                            <li>
+                                <a href="https://maps.app.goo.gl/n8SEY7G5UrYd28Gd7?g_st=ic" target="_blank" rel="noopener noreferrer" className="hover:text-champagne transition-colors">
+                                    Athenia High School, <br />
+                                    6km Milestone, Chunheti, <br />
+                                    Delhi Road, Saharanpur - 247001
+                                </a>
                             </li>
-                            <li className="flex gap-4">
-                                <Phone className="w-5 h-5 text-gold flex-shrink-0" />
-                                <span>+91 98765 43210</span>
+                            <li>
+                                <a href="tel:+919897545421" className="hover:text-champagne transition-colors">
+                                    +91 9897545421
+                                </a>
                             </li>
-                            <li className="flex gap-4">
-                                <Mail className="w-5 h-5 text-gold flex-shrink-0" />
-                                <span>admissions@athenia.in</span>
+                            <li>
+                                <a href="mailto:contact@athenia.in" className="hover:text-champagne transition-colors">
+                                    contact@athenia.in
+                                </a>
                             </li>
                         </ul>
                     </div>
 
-                    {/* Newsletter */}
                     <div>
-                        <h4 className="font-bold text-lg mb-6 text-gold font-serif">Stay Updated</h4>
-                        <p className="text-slate-400 text-sm mb-4">Subscribe to our newsletter for the latest updates.</p>
-                        <div className="flex bg-white/5 rounded-lg border border-white/10 p-1">
+                        <h4 className="font-serif text-xl font-bold text-ivory mb-10">Newsletter</h4>
+                        <p className="text-ivory/40 font-light mb-8 text-lg">Join the inner circle for exclusive updates and academic insights.</p>
+                        <form onSubmit={handleSubscribe} className="relative">
                             <input
                                 type="email"
-                                placeholder="Your email..."
-                                className="bg-transparent border-none outline-none text-white text-sm px-4 flex-1 placeholder:text-slate-500"
+                                placeholder="Gentle Email Address"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                                className="w-full bg-midnight-light border border-white/10 rounded-2xl px-6 py-5 text-ivory focus:outline-none focus:border-champagne transition-all"
                             />
-                            <button className="bg-gold text-royal-blue px-4 py-2 rounded-md font-bold text-xs uppercase tracking-widest hover:bg-white transition-colors">
-                                Join
+                            <button
+                                type="submit"
+                                disabled={loading}
+                                className="absolute right-3 top-3 bottom-3 w-12 rounded-xl bg-champagne text-midnight flex items-center justify-center hover:bg-white transition-all disabled:opacity-50"
+                            >
+                                <Send size={20} />
                             </button>
-                        </div>
+                        </form>
                     </div>
                 </div>
 
-                <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-slate-500">
+                <div className="pt-16 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-8 text-ivory/20 text-sm font-light tracking-widest uppercase">
                     <p>&copy; 2026 Athenia High School. All rights reserved.</p>
-                    <div className="flex gap-6">
-                        <a href="#" className="hover:text-white">Privacy Policy</a>
-                        <a href="#" className="hover:text-white">Terms of Service</a>
-                        <span>Designed by Sarthak Papneja</span>
+                    <div className="flex gap-10">
+                        <a href="#" className="hover:text-champagne transition-colors">Privacy Policy</a>
+                        <li><button onClick={onRequestProspectus} className="hover:text-champagne transition-colors text-left">Request Prospectus</button></li>
+                        <a href="#" className="hover:text-champagne transition-colors">Terms of Heritage</a>
                     </div>
                 </div>
             </div>

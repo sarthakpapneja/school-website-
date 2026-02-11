@@ -1,99 +1,52 @@
-import { motion, useScroll, useTransform } from 'framer-motion';
-import { useMagnetic } from '../hooks/useMagnetic';
+import { motion } from 'framer-motion';
+import { ArrowRight, Play, Sparkles } from 'lucide-react';
 
-const Hero = () => {
-    const { scrollY } = useScroll();
-    const y1 = useTransform(scrollY, [0, 500], [0, 200]);
-    const opacity = useTransform(scrollY, [0, 300], [1, 0]);
-
-    const { ref: exploreRef, position: explorePos } = useMagnetic(0.2);
-    const { ref: videoRef, position: videoPos } = useMagnetic(0.2);
-
+const Hero = ({ onExploreClick, onVideoClick }) => {
     return (
-        <div className="relative h-screen w-full overflow-hidden flex items-center justify-center" id="home">
-            {/* Cinematic Background */}
-            <motion.div
-                style={{ y: y1 }}
-                className="absolute inset-0 bg-slate-900"
-            >
-                <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-royal-blue/90 z-10" />
-                <img
-                    src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=2070&auto=format&fit=crop"
-                    alt="Athenia Campus"
-                    className="w-full h-full object-cover opacity-80 scale-110"
-                />
-            </motion.div>
+        <section className="relative h-screen w-full overflow-hidden flex items-center justify-center bg-midnight" id="home">
+            {/* Simple Background */}
+            <div className="absolute inset-0 z-0 bg-midnight" />
 
             {/* Hero Content */}
-            <motion.div
-                style={{ opacity }}
-                className="relative z-20 text-center px-4 max-w-5xl mx-auto"
-            >
-                <motion.div
-                    initial={{ opacity: 0, y: 30 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8, delay: 0.2 }}
-                >
-                    <span className="inline-block py-1 px-3 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-gold text-xs font-bold tracking-[0.2em] uppercase mb-6">
-                        Estd. 1995 • Excellence in Education
-                    </span>
-                </motion.div>
+            <div className="relative z-20 text-center px-6 max-w-7xl mx-auto mt-20">
+                <div className="inline-flex items-center gap-3 backdrop-blur-md px-6 py-2 rounded-full mb-10 border border-white/10 bg-white/5">
+                    <Sparkles size={14} className="text-champagne animate-pulse" />
+                    <span className="text-champagne font-bold text-[10px] tracking-[0.4em] uppercase font-sans">Future Heritage</span>
+                </div>
 
-                <motion.h1
-                    initial={{ opacity: 0, y: 40 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8, delay: 0.4 }}
-                    className="font-serif text-5xl md:text-7xl lg:text-8xl font-bold text-white mb-6 leading-tight"
-                >
-                    Seek <span className="text-transparent bg-clip-text bg-gradient-to-r from-gold to-yellow-200">Wisdom</span>. <br />
-                    Shape the Future.
-                </motion.h1>
+                <div className="relative mb-8">
+                    <h1 className="font-serif text-[7vw] md:text-[9vw] font-bold text-ivory leading-[0.8] tracking-tighter select-none whitespace-nowrap">
+                        ATHENIA HIGH
+                    </h1>
+                </div>
 
-                <motion.p
-                    initial={{ opacity: 0, y: 40 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8, delay: 0.6 }}
-                    className="text-lg md:text-xl text-slate-200 max-w-2xl mx-auto mb-10 font-light leading-relaxed"
-                >
-                    Athenia High School creates a dynamic learning environment where tradition meets innovation, empowering students to become global leaders.
-                </motion.p>
+                <h2 className="font-serif text-4xl md:text-6xl text-ivory mb-10 font-display italic">
+                    Seek Wisdom
+                </h2>
 
-                <motion.div
-                    initial={{ opacity: 0, y: 40 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.8, delay: 0.8 }}
-                    className="flex flex-col sm:flex-row items-center justify-center gap-4"
-                >
-                    <motion.button
-                        ref={exploreRef}
-                        animate={{ x: explorePos.x, y: explorePos.y }}
-                        className="bg-gold hover:bg-yellow-600 text-white px-8 py-4 rounded-full font-bold text-lg transition-shadow transform hover:scale-105 shadow-xl shadow-gold/20 flex items-center gap-2 w-full sm:w-auto justify-center"
+                <div className="flex flex-col sm:flex-row items-center justify-center gap-10">
+                    <button
+                        onClick={onExploreClick}
+                        className="group bg-champagne text-midnight px-12 py-6 rounded-2xl font-bold text-sm tracking-widest uppercase transition-all shadow-2xl shadow-champagne/30 flex items-center gap-4 hover:shadow-[0_0_40px_rgba(212,175,55,0.6)]"
                     >
-                        Explore Campus
-                    </motion.button>
-                    <motion.button
-                        ref={videoRef}
-                        animate={{ x: videoPos.x, y: videoPos.y }}
-                        className="bg-white/10 hover:bg-white/20 backdrop-blur-md border border-white/30 text-white px-8 py-4 rounded-full font-bold text-lg transition-all flex items-center gap-2 w-full sm:w-auto justify-center"
-                    >
-                        <span className="w-8 h-8 rounded-full bg-white text-royal-blue flex items-center justify-center">
-                            <span className="ml-1 text-xs">▶</span>
-                        </span>
-                        Watch Video
-                    </motion.button>
-                </motion.div>
-            </motion.div>
+                        Begin The Journey <ArrowRight size={20} className="group-hover:translate-x-2 transition-transform" />
+                    </button>
 
-            {/* Scroll Indicator */}
-            <motion.div
-                animate={{ y: [0, 10, 0] }}
-                transition={{ repeat: Infinity, duration: 2 }}
-                className="absolute bottom-10 left-1/2 -translate-x-1/2 text-white/50 z-20 flex flex-col items-center gap-2"
-            >
-                <span className="text-[10px] uppercase tracking-widest">Scroll to Explore</span>
-                <div className="w-[1px] h-12 bg-gradient-to-b from-white to-transparent"></div>
-            </motion.div>
-        </div>
+                    <button
+                        onClick={onVideoClick}
+                        className="flex items-center gap-5 text-ivory group hover:text-champagne transition-colors"
+                    >
+                        <div className="w-16 h-16 rounded-full border border-white/20 flex items-center justify-center group-hover:border-champagne group-hover:bg-champagne/10 group-hover:scale-110 transition-all">
+                            <Play size={24} fill="currentColor" stroke="none" className="ml-1" />
+                        </div>
+                        <div className="text-left">
+                            <span className="font-bold text-xs tracking-widest uppercase block mb-1">Preview</span>
+                            <span className="text-ivory/40 text-[10px] uppercase font-bold group-hover:text-champagne/60 transition-colors">Campus Glimpse</span>
+                        </div>
+                    </button>
+                </div>
+            </div>
+        </section>
     );
 };
 

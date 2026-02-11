@@ -1,103 +1,119 @@
 import { motion } from 'framer-motion';
-import { Trophy, Zap, Bus, Sun, Book } from 'lucide-react';
-import { useTilt } from '../hooks/useTilt';
+import { Microscope, Laptop, Music, Dumbbell, Sparkles, ArrowUpRight } from 'lucide-react';
 
-const BentoCard = ({ item, idx }) => {
-    const { ref, rotateX, rotateY, handleMouseMove, handleMouseLeave } = useTilt();
+const Card = ({ title, icon: Icon, image, span, delay, desc }) => (
+    <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, delay }}
+        viewport={{ once: true, margin: "-50px" }}
+        className={`relative rounded-[2.5rem] overflow-hidden group border border-white/5 cursor-none ${span}`}
+        style={{ willChange: 'transform' }}
+    >
+        {/* Hover Overlay Gradient */}
+        <div className="absolute inset-0 z-10 bg-gradient-to-t from-midnight via-midnight/20 to-transparent opacity-80 group-hover:via-midnight/40 transition-all duration-700"></div>
 
-    return (
-        <motion.div
-            ref={ref}
-            onMouseMove={handleMouseMove}
-            onMouseLeave={handleMouseLeave}
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: idx * 0.1 }}
-            style={{ rotateX, rotateY, transformStyle: 'preserve-3d' }}
-            className={`relative rounded-3xl overflow-hidden group ${item.colSpan} shadow-xl hover:shadow-2xl transition-shadow cursor-pointer`}
-        >
-            <div className="absolute inset-0" style={{ transform: 'translateZ(-20px)' }}>
-                <img
-                    src={item.img}
-                    alt={item.title}
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                />
-                <div className={`absolute inset-0 opacity-60 transition-opacity group-hover:opacity-70 ${item.bg === 'bg-gold' ? 'bg-yellow-600 mix-blend-multiply' : 'bg-slate-900 mix-blend-multiply'}`}></div>
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+        {/* Parallax Image Wrapper */}
+        <div className="absolute inset-0 overflow-hidden transform-gpu">
+            <img
+                src={image}
+                alt={title}
+                loading="lazy"
+                className="w-[110%] h-[110%] -left-[5%] -top-[5%] object-cover transition-transform duration-[1500ms] ease-out group-hover:scale-110 group-hover:translate-x-2 group-hover:translate-y-2 opacity-60 group-hover:opacity-100"
+            />
+        </div>
+
+        {/* Content */}
+        <div className="absolute inset-0 z-20 p-8 md:p-12 flex flex-col justify-end h-full pointer-events-none">
+            <div className="w-14 h-14 glass rounded-2xl flex items-center justify-center text-champagne mb-6 group-hover:bg-champagne group-hover:text-midnight transition-all transform translate-y-8 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 duration-500 shadow-2xl shadow-black/50">
+                <Icon size={24} />
             </div>
 
-            <div className="absolute bottom-0 left-0 p-8 w-full" style={{ transform: 'translateZ(50px)' }}>
-                <div className="bg-white/10 backdrop-blur-md p-3 rounded-xl w-fit mb-4 border border-white/20">
-                    {item.icon}
-                </div>
-                <h3 className="text-2xl font-bold text-white mb-2 font-serif">{item.title}</h3>
-                <p className="text-slate-200 text-sm font-medium leading-relaxed max-w-sm">
-                    {item.desc}
-                </p>
-                <motion.div
-                    initial={{ width: 0 }}
-                    whileInView={{ width: '40%' }}
-                    className="h-1 bg-gold mt-4 rounded-full"
-                />
+            <h3 className="font-serif text-3xl md:text-4xl font-bold text-ivory mb-2 group-hover:text-champagne transition-colors leading-tight drop-shadow-lg">
+                {title}
+            </h3>
+
+            <p className="text-ivory/80 text-sm md:text-base font-light max-w-xs transform translate-y-8 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-700 delay-100">
+                {desc}
+            </p>
+
+            {/* Exploration Hint */}
+            <div className="mt-6 flex items-center gap-3 transform translate-y-12 group-hover:translate-y-0 opacity-0 group-hover:opacity-100 transition-all duration-700 delay-200">
+                <span className="text-[10px] font-bold tracking-[0.3em] text-champagne uppercase">Explore Facility</span>
+                <div className="w-8 h-[1px] bg-champagne/50" />
             </div>
-        </motion.div>
-    );
-};
+        </div>
+
+        {/* Collaborative Cursor Trigger Area */}
+        <div className="absolute inset-0 z-50 cursor-none hover-trigger" />
+    </motion.div>
+);
 
 const BentoGrid = () => {
     const items = [
         {
-            title: "13-Acre Campus",
-            desc: "Sprawling green campus with state-of-the-art facilities.",
-            icon: <Book className="w-6 h-6 text-gold" />,
-            colSpan: "md:col-span-2",
-            bg: "bg-slate-900",
-            img: "https://images.unsplash.com/photo-1562774053-701939374585?q=80&w=2686&auto=format&fit=crop"
+            title: "13-Acre Estate",
+            icon: Laptop,
+            desc: "A sprawling 52,680 sq.m. estate where nature and innovation coexist in perfect harmony.",
+            image: "/src/assets/campus_aerial.jpg",
+            span: "md:col-span-2 md:row-span-2",
+            delay: 0.1
         },
         {
-            title: "Sports Excellence",
-            desc: "Dedicated grounds for Cricket, Football, & Basketball.",
-            icon: <Trophy className="w-6 h-6 text-white" />,
-            colSpan: "md:col-span-1",
-            bg: "bg-royal-blue",
-            img: "https://images.unsplash.com/photo-1577416412292-7661e371927b?q=80&w=2670&auto=format&fit=crop"
+            title: "Heritage Architecture",
+            icon: Microscope,
+            desc: "Exposed brick facades that breathe, designed for natural cooling and timeless aesthetics.",
+            image: "/src/assets/campus_facade.jpg",
+            span: "md:col-span-1 md:row-span-1",
+            delay: 0.2
         },
         {
-            title: "Safe Transport",
-            desc: "GPS-enabled fleet ensuring student safety.",
-            icon: <Bus className="w-6 h-6 text-white" />,
-            colSpan: "md:col-span-1",
-            bg: "bg-slate-800",
-            img: "https://images.unsplash.com/photo-1570125909232-eb263c188f7e?q=80&w=2671&auto=format&fit=crop"
+            title: "Open-Air Corridors",
+            icon: ArrowUpRight,
+            desc: "Walkways bathed in sunlight, connecting minds to the elements.",
+            image: "/src/assets/campus_students.jpg",
+            span: "md:col-span-1 md:row-span-1",
+            delay: 0.3
         },
         {
-            title: "Tech-Forward",
-            desc: "Smart Labs & 100% Solar Powered Campus.",
-            icon: <Sun className="w-6 h-6 text-gold" />,
-            colSpan: "md:col-span-2",
-            bg: "bg-gold",
-            img: "https://images.unsplash.com/photo-1509391366360-2e959784a276?q=80&w=2672&auto=format&fit=crop"
+            title: "Sports & Vitality",
+            icon: Dumbbell,
+            desc: "Expansive courts and grounds for holistic physical development under the open sky.",
+            image: "/src/assets/campus_sports.jpg",
+            span: "md:col-span-2 md:row-span-1",
+            delay: 0.4
         }
     ];
 
     return (
-        <section className="py-24 px-6 bg-white" id="infrastructure">
-            <div className="container mx-auto">
-                <motion.div
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    className="text-center mb-16"
-                >
-                    <span className="text-gold font-bold text-xs tracking-[0.2em] uppercase mb-2 block">World-Class Facilities</span>
-                    <h2 className="font-serif text-4xl md:text-5xl font-bold text-royal-blue">Designed for Growth</h2>
-                    <div className="h-1 w-20 bg-gold mt-6 mx-auto"></div>
-                </motion.div>
+        <section className="py-32 px-6 bg-midnight relative overflow-hidden" id="infrastructure">
+            {/* Background Glow */}
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[1000px] bg-champagne/5 rounded-full blur-[150px] pointer-events-none will-change-transform"></div>
 
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-[300px]">
+            <div className="container mx-auto relative z-10">
+                <div className="flex flex-col items-center text-center mb-24">
+                    <motion.div
+                        initial={{ opacity: 0, scale: 0.8 }}
+                        whileInView={{ opacity: 1, scale: 1 }}
+                        className="w-16 h-16 glass rounded-full flex items-center justify-center text-champagne mb-8 border border-white/10"
+                    >
+                        <Sparkles size={32} />
+                    </motion.div>
+                    <motion.h2
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        className="font-serif text-6xl md:text-8xl font-bold text-ivory mb-8"
+                    >
+                        Boutique <span className="text-champagne italic">Infrastructure</span>
+                    </motion.h2>
+                    <p className="text-ivory/60 text-xl max-w-2xl font-light leading-relaxed">
+                        Every square inch of our estate is architected to inspire curiosity and facilitate deep-learning protocols.
+                    </p>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 min-h-[800px]">
                     {items.map((item, idx) => (
-                        <BentoCard key={idx} item={item} idx={idx} />
+                        <Card key={idx} {...item} />
                     ))}
                 </div>
             </div>

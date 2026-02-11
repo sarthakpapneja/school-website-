@@ -1,103 +1,119 @@
 import { motion } from 'framer-motion';
-import { Search, FileText, UserCheck, GraduationCap } from 'lucide-react';
+import { Search, FileText, ClipboardCheck, GraduationCap } from 'lucide-react';
 
-const Step = ({ icon: Icon, title, desc, idx, isLast }) => (
-    <div className="flex gap-8 group">
-        <div className="flex flex-col items-center">
+const Step = ({ icon: Icon, title, desc, step, isLast }) => (
+    <div className="flex gap-10 items-start relative pb-20">
+        {!isLast && (
             <motion.div
-                initial={{ scale: 0 }}
-                whileInView={{ scale: 1 }}
-                transition={{ duration: 0.5, delay: idx * 0.2 }}
-                viewport={{ once: true }}
-                className="w-16 h-16 rounded-2xl bg-white shadow-xl shadow-royal-blue/5 border border-slate-100 flex items-center justify-center text-royal-blue group-hover:bg-royal-blue group-hover:text-white transition-all duration-500 z-10"
-            >
-                <Icon size={30} />
-            </motion.div>
-            {!isLast && (
-                <motion.div
-                    initial={{ height: 0 }}
-                    whileInView={{ height: '100px' }}
-                    transition={{ duration: 1, delay: idx * 0.3 }}
-                    viewport={{ once: true }}
-                    className="w-1 bg-gradient-to-b from-royal-blue to-gold/20"
-                />
-            )}
+                initial={{ height: 0 }}
+                whileInView={{ height: '100%' }}
+                transition={{ duration: 1.5, ease: "easeInOut" }}
+                className="absolute left-[39px] top-20 w-[1px] bg-gradient-to-b from-champagne via-champagne/20 to-transparent"
+            />
+        )}
+        <div className="relative z-10 w-20 h-20 bg-midnight-light rounded-3xl border border-white/10 flex items-center justify-center shrink-0 group hover:border-champagne/50 hover:shadow-2xl hover:shadow-champagne/10 transition-all duration-700">
+            <Icon size={32} className="text-champagne transition-transform group-hover:scale-110" />
+            <div className="absolute -top-3 -right-3 w-10 h-10 bg-midnight border border-champagne rounded-full flex items-center justify-center text-champagne font-serif font-bold text-sm shadow-2xl">
+                0{step}
+            </div>
         </div>
-        <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6, delay: idx * 0.2 }}
-            viewport={{ once: true }}
-            className="pb-20"
-        >
-            <h3 className="font-serif text-2xl font-bold text-slate-900 mb-2">{title}</h3>
-            <p className="text-slate-600 max-w-md leading-relaxed">
-                {desc}
-            </p>
-            <div className="mt-4 w-12 h-1 bg-gold rounded-full group-hover:w-24 transition-all duration-500" />
-        </motion.div>
+        <div className="pt-3">
+            <h4 className="font-serif text-3xl font-bold text-ivory mb-4 tracking-tight">{title}</h4>
+            <p className="text-ivory/40 leading-relaxed max-w-lg text-lg font-light">{desc}</p>
+        </div>
     </div>
 );
 
-const AdmissionsJourney = () => {
+const AdmissionsJourney = ({ onApply }) => {
     const steps = [
         {
             icon: Search,
-            title: "Inquiry & Discovery",
-            desc: "Explore our campus and values through a scheduled tour or virtual session with our admissions team."
+            title: "Private Inquiry",
+            desc: "Begin your journey with a curated campus walkthrough and principal's session to understand our artisanal philosophy."
         },
         {
             icon: FileText,
-            title: "Application Submission",
-            desc: "Apply online through our secure portal with academic transcripts and required documentation."
+            title: "Digital Portfolio",
+            desc: "Submit your academic portfolio and personal statement through our secure admissions portal for review."
         },
         {
-            icon: UserCheck,
-            title: "Assessment & Interview",
-            desc: "A friendly evaluation of the student's aptitude followed by a conversation with the Principal."
+            icon: ClipboardCheck,
+            title: "Holistic Assessment",
+            desc: "A personalized interaction designed to uncover the student's unique potential, interests, and leadership traits."
         },
         {
             icon: GraduationCap,
-            title: "Enrollment & Onboarding",
-            desc: "Once selected, complete the fee formalities to secure your seat and begin the journey of wisdom."
+            title: "Secure Enrollment",
+            desc: "Welcome to the Athenia heritage. Secure your seat and begin your transformation into a global visionary."
         }
     ];
 
     return (
-        <section className="py-24 px-6 bg-white relative overflow-hidden" id="admissions">
+        <section className="py-32 px-6 bg-midnight overflow-hidden relative" id="admissions">
+            <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-champagne/5 rounded-full blur-[150px] -mr-64 -mt-64"></div>
+
             <div className="container mx-auto">
-                <div className="flex flex-col lg:flex-row gap-20">
+                <div className="flex flex-col lg:flex-row gap-24">
+                    <motion.div
+                        initial={{ opacity: 0, x: -50 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 1 }}
+                        className="lg:w-1/2 flex flex-col justify-center"
+                    >
+                        <span className="text-champagne font-bold text-xs tracking-[0.5em] uppercase mb-8 block">The Gateway</span>
+                        <h2 className="font-serif text-5xl md:text-7xl font-bold text-ivory leading-tight mb-10">
+                            Secure Your child's <br /><span className="text-champagne italic">Future Legacy</span>
+                        </h2>
+                        <p className="text-ivory/50 text-xl mb-12 leading-relaxed font-light max-w-xl">
+                            Admissions at Athenia are a journey of mutual discovery. We seek curious minds ready to embrace a curriculum beyond standard boundaries.
+                        </p>
+                        <motion.button
+                            whileHover={{ scale: 1.02 }}
+                            whileTap={{ scale: 0.98 }}
+                            onClick={onApply}
+                            className="w-fit bg-champagne text-midnight px-12 py-6 rounded-2xl font-bold text-lg hover:bg-white transition-all shadow-2xl shadow-champagne/20"
+                        >
+                            Start Application Portal
+                        </motion.button>
+                    </motion.div>
 
-                    <div className="w-full lg:w-2/5">
-                        <div className="sticky top-32">
-                            <span className="text-gold font-bold text-xs tracking-[0.2em] uppercase mb-4 block">Enrollment 2026-27</span>
-                            <h2 className="font-serif text-4xl md:text-5xl font-bold text-royal-blue leading-tight mb-8">
-                                Your Path to <br /> <span className="text-gold">Athenia Wisdom</span>
-                            </h2>
-                            <p className="text-slate-600 text-lg mb-10 leading-relaxed">
-                                Joining Athenia High School is the first step toward a transformative educational experience. We've simplified our admissions process to be transparent and merit-based.
-                            </p>
-                            <button className="bg-gold text-white px-10 py-5 rounded-2xl font-bold text-lg hover:bg-yellow-600 transition-all shadow-xl shadow-gold/20 transform hover:-translate-y-1">
-                                Start Application
-                            </button>
+                    <motion.div
+                        initial={{ opacity: 0, x: 50 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 1, delay: 0.3 }}
+                        className="lg:w-1/2 relative group"
+                    >
+                        <div className="absolute inset-0 bg-champagne/10 blur-[100px] rounded-full scale-75 group-hover:scale-100 transition-transform duration-1000"></div>
+                        <div className="relative space-y-4">
+                            {steps.map((step, idx) => (
+                                <Step
+                                    key={idx}
+                                    step={idx + 1}
+                                    {...step}
+                                    isLast={idx === steps.length - 1}
+                                />
+                            ))}
                         </div>
-                    </div>
-
-                    <div className="w-full lg:w-3/5 py-10">
-                        {steps.map((step, idx) => (
-                            <Step
-                                key={idx}
-                                idx={idx}
-                                icon={step.icon}
-                                title={step.title}
-                                desc={step.desc}
-                                isLast={idx === steps.length - 1}
-                            />
-                        ))}
-                    </div>
-
+                    </motion.div>
                 </div>
+
+                {/* Visual Anchor */}
+                <motion.div
+                    initial={{ opacity: 0, y: 50 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    className="mt-20 rounded-[4rem] overflow-hidden aspect-[21/9] border border-white/10 relative"
+                >
+                    <img src="/assets/admissions_sanctuary_1770840427423.png" className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-1000 scale-105 hover:scale-100" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-midnight via-transparent to-transparent opacity-80" />
+                    <div className="absolute bottom-12 left-12">
+                        <h4 className="font-serif text-3xl font-bold text-ivory mb-2">The Admissions Sanctuary</h4>
+                        <p className="text-champagne/60 text-sm font-bold tracking-widest uppercase">Palo Alto • Main Campus</p>
+                    </div>
+                </motion.div>
             </div>
+
         </section>
     );
 };

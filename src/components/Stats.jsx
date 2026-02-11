@@ -1,63 +1,41 @@
-import { useRef, useEffect, useState } from 'react';
-import { motion, useInView, useSpring, useTransform } from 'framer-motion';
+import { motion } from 'framer-motion';
 
-const Digit = ({ value }) => {
-    const ref = useRef(null);
-    const isInView = useInView(ref, { once: true });
-    const springValue = useSpring(0, {
-        stiffness: 100,
-        damping: 30,
-    });
+const StatItem = ({ label, value, delay }) => (
+    <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, delay }}
+        viewport={{ once: true }}
+        className="flex flex-col items-center p-12 glass border border-white/5 rounded-[3rem] relative group overflow-hidden"
+    >
+        <div className="absolute -bottom-10 -right-10 w-32 h-32 bg-champagne/5 rounded-full blur-[40px] group-hover:bg-champagne/10 transition-all duration-700"></div>
 
-    useEffect(() => {
-        if (isInView) {
-            springValue.set(value);
-        }
-    }, [isInView, springValue, value]);
-
-    const displayValue = useTransform(springValue, (latest) => Math.round(latest));
-    const [current, setCurrent] = useState(0);
-
-    useEffect(() => {
-        displayValue.on("change", (latest) => setCurrent(latest));
-    }, [displayValue]);
-
-    return <span ref={ref}>{current}</span>;
-};
+        <div className="font-serif text-6xl md:text-8xl font-bold text-champagne mb-4 drop-shadow-[0_0_15px_rgba(212,175,55,0.2)] group-hover:scale-110 transition-transform duration-700">
+            {value}
+        </div>
+        <div className="text-ivory/40 text-[10px] font-bold tracking-[0.4em] uppercase text-center">{label}</div>
+    </motion.div>
+);
 
 const Stats = () => {
-    const stats = [
-        { label: "Acres Campus", value: 13, suffix: "+" },
-        { label: "Global Alumni", value: 5000, suffix: "+" },
-        { label: "Sports Medals", value: 450, suffix: "+" },
-        { label: "Faculty Experts", value: 120, suffix: "+" },
-    ];
-
     return (
-        <section className="py-20 bg-royal-blue text-white overflow-hidden relative">
-            <div className="absolute inset-0 opacity-10">
-                <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-white/20 via-transparent to-transparent"></div>
+        <section className="py-24 px-6 bg-midnight relative z-10 overflow-hidden">
+            {/* Cinematic Background Image */}
+            <div className="absolute inset-0 z-0">
+                <img
+                    src="/assets/stats_background_1770840447045.png"
+                    alt="Global Connectivity"
+                    className="w-full h-full object-cover opacity-30"
+                />
+                <div className="absolute inset-0 bg-gradient-to-b from-midnight via-midnight/80 to-midnight"></div>
             </div>
 
-            <div className="container mx-auto px-6 relative z-10">
-                <div className="grid grid-cols-2 lg:grid-cols-4 gap-12 text-center">
-                    {stats.map((stat, idx) => (
-                        <motion.div
-                            key={idx}
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            transition={{ delay: idx * 0.1 }}
-                            viewport={{ once: true }}
-                            className="flex flex-col items-center"
-                        >
-                            <div className="text-4xl md:text-6xl font-serif font-black mb-2 text-gold">
-                                <Digit value={stat.value} />{stat.suffix}
-                            </div>
-                            <div className="text-slate-300 font-bold uppercase tracking-widest text-xs md:text-sm">
-                                {stat.label}
-                            </div>
-                        </motion.div>
-                    ))}
+            <div className="container mx-auto relative z-10">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
+                    <StatItem label="Years of Wisdom" value="30+" delay={0.1} />
+                    <StatItem label="Global Scholars" value="5K" delay={0.2} />
+                    <StatItem label="Elite Faculty" value="150" delay={0.3} />
+                    <StatItem label="Campus Acres" value="25" delay={0.4} />
                 </div>
             </div>
         </section>
