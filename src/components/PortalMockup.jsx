@@ -105,7 +105,7 @@ const PortalMockup = ({ isOpen, onClose }) => {
 
             toast.error('Authentication Failed. Please check your credentials.');
         } finally {
-            if (id !== 'ATH2024001' || key !== 'wisdom789') {
+            if (id !== 'ATHT2024001' || key !== 'wisdom789') {
                 setIsAuthenticating(false);
             }
         }
@@ -139,9 +139,9 @@ const PortalMockup = ({ isOpen, onClose }) => {
                     onClick={(e) => e.stopPropagation()}
                     data-lenis-prevent
                 >
-                    {/* Background Logo Watermark */}
-                    <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-[0.05] flex items-center justify-center">
-                        <img src={logoImg} alt="" className="w-full h-full object-contain scale-[1.3] mix-blend-overlay" />
+                    {/* Premium Logo Background - Single, refined placement */}
+                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full opacity-[0.03] pointer-events-none flex items-center justify-center overflow-hidden">
+                        <img src={logoImg} alt="" className="w-1/2 h-1/2 object-contain grayscale scale-[2]" />
                     </div>
                     {/* Close Button */}
                     <button onClick={onClose} className="absolute top-4 right-4 lg:top-8 lg:right-8 z-50 p-3 glass rounded-full text-ivory/50 hover:text-champagne transition-colors">
