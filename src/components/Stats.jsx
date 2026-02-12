@@ -32,8 +32,8 @@ const Stats = () => {
 
             <div className="container mx-auto relative z-10">
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
-                    <StatItem label="Years of Wisdom" value="30+" delay={0.1} />
-                    <StatItem label="Scholars" value="5K" delay={0.2} />
+                    <StatItem label="Years of Wisdom" value="9+" delay={0.1} />
+                    <StatItem label="Scholars" value="600+" delay={0.2} />
                     <StatItem label="Elite Faculty" value="150" delay={0.3} />
                     <StatItem label="Campus Acres" value="25" delay={0.4} />
                 </div>
