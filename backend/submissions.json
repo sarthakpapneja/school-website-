@@ -16,5 +16,75 @@
       "date": "2026-02-11T18:23:26.672Z"
     }
   ],
-  "contact": []
+  "contact": [],
+  "students": [
+    {
+      "id": "ATH2024001",
+      "key": "wisdom789",
+      "name": "A. Papneja",
+      "class": "XII",
+      "stream": "Science",
+      "stats": {
+        "attendance": "98%",
+        "result": "96.4%",
+        "rank": "#12"
+      },
+      "schedule": [
+        { "time": "08:00 AM", "subject": "Physics (Electrodynamics)", "location": "Lab 1" },
+        { "time": "09:45 AM", "subject": "Mathematics (Calculus)", "location": "Room 204" },
+        { "time": "11:15 AM", "subject": "English Core", "location": "Lecture Hall" },
+        { "time": "01:30 PM", "subject": "Computer Science (Python)", "location": "IT Wing" }
+      ],
+      "fullSchedule": {
+        "Monday": [
+          { "time": "08:00 - 09:30", "subject": "Physics", "teacher": "Dr. Sharma" },
+          { "time": "09:45 - 11:15", "subject": "Mathematics", "teacher": "Mrs. Gupta" },
+          { "time": "11:30 - 13:00", "subject": "Chemistry", "teacher": "Mr. Verma" }
+        ],
+        "Tuesday": [
+          { "time": "08:00 - 09:30", "subject": "English", "teacher": "Ms. Wilson" },
+          { "time": "09:45 - 11:15", "subject": "Computer Science", "teacher": "Mr. Khan" },
+          { "time": "11:30 - 13:00", "subject": "Physics Lab", "teacher": "Dr. Sharma" }
+        ],
+        "Wednesday": [
+          { "time": "08:00 - 09:30", "subject": "Mathematics", "teacher": "Mrs. Gupta" },
+          { "time": "09:45 - 11:15", "subject": "Chemistry Lab", "teacher": "Mr. Verma" },
+          { "time": "11:30 - 13:00", "subject": "Physical Education", "teacher": "Coach Singh" }
+        ],
+        "Thursday": [
+          { "time": "08:00 - 09:30", "subject": "Physics", "teacher": "Dr. Sharma" },
+          { "time": "09:45 - 11:15", "subject": "Mathematics", "teacher": "Mrs. Gupta" },
+          { "time": "11:30 - 13:00", "subject": "English", "teacher": "Ms. Wilson" }
+        ],
+        "Friday": [
+          { "time": "08:00 - 09:30", "subject": "Computer Science", "teacher": "Mr. Khan" },
+          { "time": "09:45 - 11:15", "subject": "Chemistry", "teacher": "Mr. Verma" },
+          { "time": "11:30 - 13:00", "subject": "Self Study / Library", "teacher": "Librarian" }
+        ]
+      },
+      "academicRecords": [
+        { "subject": "Physics", "unitTest": 23, "halfYearly": 74, "predicted": 95 },
+        { "subject": "Mathematics", "unitTest": 25, "halfYearly": 78, "predicted": 98 },
+        { "subject": "Chemistry", "unitTest": 22, "halfYearly": 72, "predicted": 94 },
+        { "subject": "English", "unitTest": 24, "halfYearly": 76, "predicted": 96 },
+        { "subject": "Computer Science", "unitTest": 25, "halfYearly": 79, "predicted": 99 }
+      ],
+      "feeStatus": {
+        "pending": 12500,
+        "lastPayment": { "amount": 45000, "date": "2024-01-15" },
+        "history": [
+          { "quarter": "Q1 (Apr-Jun)", "amount": 45000, "status": "Paid", "date": "2024-04-10" },
+          { "quarter": "Q2 (Jul-Sep)", "amount": 45000, "status": "Paid", "date": "2024-07-05" },
+          { "quarter": "Q3 (Oct-Dec)", "amount": 45000, "status": "Paid", "date": "2024-10-12" },
+          { "quarter": "Q4 (Jan-Mar)", "amount": 45000, "status": "Pending", "date": "-" }
+        ]
+      },
+      "circulars": [
+        { "id": 1, "title": "Annual Sports Day 2024", "date": "2024-02-10", "highlight": true },
+        { "id": 2, "title": "Summer Internship Registrations Open", "date": "2024-02-05", "highlight": false },
+        { "id": 3, "title": "Parent-Teacher Meeting Schedule", "date": "2024-02-01", "highlight": false },
+        { "id": 4, "title": "Inter-School Science Fair Results", "date": "2024-01-25", "highlight": true }
+      ]
+    }
+  ]
 }

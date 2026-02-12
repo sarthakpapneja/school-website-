@@ -24,6 +24,8 @@ import Marquee from './components/Marquee';
 import Preloader from './components/Preloader';
 import SmoothScroll from './components/SmoothScroll';
 import ProspectusModal from './components/ProspectusModal';
+import Chatbot from './components/Chatbot';
+import PoliciesModal from './components/PoliciesModal';
 
 function App() {
   const [loading, setLoading] = useState(true); // Keep for potential future use or prop drilling
@@ -36,6 +38,7 @@ function App() {
   const [isMessageOpen, setIsMessageOpen] = useState(false);
   const [activeFeature, setActiveFeature] = useState(null);
   const [isProspectusOpen, setIsProspectusOpen] = useState(false);
+  const [isPoliciesOpen, setIsPoliciesOpen] = useState(false);
 
   // Global actions
   const openApply = () => setIsApplyOpen(true);
@@ -44,6 +47,7 @@ function App() {
   const openMessage = () => setIsMessageOpen(true);
   const openFeature = (feature) => setActiveFeature(feature);
   const openProspectus = () => setIsProspectusOpen(true);
+  const openPolicies = () => setIsPoliciesOpen(true);
 
   const handlePreloaderComplete = () => {
     setLoading(false);
@@ -72,7 +76,7 @@ function App() {
       />
       <AuroraBackground />
 
-      <Navbar onApplyClick={openApply} onPortalClick={openPortal} />
+      <Navbar onApplyClick={openApply} onPortalClick={openPortal} onPoliciesClick={openPolicies} />
 
       <Hero onExploreClick={openApply} onVideoClick={openVideo} />
 
@@ -94,7 +98,9 @@ function App() {
       <Gallery />
       <HallOfFame />
       <ImpactCTA onApply={openApply} onRequestProspectus={openProspectus} />
-      <Footer onPortalClick={openPortal} onRequestProspectus={openProspectus} />
+      <Footer onPortalClick={openPortal} onRequestProspectus={openProspectus} onPoliciesClick={openPolicies} />
+
+      <Chatbot />
 
       <ApplicationModal
         isOpen={isApplyOpen}
@@ -125,6 +131,11 @@ function App() {
       <ProspectusModal
         isOpen={isProspectusOpen}
         onClose={() => setIsProspectusOpen(false)}
+      />
+
+      <PoliciesModal
+        isOpen={isPoliciesOpen}
+        onClose={() => setIsPoliciesOpen(false)}
       />
     </div>
   );

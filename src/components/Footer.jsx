@@ -5,7 +5,7 @@ import axios from 'axios';
 import toast from 'react-hot-toast';
 import { useState } from 'react';
 
-const Footer = ({ onPortalClick, onRequestProspectus }) => {
+const Footer = ({ onPortalClick, onRequestProspectus, onPoliciesClick }) => {
     const [email, setEmail] = useState('');
     const [loading, setLoading] = useState(false);
 
@@ -54,13 +54,19 @@ const Footer = ({ onPortalClick, onRequestProspectus }) => {
                     <div>
                         <h4 className="font-serif text-xl font-bold text-ivory mb-10">Quick Links</h4>
                         <ul className="flex flex-col gap-5">
-                            {['About Athenia', 'Academic Life', 'Admissions', 'Student Portal', 'Careers'].map((link) => (
-                                <li key={link}>
+                            {[
+                                { name: 'About Athenia', action: () => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' }) },
+                                { name: 'Academic Life', action: () => document.getElementById('academics')?.scrollIntoView({ behavior: 'smooth' }) },
+                                { name: 'Admissions', action: () => document.getElementById('admissions')?.scrollIntoView({ behavior: 'smooth' }) },
+                                { name: 'Student Portal', action: onPortalClick },
+                                { name: 'Careers', action: () => toast.success('Careers opening soon! Check back later.') }
+                            ].map((item) => (
+                                <li key={item.name}>
                                     <button
-                                        onClick={link === 'Student Portal' ? onPortalClick : undefined}
-                                        className="text-ivory/40 hover:text-champagne transition-colors text-lg font-light"
+                                        onClick={item.action}
+                                        className="text-ivory/40 hover:text-champagne transition-colors text-lg font-light text-left"
                                     >
-                                        {link}
+                                        {item.name}
                                     </button>
                                 </li>
                             ))}
@@ -115,9 +121,9 @@ const Footer = ({ onPortalClick, onRequestProspectus }) => {
                 <div className="pt-16 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-8 text-ivory/20 text-sm font-light tracking-widest uppercase">
                     <p>&copy; 2026 Athenia High School. All rights reserved.</p>
                     <div className="flex gap-10">
-                        <a href="#" className="hover:text-champagne transition-colors">Privacy Policy</a>
+                        <button onClick={onPoliciesClick} className="hover:text-champagne transition-colors uppercase tracking-widest text-[10px] font-bold">Institutional Policies</button>
                         <li><button onClick={onRequestProspectus} className="hover:text-champagne transition-colors text-left">Request Prospectus</button></li>
-                        <a href="#" className="hover:text-champagne transition-colors">Terms of Heritage</a>
+                        <a href="#" className="hover:text-champagne transition-colors">Privacy Policy</a>
                     </div>
                 </div>
             </div>

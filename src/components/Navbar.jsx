@@ -34,7 +34,7 @@ const NavLink = ({ href, children, mobile = false, onClick }) => {
     );
 };
 
-const Navbar = ({ onApplyClick, onPortalClick }) => {
+const Navbar = ({ onApplyClick, onPortalClick, onPoliciesClick }) => {
     const [isScrolled, setIsScrolled] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -89,6 +89,12 @@ const Navbar = ({ onApplyClick, onPortalClick }) => {
 
                 {/* Actions */}
                 <div className="hidden md:flex items-center gap-4">
+                    <button
+                        onClick={onPoliciesClick}
+                        className="text-ivory/60 hover:text-champagne text-xs uppercase tracking-widest font-bold px-4 transition-colors"
+                    >
+                        Policies
+                    </button>
                     <button
                         onClick={onPortalClick}
                         className="text-ivory/60 hover:text-champagne text-xs uppercase tracking-widest font-bold px-4 transition-colors"
@@ -146,6 +152,15 @@ const Navbar = ({ onApplyClick, onPortalClick }) => {
                             transition={{ delay: 0.5 }}
                             className="mt-12 space-y-4"
                         >
+                            <button
+                                onClick={() => {
+                                    onPoliciesClick();
+                                    setIsMobileMenuOpen(false);
+                                }}
+                                className="w-full py-4 glass rounded-xl text-ivory uppercase tracking-widest text-sm font-bold flex items-center justify-center gap-2 hover:bg-white/10"
+                            >
+                                Institutional Policies
+                            </button>
                             <button
                                 onClick={() => {
                                     onPortalClick();
