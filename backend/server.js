@@ -18,10 +18,62 @@ const DB_PATH = path.join(__dirname, 'submissions.json');
 
 // Initialize DB if not exists
 if (!fs.existsSync(DB_PATH)) {
-    fs.writeFileSync(DB_PATH, JSON.stringify({ applications: [], newsletter: [], contact: [] }, null, 2));
+    const initialData = {
+        applications: [],
+        newsletter: [],
+        contact: [],
+        students: [
+            {
+                id: "ATH2024001",
+                key: "wisdom789",
+                name: "A. Papneja",
+                class: "XII",
+                stream: "Science",
+                stats: {
+                    attendance: "98%",
+                    result: "96.4%",
+                    rank: "#12"
+                },
+                schedule: [
+                    { time: '08:00 AM', subject: 'Physics (Electrodynamics)', location: 'Lab 1' },
+                    { time: '09:45 AM', subject: 'Mathematics (Calculus)', location: 'Room 204' },
+                    { time: '11:15 AM', subject: 'English Core', location: 'Lecture Hall' },
+                    { time: '01:30 PM', subject: 'Computer Science (Python)', location: 'IT Wing' }
+                ]
+            }
+        ]
+    };
+    fs.writeFileSync(DB_PATH, JSON.stringify(initialData, null, 2));
 }
 
 // Routes
+app.post('/api/portal/login', (req, res) => {
+    const { id, key } = req.body;
+    const db = JSON.parse(fs.readFileSync(DB_PATH));
+    const student = db.students.find(s => s.id === id && s.key === key);
+
+    if (student) {
+        console.log(`[Backend] Portal Login Successful: ${id}`);
+        const { key: _, ...safeStudent } = student;
+        res.status(200).json({ success: true, student: safeStudent });
+    } else {
+        console.log(`[Backend] Portal Login Failed: ${id}`);
+        res.status(401).json({ success: false, error: 'Invalid Credentials' });
+    }
+});
+
+app.get('/api/portal/student/:id', (req, res) => {
+    const { id } = req.params;
+    const db = JSON.parse(fs.readFileSync(DB_PATH));
+    const student = db.students.find(s => s.id === id);
+
+    if (student) {
+        const { key: _, ...safeStudent } = student;
+        res.status(200).json(safeStudent);
+    } else {
+        res.status(404).json({ error: 'Student not found' });
+    }
+});
 app.post('/api/apply', (req, res) => {
     const { name, email, phone, grade, message } = req.body;
 

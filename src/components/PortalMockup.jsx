@@ -1,12 +1,14 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Lock, ShieldCheck, Mail, Key, LayoutDashboard, Calendar, FileText, CreditCard, ChevronRight, Bell, User } from 'lucide-react';
+import { X, Lock, ShieldCheck, Mail, Key, LayoutDashboard, Calendar, FileText, CreditCard, ChevronRight, Bell, User, LogOut } from 'lucide-react';
 import toast from 'react-hot-toast';
+import axios from 'axios';
 
 const PortalMockup = ({ isOpen, onClose }) => {
     const [isAuthenticating, setIsAuthenticating] = useState(false);
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [credentials, setCredentials] = useState({ id: '', key: '' });
+    const [studentData, setStudentData] = useState(null);
 
     // Body scroll lock
     useEffect(() => {
@@ -14,17 +16,17 @@ const PortalMockup = ({ isOpen, onClose }) => {
             document.body.style.overflow = 'hidden';
         } else {
             document.body.style.overflow = 'unset';
-            // Reset state on close
-            setIsAuthenticated(false);
-            setIsAuthenticating(false);
-            setCredentials({ id: '', key: '' });
+            // Reset state on close but keep session logic if authenticated
+            if (!isAuthenticated) {
+                setCredentials({ id: '', key: '' });
+            }
         }
         return () => {
             document.body.style.overflow = 'unset';
         };
-    }, [isOpen]);
+    }, [isOpen, isAuthenticated]);
 
-    const handleLogin = (e) => {
+    const handleLogin = async (e) => {
         e.preventDefault();
         if (!credentials.id || !credentials.key) {
             toast.error('Please enter valid credentials.');
@@ -33,20 +35,35 @@ const PortalMockup = ({ isOpen, onClose }) => {
 
         setIsAuthenticating(true);
 
-        // Simulate secure authentication flow
-        setTimeout(() => {
+        try {
+            const response = await axios.post('http://localhost:5001/api/portal/login', credentials);
+
+            if (response.data.success) {
+                setStudentData(response.data.student);
+                setIsAuthenticated(true);
+                toast.success(`Welcome, Scholar ${response.data.student.name}`, {
+                    icon: '🦅',
+                    style: {
+                        borderRadius: '1rem',
+                        background: '#161B22',
+                        color: '#D4AF37',
+                        border: '1px solid rgba(212,175,55,0.2)'
+                    },
+                });
+            }
+        } catch (error) {
+            console.error('Portal Auth Error:', error);
+            toast.error(error.response?.data?.error || 'Authentication Failed. Please check your credentials.');
+        } finally {
             setIsAuthenticating(false);
-            setIsAuthenticated(true);
-            toast.success('Authentication Successful. Welcome, Scholar.', {
-                icon: '🦅',
-                style: {
-                    borderRadius: '1rem',
-                    background: '#161B22',
-                    color: '#D4AF37',
-                    border: '1px solid rgba(212,175,55,0.2)'
-                },
-            });
-        }, 2000);
+        }
+    };
+
+    const handleLogout = () => {
+        setIsAuthenticated(false);
+        setStudentData(null);
+        setCredentials({ id: '', key: '' });
+        toast.success('Logged out successfully.');
     };
 
     if (!isOpen) return null;
@@ -142,8 +159,8 @@ const PortalMockup = ({ isOpen, onClose }) => {
                                             <User size={20} />
                                         </div>
                                         <div>
-                                            <h4 className="text-ivory font-bold text-sm">A. Papneja</h4>
-                                            <p className="text-[10px] text-champagne/60 tracking-wider">Class XII - Science Stream</p>
+                                            <h4 className="text-ivory font-bold text-sm">{studentData?.name || 'Scholar'}</h4>
+                                            <p className="text-[10px] text-champagne/60 tracking-wider">Class {studentData?.class || 'XII'} - {studentData?.stream || 'Science'} Stream</p>
                                         </div>
                                     </div>
 
@@ -162,6 +179,16 @@ const PortalMockup = ({ isOpen, onClose }) => {
                                             {item.label}
                                         </button>
                                     ))}
+
+                                    <div className="mt-auto">
+                                        <button
+                                            onClick={handleLogout}
+                                            className="flex items-center gap-4 px-4 py-3 rounded-xl text-xs font-bold tracking-widest uppercase transition-all text-red-500/60 hover:text-red-500 hover:bg-red-500/5 w-full"
+                                        >
+                                            <LogOut size={18} />
+                                            Sign Out
+                                        </button>
+                                    </div>
                                 </div>
 
                                 {/* Main Content */}
@@ -180,9 +207,9 @@ const PortalMockup = ({ isOpen, onClose }) => {
                                     {/* Stats Grid */}
                                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
                                         {[
-                                            { label: 'Attendance', value: '98%', color: '#D4AF37' },
-                                            { label: 'Term I Result', value: '96.4%', color: '#F8F9FA' },
-                                            { label: 'Merit Rank', value: '#12', color: '#D4AF37' },
+                                            { label: 'Attendance', value: studentData?.stats?.attendance || 'N/A', color: '#D4AF37' },
+                                            { label: 'Term I Result', value: studentData?.stats?.result || 'N/A', color: '#F8F9FA' },
+                                            { label: 'Merit Rank', value: studentData?.stats?.rank || 'N/A', color: '#D4AF37' },
                                         ].map((stat) => (
                                             <div key={stat.label} className="glass p-6 rounded-3xl border border-white/5">
                                                 <p className="text-ivory/20 text-[10px] uppercase font-bold tracking-widest mb-4">{stat.label}</p>
@@ -198,12 +225,7 @@ const PortalMockup = ({ isOpen, onClose }) => {
                                             <button className="text-champagne text-[10px] font-bold tracking-widest uppercase flex items-center gap-2">Full Timetable <ChevronRight size={14} /></button>
                                         </div>
                                         <div className="space-y-6">
-                                            {[
-                                                { time: '08:00 AM', subject: 'Physics (Electrodynamics)', location: 'Lab 1' },
-                                                { time: '09:45 AM', subject: 'Mathematics (Calculus)', location: 'Room 204' },
-                                                { time: '11:15 AM', subject: 'English Core', location: 'Lecture Hall' },
-                                                { time: '01:30 PM', subject: 'Computer Science (Python)', location: 'IT Wing' },
-                                            ].map((session, idx) => (
+                                            {(studentData?.schedule || []).map((session, idx) => (
                                                 <div key={idx} className="flex items-center justify-between py-4 border-b border-white/5 last:border-0">
                                                     <div className="flex gap-6 items-center">
                                                         <span className="text-champagne font-bold text-[10px] tabular-nums">{session.time}</span>

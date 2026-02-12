@@ -69,7 +69,7 @@ const MessageModal = ({ isOpen, onClose }) => {
                                         virtues of critical thinking and emotional intelligence.
                                     </p>
                                     <p>
-                                        Our artisanal approach to mentorship ensures that every student is seen, heard, and challenged
+                                        Our personalized approach to mentorship ensures that every student is seen, heard, and challenged
                                         to reach beyond their perceived limits. We don't just prepare students for universities;
                                         we prepare them for a lifetime of seeking truth and leading with wisdom.
                                     </p>
@@ -78,13 +78,13 @@ const MessageModal = ({ isOpen, onClose }) => {
                                             <h4 className="text-ivory font-bold mb-2 flex items-center gap-2">
                                                 <Sparkles size={16} className="text-champagne" /> Boutique Focus
                                             </h4>
-                                            <p className="text-sm opacity-50">1:8 Teacher-student ratio for personalized growth.</p>
+                                            <p className="text-sm opacity-50">1:4 Teacher-student ratio for personalized growth.</p>
                                         </div>
                                         <div>
                                             <h4 className="text-ivory font-bold mb-2 flex items-center gap-2">
-                                                <Sparkles size={16} className="text-champagne" /> Global Horizon
+                                                <Sparkles size={16} className="text-champagne" /> Value-Based Education
                                             </h4>
-                                            <p className="text-sm opacity-50">Immersion programs in 12 partner nations.</p>
+                                            <p className="text-sm opacity-50">Rooted in Indian values with global perspective.</p>
                                         </div>
                                     </div>
                                 </div>
