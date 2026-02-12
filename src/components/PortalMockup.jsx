@@ -135,27 +135,73 @@ const PortalMockup = ({ isOpen, onClose }) => {
             const element = document.getElementById('transcript-template');
             if (!element) throw new Error('Scholastic template could not be located.');
 
-            // Ensure images are decoded and fonts are ready
-            await new Promise(resolve => setTimeout(resolve, 1500));
+            // Briefly make template measurable for html2canvas (keep off-screen)
+            const origStyles = {
+                position: element.style.position,
+                top: element.style.top,
+                left: element.style.left,
+                zIndex: element.style.zIndex,
+                visibility: element.style.visibility
+            };
+            element.style.position = 'fixed';
+            element.style.top = '0';
+            element.style.left = '-9999px';
+            element.style.zIndex = '-1';
+            element.style.visibility = 'visible';
+
+            await new Promise(resolve => setTimeout(resolve, 300));
 
             const canvas = await html2canvas(element, {
-                scale: 3,
+                scale: 2,
                 useCORS: true,
+                allowTaint: true,
                 backgroundColor: '#ffffff',
                 logging: false,
                 width: 800,
                 windowWidth: 800,
                 onclone: (clonedDoc) => {
-                    const clonedElement = clonedDoc.getElementById('transcript-template');
-                    if (clonedElement) {
-                        clonedElement.style.display = 'block';
-                        clonedElement.style.position = 'static';
-                        clonedElement.style.visibility = 'visible';
-                        clonedElement.style.top = '0';
-                        clonedElement.style.left = '0';
+                    const clonedEl = clonedDoc.getElementById('transcript-template');
+                    if (clonedEl) {
+                        clonedEl.style.display = 'block';
+                        clonedEl.style.position = 'static';
+                        clonedEl.style.visibility = 'visible';
+                        clonedEl.style.left = '0';
                     }
                 }
             });
+
+            // Restore original styles
+            element.style.position = origStyles.position;
+            element.style.top = origStyles.top;
+            element.style.left = origStyles.left;
+            element.style.zIndex = origStyles.zIndex;
+            element.style.visibility = origStyles.visibility;
+
+            // Draw school logo as watermark on canvas (guaranteed in downloaded PDF)
+            const ctx = canvas.getContext('2d');
+            const logoImgEl = new Image();
+            logoImgEl.crossOrigin = 'anonymous';
+            logoImgEl.src = logoImg;
+
+            try {
+                await new Promise((resolve, reject) => {
+                    logoImgEl.onload = () => resolve();
+                    logoImgEl.onerror = () => reject(new Error('Logo load failed'));
+                    if (logoImgEl.complete && logoImgEl.naturalWidth) resolve();
+                });
+                const cw = canvas.width;
+                const ch = canvas.height;
+                const logoDisplayW = Math.min(400, cw * 0.6);
+                const logoDisplayH = (logoImgEl.naturalHeight / logoImgEl.naturalWidth) * logoDisplayW;
+                const logoX = (cw - logoDisplayW) / 2;
+                const logoY = (ch - logoDisplayH) / 2;
+                ctx.save();
+                ctx.globalAlpha = 0.18;
+                ctx.drawImage(logoImgEl, logoX, logoY, logoDisplayW, logoDisplayH);
+                ctx.restore();
+            } catch (_) {
+                // PDF still saves; watermark from template may appear if html2canvas captured it
+            }
 
             const imgData = canvas.toDataURL('image/png', 1.0);
             const pdf = new jsPDF('p', 'mm', 'a4');
