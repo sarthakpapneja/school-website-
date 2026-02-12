@@ -35,7 +35,7 @@ const Stats = () => {
                     <StatItem label="Years of Wisdom" value="9+" delay={0.1} />
                     <StatItem label="Scholars" value="600+" delay={0.2} />
                     <StatItem label="Elite Faculty" value="150" delay={0.3} />
-                    <StatItem label="Campus Acres" value="25" delay={0.4} />
+                    <StatItem label="Campus Acres" value="13" delay={0.4} />
                 </div>
             </div>
         </section>

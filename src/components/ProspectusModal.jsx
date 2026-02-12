@@ -126,7 +126,7 @@ const ProspectusModal = ({ isOpen, onClose }) => {
                                     <h2 className="font-serif text-3xl mb-8 text-center md:text-left" style={{ color: '#EAEAEA', borderColor: 'transparent' }}>Academic <span className="italic" style={{ color: '#D4AF37', borderColor: 'transparent' }}>Wings</span></h2>
                                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4" style={{ borderColor: 'transparent' }}>
                                         {[
-                                            { title: "S.T.E.M. Institute", desc: "Quantum Computing & Biotech" },
+                                            { title: "Science & Technology Wing", desc: "NCERT & NEP 2020 Aligned" },
                                             { title: "Global Humanities", desc: "History, Philosophy & Law" },
                                             { title: "Conservatory of Arts", desc: "Visual, Sonic & Dramatic Arts" },
                                             { title: "The Classics", desc: "Latin, Greek & Ancient Wisdom" }
@@ -157,14 +157,14 @@ const ProspectusModal = ({ isOpen, onClose }) => {
                                     <div className="text-left" style={{ borderColor: 'transparent' }}>
                                         <h3 className="font-serif text-xl mb-4" style={{ color: '#EAEAEA', borderColor: 'transparent' }}>Contact Us</h3>
                                         <div className="space-y-3 text-sm" style={{ color: 'rgba(234,234,234,0.6)', borderColor: 'transparent' }}>
-                                            <p className="flex items-center gap-3" style={{ borderColor: 'transparent' }}><MapPin size={14} style={{ color: '#D4AF37', borderColor: 'transparent' }} /> 123 Heritage Lane, Athenia Estate</p>
-                                            <p className="flex items-center gap-3" style={{ borderColor: 'transparent' }}><Phone size={14} style={{ color: '#D4AF37', borderColor: 'transparent' }} /> +1 (555) 123-4567</p>
+                                            <p className="flex items-center gap-3" style={{ borderColor: 'transparent' }}><MapPin size={14} style={{ color: '#D4AF37', borderColor: 'transparent' }} /> Athenia Heritage Campus, Saharanpur, UP</p>
+                                            <p className="flex items-center gap-3" style={{ borderColor: 'transparent' }}><Phone size={14} style={{ color: '#D4AF37', borderColor: 'transparent' }} /> +91 98975 45421</p>
                                             <p className="flex items-center gap-3" style={{ borderColor: 'transparent' }}><Mail size={14} style={{ color: '#D4AF37', borderColor: 'transparent' }} /> admissions@athenia.edu</p>
                                             <p className="flex items-center gap-3" style={{ borderColor: 'transparent' }}><Globe size={14} style={{ color: '#D4AF37', borderColor: 'transparent' }} /> www.atheniahigh.edu</p>
                                         </div>
                                     </div>
                                     <div className="text-left md:text-right" style={{ borderColor: 'transparent' }}>
-                                        <div className="font-bold text-xs tracking-[0.2em] uppercase mb-2" style={{ color: '#D4AF37', borderColor: 'transparent' }}>Est. 1996</div>
+                                        <div className="font-bold text-xs tracking-[0.2em] uppercase mb-2" style={{ color: '#D4AF37', borderColor: 'transparent' }}>Est. 2017</div>
                                         <p className="text-xs max-w-xs" style={{ color: 'rgba(234,234,234,0.4)', borderColor: 'transparent' }}>
                                             © 2026 Athenia High School. All rights reserved. <br /> Excellence in every endeavor.
                                         </p>

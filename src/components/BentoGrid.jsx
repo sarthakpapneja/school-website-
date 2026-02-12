@@ -55,7 +55,7 @@ const BentoGrid = () => {
             title: "13-Acre Estate",
             icon: Laptop,
             desc: "A sprawling 52,680 sq.m. estate where nature and innovation coexist in perfect harmony.",
-            image: "/src/assets/campus_aerial.jpg",
+            image: "/assets/campus_aerial_v2.png",
             span: "md:col-span-2 md:row-span-2",
             delay: 0.1
         },
@@ -63,7 +63,7 @@ const BentoGrid = () => {
             title: "Heritage Architecture",
             icon: Microscope,
             desc: "Exposed brick facades that breathe, designed for natural cooling and timeless aesthetics.",
-            image: "/src/assets/campus_facade.jpg",
+            image: "/assets/campus_facade_v2.png",
             span: "md:col-span-1 md:row-span-1",
             delay: 0.2
         },
@@ -71,7 +71,7 @@ const BentoGrid = () => {
             title: "Open-Air Corridors",
             icon: ArrowUpRight,
             desc: "Walkways bathed in sunlight, connecting minds to the elements.",
-            image: "/src/assets/campus_students.jpg",
+            image: "/assets/campus_corridor_v2.png",
             span: "md:col-span-1 md:row-span-1",
             delay: 0.3
         },
@@ -79,7 +79,7 @@ const BentoGrid = () => {
             title: "Sports & Vitality",
             icon: Dumbbell,
             desc: "Expansive courts and grounds for holistic physical development under the open sky.",
-            image: "/src/assets/campus_sports.jpg",
+            image: "/assets/campus_sports_v2.png",
             span: "md:col-span-2 md:row-span-1",
             delay: 0.4
         }

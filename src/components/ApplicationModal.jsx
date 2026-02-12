@@ -80,7 +80,7 @@ const ApplicationModal = ({ isOpen, onClose }) => {
                                         />
                                     </div>
                                     <div>
-                                        <label className="block text-ivory/40 text-[10px] font-bold tracking-[0.3em] uppercase mb-4">Intellectual Level</label>
+                                        <label className="block text-ivory/40 text-[10px] font-bold tracking-[0.3em] uppercase mb-4">Class Placement</label>
                                         <select
                                             name="grade"
                                             value={formData.grade}
@@ -96,22 +96,22 @@ const ApplicationModal = ({ isOpen, onClose }) => {
                                                 <option value="ukg" className="bg-midnight text-ivory font-sans">Senior Kindergarten</option>
                                             </optgroup>
                                             <optgroup label="Primary Years" className="bg-midnight text-champagne font-bold">
-                                                <option value="grade_1" className="bg-midnight text-ivory font-sans">Grade 1</option>
-                                                <option value="grade_2" className="bg-midnight text-ivory font-sans">Grade 2</option>
-                                                <option value="grade_3" className="bg-midnight text-ivory font-sans">Grade 3</option>
-                                                <option value="grade_4" className="bg-midnight text-ivory font-sans">Grade 4</option>
-                                                <option value="grade_5" className="bg-midnight text-ivory font-sans">Grade 5</option>
+                                                <option value="class_1" className="bg-midnight text-ivory font-sans">Class I</option>
+                                                <option value="class_2" className="bg-midnight text-ivory font-sans">Class II</option>
+                                                <option value="class_3" className="bg-midnight text-ivory font-sans">Class III</option>
+                                                <option value="class_4" className="bg-midnight text-ivory font-sans">Class IV</option>
+                                                <option value="class_5" className="bg-midnight text-ivory font-sans">Class V</option>
                                             </optgroup>
                                             <optgroup label="Middle Years" className="bg-midnight text-champagne font-bold">
-                                                <option value="grade_6" className="bg-midnight text-ivory font-sans">Grade 6</option>
-                                                <option value="grade_7" className="bg-midnight text-ivory font-sans">Grade 7</option>
-                                                <option value="grade_8" className="bg-midnight text-ivory font-sans">Grade 8</option>
+                                                <option value="class_6" className="bg-midnight text-ivory font-sans">Class VI</option>
+                                                <option value="class_7" className="bg-midnight text-ivory font-sans">Class VII</option>
+                                                <option value="class_8" className="bg-midnight text-ivory font-sans">Class VIII</option>
                                             </optgroup>
                                             <optgroup label="Senior Years" className="bg-midnight text-champagne font-bold">
-                                                <option value="grade_9" className="bg-midnight text-ivory font-sans">Grade 9</option>
-                                                <option value="grade_10" className="bg-midnight text-ivory font-sans">Grade 10</option>
-                                                <option value="grade_11" className="bg-midnight text-ivory font-sans">Grade 11</option>
-                                                <option value="grade_12" className="bg-midnight text-ivory font-sans">Grade 12</option>
+                                                <option value="class_9" className="bg-midnight text-ivory font-sans">Class IX</option>
+                                                <option value="class_10" className="bg-midnight text-ivory font-sans">Class X</option>
+                                                <option value="class_11" className="bg-midnight text-ivory font-sans">Class XI</option>
+                                                <option value="class_12" className="bg-midnight text-ivory font-sans">Class XII</option>
                                             </optgroup>
                                         </select>
                                     </div>
