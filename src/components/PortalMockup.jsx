@@ -123,40 +123,53 @@ const PortalMockup = ({ isOpen, onClose }) => {
     };
 
     const handleDownloadTranscript = async () => {
-        const toastId = toast.loading('Generating Scholastic Transcript...');
+        const toastId = toast.loading('Preparing Scholastic Records...', {
+            style: {
+                background: '#1a1a1a',
+                color: '#fff',
+                border: '1px solid rgba(212, 175, 55, 0.2)'
+            }
+        });
 
         try {
             const element = document.getElementById('transcript-template');
-            if (!element) throw new Error('Template not found');
+            if (!element) throw new Error('Scholastic template could not be located.');
 
-            // Temporarily prepare for capture
-            element.style.display = 'block';
-            element.style.position = 'fixed';
-            element.style.left = '-9999px';
-            element.style.top = '0';
-            element.style.width = '800px';
+            // Ensure images are decoded and fonts are ready
+            await new Promise(resolve => setTimeout(resolve, 1500));
 
             const canvas = await html2canvas(element, {
-                scale: 2,
+                scale: 3,
                 useCORS: true,
                 backgroundColor: '#ffffff',
-                logging: false
+                logging: false,
+                width: 800,
+                windowWidth: 800,
+                onclone: (clonedDoc) => {
+                    const clonedElement = clonedDoc.getElementById('transcript-template');
+                    if (clonedElement) {
+                        clonedElement.style.display = 'block';
+                        clonedElement.style.position = 'static';
+                        clonedElement.style.visibility = 'visible';
+                        clonedElement.style.top = '0';
+                        clonedElement.style.left = '0';
+                    }
+                }
             });
 
-            element.style.display = 'none';
-
-            const imgData = canvas.toDataURL('image/png');
+            const imgData = canvas.toDataURL('image/png', 1.0);
             const pdf = new jsPDF('p', 'mm', 'a4');
             const pdfWidth = pdf.internal.pageSize.getWidth();
-            const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
+            const imgProps = pdf.getImageProperties(imgData);
+            const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
 
-            pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
-            pdf.save(`Transcript_${studentData?.name.replace(/\s+/g, '_')}_2024.pdf`);
+            pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight, undefined, 'FAST');
+            pdf.save(`Athenia_Transcript_${(studentData?.name || 'Scholar').replace(/\s+/g, '_')}_2024.pdf`);
 
             toast.success('Transcript downloaded successfully.', { id: toastId });
         } catch (error) {
-            console.error(error);
-            toast.error('Failed to generate transcript.', { id: toastId });
+            console.error('[Portal Error] Transcript generation failed:', error);
+            toast.error('Transcript generation failed. Please try again.', { id: toastId });
         }
     };
 
@@ -493,10 +506,21 @@ const PortalMockup = ({ isOpen, onClose }) => {
                 </motion.div>
             </motion.div>
 
-            {/* Hidden Transcript Template for PDF Generation */}
-            <div id="transcript-template" style={{ display: 'none', background: 'white', color: 'black', padding: '60px', fontFamily: 'serif', width: '800px', position: 'relative' }}>
-                {/* Logo Watermark */}
-                <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', opacity: '0.05', pointerEvents: 'none' }}>
+            {/* Hidden Transcript Template for PDF Generation - Always present but off-screen for better capture reliability */}
+            <div id="transcript-template" style={{
+                position: 'absolute',
+                top: '-5000px',
+                left: '-5000px',
+                background: 'white',
+                color: 'black',
+                padding: '80px',
+                fontFamily: 'serif',
+                width: '800px',
+                zIndex: -100,
+                pointerEvents: 'none'
+            }}>
+                {/* Logo Watermark - Mandated Visibility */}
+                <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', opacity: '0.15', pointerEvents: 'none' }}>
                     <img src={logoImg} alt="" style={{ width: '400px' }} />
                 </div>
 

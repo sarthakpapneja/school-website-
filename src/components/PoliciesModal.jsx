@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X, HeartPulse, ShieldAlert, GraduationCap, Users, ShieldCheck, FileText } from 'lucide-react';
-import logoImg from '../assets/logo.jpeg';
 
 const POLICIES = [
     {

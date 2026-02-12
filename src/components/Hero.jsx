@@ -7,10 +7,6 @@ const Hero = ({ onExploreClick, onVideoClick }) => {
             {/* Simple Background */}
             <div className="absolute inset-0 z-0 bg-midnight" />
 
-            {/* Logo Emblem - Refined, single discrete placement */}
-            <div className="absolute inset-0 z-1 pointer-events-none flex items-center justify-center opacity-[0.02]">
-                <img src={logoImg} alt="" className="w-[30%] aspect-square object-contain grayscale blur-[1px]" />
-            </div>
 
             {/* Hero Content */}
             <div className="relative z-20 text-center px-6 max-w-7xl mx-auto mt-20">
