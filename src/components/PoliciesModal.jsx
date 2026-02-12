@@ -81,18 +81,18 @@ const PoliciesModal = ({ isOpen, onClose }) => {
                     </button>
 
                     {/* Left Sidebar */}
-                    <div className="w-full lg:w-80 border-b lg:border-b-0 lg:border-r border-white/5 p-8 lg:p-16 flex flex-col gap-6 lg:gap-8 bg-black/20 overflow-y-auto max-h-[35vh] lg:max-h-full">
-                        <div className="mb-4 lg:mb-8">
-                            <span className="text-champagne font-bold text-[8px] lg:text-[10px] tracking-[0.5em] uppercase mb-2 lg:mb-4 block">Standards</span>
-                            <h2 className="font-serif text-xl lg:text-3xl font-bold text-ivory leading-tight">Institutional <br /><span className="text-champagne italic">Policies</span></h2>
+                    <div className="w-full lg:w-80 border-b lg:border-b-0 lg:border-r border-white/5 p-4 lg:p-16 pt-16 lg:pt-16 flex flex-col gap-4 lg:gap-8 bg-black/20 overflow-y-auto max-h-[40vh] lg:max-h-full">
+                        <div className="mb-4 lg:mb-8 text-center lg:text-left">
+                            <span className="text-champagne font-bold text-[8px] lg:text-[10px] tracking-[0.5em] uppercase mb-1 lg:mb-4 block">Standards</span>
+                            <h2 className="font-serif text-xl lg:text-3xl font-bold text-ivory leading-tight uppercase">Institutional <br /><span className="text-champagne italic lowercase">Policies</span></h2>
                         </div>
 
-                        <div className="flex flex-col gap-3 lg:gap-4">
+                        <div className="flex flex-col gap-2 lg:gap-4">
                             {POLICIES.map((policy) => (
                                 <button
                                     key={policy.id}
                                     onClick={() => setActiveTab(policy.id)}
-                                    className={`flex items-center gap-4 lg:gap-6 px-6 lg:px-8 py-3 lg:py-5 rounded-[1.5rem] lg:rounded-[2rem] text-[10px] lg:text-xs font-bold tracking-widest uppercase transition-all text-left ${activeTab === policy.id ? 'bg-champagne text-midnight shadow-[0_10px_30px_rgba(212,175,55,0.2)]' : 'text-ivory/40 hover:text-ivory hover:bg-white/5'}`}
+                                    className={`flex items-center gap-4 lg:gap-6 px-4 lg:px-8 py-3 lg:py-5 rounded-xl lg:rounded-[2rem] text-[10px] lg:text-xs font-bold tracking-widest uppercase transition-all text-left ${activeTab === policy.id ? 'bg-champagne text-midnight shadow-[0_10px_30px_rgba(212,175,55,0.2)]' : 'text-ivory/40 hover:text-ivory hover:bg-white/5'}`}
                                 >
                                     <policy.icon size={16} className="lg:hidden" />
                                     <policy.icon size={20} className="hidden lg:block" />
@@ -110,27 +110,27 @@ const PoliciesModal = ({ isOpen, onClose }) => {
                     </div>
 
                     {/* Right Content */}
-                    <div className="flex-1 p-8 lg:p-24 overflow-y-auto min-h-0">
+                    <div className="flex-1 p-6 lg:p-24 overflow-y-auto min-h-0 bg-midnight-light/50">
                         <AnimatePresence mode="wait">
                             <motion.div
                                 key={activeTab}
-                                initial={{ opacity: 0, x: 20 }}
-                                animate={{ opacity: 1, x: 0 }}
-                                exit={{ opacity: 0, x: -20 }}
-                                className="max-w-2xl"
+                                initial={{ opacity: 0, y: 10 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                exit={{ opacity: 0, y: -10 }}
+                                className="max-w-2xl mx-auto lg:mx-0"
                             >
-                                <div className="w-12 h-12 lg:w-20 lg:h-20 bg-champagne/10 rounded-2xl lg:rounded-3xl flex items-center justify-center text-champagne mb-8 lg:mb-12 border border-champagne/20">
-                                    <activePolicy.icon size={24} className="lg:hidden" />
+                                <div className="w-10 h-10 lg:w-20 lg:h-20 bg-champagne/10 rounded-xl lg:rounded-3xl flex items-center justify-center text-champagne mb-6 lg:mb-12 border border-champagne/20">
+                                    <activePolicy.icon size={20} className="lg:hidden" />
                                     <activePolicy.icon size={40} className="hidden lg:block" />
                                 </div>
-                                <h3 className="font-serif text-2xl lg:text-5xl font-bold text-ivory mb-6 lg:mb-10 leading-tight">{activePolicy.title}</h3>
+                                <h3 className="font-serif text-xl lg:text-5xl font-bold text-ivory mb-4 lg:mb-10 leading-tight border-b lg:border-b-0 border-white/5 pb-2 lg:pb-0">{activePolicy.title}</h3>
                                 <div className="space-y-4 lg:space-y-8">
                                     {activePolicy.content.split('\n').map((line, idx) => {
                                         const trimmed = line.trim();
                                         if (!trimmed) return null;
                                         const isBullet = trimmed.startsWith('-');
                                         return (
-                                            <p key={idx} className={`text-sm lg:text-lg leading-relaxed ${isBullet ? 'text-ivory/60 pl-6 lg:pl-8 relative before:content-[""] before:absolute before:left-0 before:top-3 before:w-1.5 before:h-1.5 before:bg-champagne before:rounded-full' : 'text-ivory font-serif italic border-b border-white/5 pb-3 lg:pb-4'}`}>
+                                            <p key={idx} className={`text-xs lg:text-lg leading-relaxed ${isBullet ? 'text-ivory/60 pl-5 lg:pl-8 relative before:content-[""] before:absolute before:left-0 before:top-2 lg:before:top-3 before:w-1 lg:before:w-1.5 before:h-1 lg:before:h-1.5 before:bg-champagne before:rounded-full' : 'text-ivory font-serif italic pb-2 lg:pb-4'}`}>
                                                 {isBullet ? trimmed.substring(1).trim() : trimmed}
                                             </p>
                                         );
