@@ -128,14 +128,14 @@ const PortalMockup = ({ isOpen, onClose }) => {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                className="fixed inset-0 z-[100] flex items-center justify-center p-6 bg-midnight/90 backdrop-blur-3xl overflow-y-auto"
+                className="fixed inset-0 z-[1100] flex items-center justify-center p-6 bg-midnight/90 backdrop-blur-3xl overflow-y-auto"
                 onClick={onClose}
             >
                 <motion.div
                     initial={{ opacity: 0, scale: 0.9, y: 30 }}
                     animate={{ opacity: 1, scale: 1, y: 0 }}
                     exit={{ opacity: 0, scale: 0.9, y: 30 }}
-                    className="bg-midnight-light border border-white/10 rounded-[2.5rem] lg:rounded-[4rem] w-full max-w-5xl max-h-[90vh] flex flex-col shadow-2xl relative my-auto overflow-hidden"
+                    className="bg-midnight-light border border-white/10 rounded-[2.5rem] lg:rounded-[4rem] w-full max-w-5xl h-[85vh] lg:h-[700px] max-h-[90vh] flex flex-col shadow-2xl relative my-auto overflow-hidden"
                     onClick={(e) => e.stopPropagation()}
                     data-lenis-prevent
                 >
