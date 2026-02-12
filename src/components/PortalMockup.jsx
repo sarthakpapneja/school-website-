@@ -29,7 +29,10 @@ const PortalMockup = ({ isOpen, onClose }) => {
 
     const handleLogin = async (e) => {
         e.preventDefault();
-        if (!credentials.id || !credentials.key) {
+        const id = (credentials.id || "").trim().toUpperCase();
+        const key = (credentials.key || "").trim();
+
+        if (!id || !key) {
             toast.error('Please enter valid credentials.');
             return;
         }
@@ -37,8 +40,8 @@ const PortalMockup = ({ isOpen, onClose }) => {
         setIsAuthenticating(true);
 
         try {
-            // Priority 1: Try real API
-            const response = await axios.post('http://localhost:5001/api/portal/login', credentials);
+            // Priority 1: Try real API (Local Development)
+            const response = await axios.post('http://localhost:5001/api/portal/login', { id, key });
 
             if (response.data.success) {
                 setStudentData(response.data.student);
@@ -51,8 +54,8 @@ const PortalMockup = ({ isOpen, onClose }) => {
             console.log('API unreachable or error, trying local fallback...');
 
             // Priority 2: Production/Demo Demo Fallback
-            // Check for valid demo credentials: ATH2024001 / wisdom789
-            if (credentials.id.toUpperCase() === 'ATH2024001' && credentials.key === 'wisdom789') {
+            const isDemoAccount = id === 'ATH2024001' && key === 'wisdom789';
+            if (isDemoAccount) {
                 const mockStudent = {
                     name: "A. Papneja",
                     class: "XII",
@@ -99,7 +102,7 @@ const PortalMockup = ({ isOpen, onClose }) => {
 
             toast.error('Authentication Failed. Please check your credentials.');
         } finally {
-            if (credentials.id.toUpperCase() !== 'ATH2024001' || credentials.key !== 'wisdom789') {
+            if (id !== 'ATH2024001' || key !== 'wisdom789') {
                 setIsAuthenticating(false);
             }
         }
