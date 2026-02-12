@@ -7,9 +7,9 @@ const Hero = ({ onExploreClick, onVideoClick }) => {
             {/* Simple Background */}
             <div className="absolute inset-0 z-0 bg-midnight" />
 
-            {/* Logo Watermark */}
-            <div className="absolute inset-0 z-1 pointer-events-none flex items-center justify-center opacity-[0.03]">
-                <img src={logoImg} alt="" className="w-full h-full object-contain scale-110" />
+            {/* Logo Emblem - Refined, single discrete placement */}
+            <div className="absolute inset-0 z-1 pointer-events-none flex items-center justify-center opacity-[0.02]">
+                <img src={logoImg} alt="" className="w-[30%] aspect-square object-contain grayscale blur-[1px]" />
             </div>
 
             {/* Hero Content */}

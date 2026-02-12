@@ -84,8 +84,9 @@ const PoliciesModal = ({ isOpen, onClose }) => {
                     onClick={(e) => e.stopPropagation()}
                     data-lenis-prevent
                 >
-                    <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-[0.05] flex items-center justify-center">
-                        <img src={logoImg} alt="" className="w-full h-full object-contain scale-[1.3] mix-blend-overlay" />
+                    {/* Refined Logo Background - Discrete placement */}
+                    <div className="absolute -bottom-20 -right-20 w-80 h-80 opacity-[0.04] pointer-events-none grayscale">
+                        <img src={logoImg} alt="" className="w-full h-full object-contain" />
                     </div>
                     {/* Close Button */}
                     <button onClick={onClose} className="absolute top-4 right-4 lg:top-8 lg:right-8 z-50 p-3 lg:p-4 glass rounded-full text-ivory/50 hover:text-champagne transition-colors shadow-xl">
