@@ -6,6 +6,7 @@ import axios from 'axios';
 import { jsPDF } from 'jspdf';
 import html2canvas from 'html2canvas';
 import logoImg from '../assets/logo.jpeg';
+import logoWatermark from '../assets/logo-watermark.png';
 
 const PortalMockup = ({ isOpen, onClose }) => {
     const [isAuthenticating, setIsAuthenticating] = useState(false);
@@ -177,11 +178,11 @@ const PortalMockup = ({ isOpen, onClose }) => {
             element.style.zIndex = origStyles.zIndex;
             element.style.visibility = origStyles.visibility;
 
-            // Draw school logo as watermark on canvas (guaranteed in downloaded PDF)
+            // Draw Athenia circular logo as watermark on canvas (guaranteed in downloaded PDF)
             const ctx = canvas.getContext('2d');
             const logoImgEl = new Image();
             logoImgEl.crossOrigin = 'anonymous';
-            logoImgEl.src = logoImg;
+            logoImgEl.src = logoWatermark;
 
             try {
                 await new Promise((resolve, reject) => {
@@ -565,9 +566,9 @@ const PortalMockup = ({ isOpen, onClose }) => {
                 zIndex: -100,
                 pointerEvents: 'none'
             }}>
-                {/* Logo Watermark - Mandated Visibility */}
+                {/* Athenia circular logo watermark - mandated visibility */}
                 <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', opacity: '0.15', pointerEvents: 'none' }}>
-                    <img src={logoImg} alt="" style={{ width: '400px' }} />
+                    <img src={logoWatermark} alt="" style={{ width: '400px' }} />
                 </div>
 
                 <div style={{ position: 'relative', zIndex: '1' }}>
