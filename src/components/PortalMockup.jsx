@@ -143,16 +143,16 @@ const PortalMockup = ({ isOpen, onClose }) => {
                                         </div>
                                         <div>
                                             <h4 className="text-ivory font-bold text-sm">A. Papneja</h4>
-                                            <p className="text-[10px] text-champagne/60 tracking-wider">Level 12 Scholar</p>
+                                            <p className="text-[10px] text-champagne/60 tracking-wider">Class XII - Science Stream</p>
                                         </div>
                                     </div>
 
                                     {[
                                         { icon: LayoutDashboard, label: 'Overview', active: true },
                                         { icon: Calendar, label: 'Schedule' },
-                                        { icon: FileText, label: 'Academics' },
-                                        { icon: CreditCard, label: 'Financials' },
-                                        { icon: Bell, label: 'Notices' },
+                                        { icon: FileText, label: 'Academics (CBSE)' },
+                                        { icon: CreditCard, label: 'Fee Portal' },
+                                        { icon: Bell, label: 'Circulars' },
                                     ].map((item) => (
                                         <button
                                             key={item.label}
@@ -168,12 +168,12 @@ const PortalMockup = ({ isOpen, onClose }) => {
                                 <div className="flex-1 p-12 lg:p-16 h-full overflow-y-auto">
                                     <div className="flex justify-between items-end mb-12">
                                         <div>
-                                            <span className="text-champagne font-bold text-[10px] tracking-[0.5em] uppercase mb-2 block">Sanctuary Overview</span>
+                                            <span className="text-champagne font-bold text-[10px] tracking-[0.5em] uppercase mb-2 block">Student Sanctuary</span>
                                             <h2 className="font-serif text-3xl font-bold text-ivory">Welcome, Scholar</h2>
                                         </div>
                                         <div className="text-right">
-                                            <p className="text-ivory/40 text-[10px] uppercase font-bold tracking-widest">Date</p>
-                                            <p className="text-ivory font-serif italic">12 Feb, 2024</p>
+                                            <p className="text-ivory/40 text-[10px] uppercase font-bold tracking-widest">Session</p>
+                                            <p className="text-ivory font-serif italic">2024 - 2025</p>
                                         </div>
                                     </div>
 
@@ -181,8 +181,8 @@ const PortalMockup = ({ isOpen, onClose }) => {
                                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
                                         {[
                                             { label: 'Attendance', value: '98%', color: '#D4AF37' },
-                                            { label: 'GPA', value: '3.9/4.0', color: '#F8F9FA' },
-                                            { label: 'Total Credits', value: '142', color: '#D4AF37' },
+                                            { label: 'Term I Result', value: '96.4%', color: '#F8F9FA' },
+                                            { label: 'Merit Rank', value: '#12', color: '#D4AF37' },
                                         ].map((stat) => (
                                             <div key={stat.label} className="glass p-6 rounded-3xl border border-white/5">
                                                 <p className="text-ivory/20 text-[10px] uppercase font-bold tracking-widest mb-4">{stat.label}</p>
@@ -194,14 +194,15 @@ const PortalMockup = ({ isOpen, onClose }) => {
                                     {/* Today's Schedule */}
                                     <div className="glass p-8 rounded-[2.5rem] border border-white/5">
                                         <div className="flex justify-between items-center mb-8">
-                                            <h4 className="text-ivory font-bold uppercase tracking-widest text-xs">Today's Sessions</h4>
-                                            <button className="text-champagne text-[10px] font-bold tracking-widest uppercase flex items-center gap-2">View Full <ChevronRight size={14} /></button>
+                                            <h4 className="text-ivory font-bold uppercase tracking-widest text-xs">Today's Class Schedule</h4>
+                                            <button className="text-champagne text-[10px] font-bold tracking-widest uppercase flex items-center gap-2">Full Timetable <ChevronRight size={14} /></button>
                                         </div>
                                         <div className="space-y-6">
                                             {[
-                                                { time: '09:00 AM', subject: 'Advanced Astrophysics', location: 'Hall A' },
-                                                { time: '11:30 AM', subject: 'Philosophy of Ethics', location: 'Library' },
-                                                { time: '02:00 PM', subject: 'Artisanal Design', location: 'Studio 3' },
+                                                { time: '08:00 AM', subject: 'Physics (Electrodynamics)', location: 'Lab 1' },
+                                                { time: '09:45 AM', subject: 'Mathematics (Calculus)', location: 'Room 204' },
+                                                { time: '11:15 AM', subject: 'English Core', location: 'Lecture Hall' },
+                                                { time: '01:30 PM', subject: 'Computer Science (Python)', location: 'IT Wing' },
                                             ].map((session, idx) => (
                                                 <div key={idx} className="flex items-center justify-between py-4 border-b border-white/5 last:border-0">
                                                     <div className="flex gap-6 items-center">
