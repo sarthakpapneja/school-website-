@@ -4,29 +4,29 @@ import { BookOpen, FlaskConical, Globe, Palette } from 'lucide-react';
 const departments = [
     {
         id: 'stem',
-        name: 'S.T.E.M. Institute',
-        description: 'Pioneering research in quantum computing and biotechnology within our state-of-the-art labs.',
+        name: 'Science & Technology Wing',
+        description: 'Advanced research in Physics, Chemistry, and Biology within our NCERT-aligned laboratories.',
         icon: <FlaskConical className="text-champagne" size={24} />,
         image: "https://images.unsplash.com/photo-1532094349884-543bc11b234d?q=80&w=2070&auto=format&fit=crop"
     },
     {
         id: 'humanities',
-        name: 'Global Humanities',
-        description: 'Critical analysis of history, philosophy, and literature to understand the human condition.',
+        name: 'Liberal Arts & Social Sciences',
+        description: 'Critical analysis of History, Geography, and Political Science to understand the global human condition.',
         icon: <Globe className="text-champagne" size={24} />,
         image: "https://images.unsplash.com/photo-1457369804613-52c61a468e7d?q=80&w=2070&auto=format&fit=crop"
     },
     {
         id: 'arts',
-        name: 'Conservatory of Arts',
-        description: 'Nurturing creative expression through visual arts, music, and dramatic performance.',
+        name: 'Creative & Performing Arts',
+        description: 'Nurturing creative expression through Fine Arts, Music, and Dramatic performance as per CBSE guidelines.',
         icon: <Palette className="text-champagne" size={24} />,
         image: "https://images.unsplash.com/photo-1547826039-bfc35e0f1ea8?q=80&w=1972&auto=format&fit=crop"
     },
     {
         id: 'classics',
-        name: 'The Classics',
-        description: 'Study of Latin, Greek, and ancient civilizations to ground modern leadership in timeless wisdom.',
+        name: 'Value Education & Holistic Growth',
+        description: 'Developing character and leadership through timeless wisdom and personality development, aligned with NEP 2020.',
         icon: <BookOpen className="text-champagne" size={24} />,
         image: "https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?q=80&w=2070&auto=format&fit=crop"
     }
@@ -158,7 +158,7 @@ const Academics = () => {
                                 {/* Special Highlight Item */}
                                 <li className="flex items-start gap-4 text-champagne font-medium text-sm bg-champagne/5 p-4 rounded-xl border border-champagne/10">
                                     <span className="mt-1 w-1.5 h-1.5 rounded-full bg-champagne animate-pulse" />
-                                    No Homework for Grade 1 & 2.
+                                    No Homework for Class I & II.
                                 </li>
                             </ul>
                         </div>

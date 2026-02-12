@@ -109,7 +109,7 @@ const AdmissionsJourney = ({ onApply }) => {
                     <div className="absolute inset-0 bg-gradient-to-t from-midnight via-transparent to-transparent opacity-80" />
                     <div className="absolute bottom-12 left-12">
                         <h4 className="font-serif text-3xl font-bold text-ivory mb-2">The Admissions Sanctuary</h4>
-                        <p className="text-champagne/60 text-sm font-bold tracking-widest uppercase">Palo Alto • Main Campus</p>
+                        <p className="text-champagne/60 text-sm font-bold tracking-widest uppercase">Saharanpur • Main Campus</p>
                     </div>
                 </motion.div>
             </div>

@@ -65,7 +65,7 @@ const About = () => {
                         <span className="text-champagne font-bold tracking-[0.3em] uppercase text-xs mb-4 block">Our Philosophy</span>
                         <h2 className="font-serif text-5xl md:text-7xl text-ivory mb-8">Committed to <span className="text-champagne italic">Excellence</span></h2>
                         <p className="text-xl text-ivory/60 font-light leading-relaxed">
-                            Established in 2017, Athenia High School reflects the vibrant energy of Saharanpur.
+                            Established in 2017, Athenia High School is a premier <span className="text-champagne">CBSE-affiliated school</span> that reflects the vibrant energy of Saharanpur.
                             We follow the theory of <span className="text-champagne">Vasudhaiva Kutumbakam</span> — the world is one family.
                         </p>
                     </motion.div>

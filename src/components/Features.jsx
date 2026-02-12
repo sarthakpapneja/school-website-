@@ -44,18 +44,18 @@ const FeatureCard = ({ icon: Icon, title, desc, delay, onClick }) => {
 
 const features = [
     {
-        title: "Ivy League Fast-Track",
-        description: "85% of our graduates matriculate into the top 10 global universities.",
+        title: "Global University Placement Cell",
+        description: "Strong placement record in premier Indian and International institutions, with dedicated guidance for Class XII.",
         icon: <Trophy size={28} className="text-champagne" />
     },
     {
-        title: "Global Citizenship",
-        description: "Semesters abroad in Kyoto, Paris, and Cape Town included in the curriculum.",
+        title: "Cultural Exchange & Global Exposure",
+        description: "International exchange programs, MUN collaborations, and cross-border academic initiatives.",
         icon: <Globe2 size={28} className="text-champagne" />
     },
     {
         title: "Boutique Mentorship",
-        description: "A 4:1 student-faculty ratio ensures hyper-personalized academic guidance.",
+        description: "A 4:1 student-faculty ratio ensures hyper-personalized academic guidance for competitive excellence.",
         icon: <Users size={28} className="text-champagne" />
     }
 ];
