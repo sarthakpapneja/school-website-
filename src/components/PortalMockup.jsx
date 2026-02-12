@@ -3,6 +3,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { X, Lock, ShieldCheck, Mail, Key, LayoutDashboard, Calendar, FileText, CreditCard, ChevronRight, Bell, User, LogOut } from 'lucide-react';
 import toast from 'react-hot-toast';
 import axios from 'axios';
+import { jsPDF } from 'jspdf';
+import html2canvas from 'html2canvas';
 import logoImg from '../assets/logo.jpeg';
 
 const PortalMockup = ({ isOpen, onClose }) => {
@@ -120,6 +122,44 @@ const PortalMockup = ({ isOpen, onClose }) => {
         toast.success('Logged out successfully.');
     };
 
+    const handleDownloadTranscript = async () => {
+        const toastId = toast.loading('Generating Scholastic Transcript...');
+
+        try {
+            const element = document.getElementById('transcript-template');
+            if (!element) throw new Error('Template not found');
+
+            // Temporarily prepare for capture
+            element.style.display = 'block';
+            element.style.position = 'fixed';
+            element.style.left = '-9999px';
+            element.style.top = '0';
+            element.style.width = '800px';
+
+            const canvas = await html2canvas(element, {
+                scale: 2,
+                useCORS: true,
+                backgroundColor: '#ffffff',
+                logging: false
+            });
+
+            element.style.display = 'none';
+
+            const imgData = canvas.toDataURL('image/png');
+            const pdf = new jsPDF('p', 'mm', 'a4');
+            const pdfWidth = pdf.internal.pageSize.getWidth();
+            const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
+
+            pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+            pdf.save(`Transcript_${studentData?.name.replace(/\s+/g, '_')}_2024.pdf`);
+
+            toast.success('Transcript downloaded successfully.', { id: toastId });
+        } catch (error) {
+            console.error(error);
+            toast.error('Failed to generate transcript.', { id: toastId });
+        }
+    };
+
     if (!isOpen) return null;
 
     return (
@@ -139,10 +179,6 @@ const PortalMockup = ({ isOpen, onClose }) => {
                     onClick={(e) => e.stopPropagation()}
                     data-lenis-prevent
                 >
-                    {/* Refined Institutional Emblem - Discrete and elegant */}
-                    <div className="absolute -top-20 -left-20 w-80 h-80 opacity-[0.03] pointer-events-none grayscale">
-                        <img src={logoImg} alt="" className="w-full h-full object-contain" />
-                    </div>
                     {/* Close Button */}
                     <button onClick={onClose} className="absolute top-4 right-4 lg:top-8 lg:right-8 z-50 p-3 glass rounded-full text-ivory/50 hover:text-champagne transition-colors">
                         <X size={20} />
@@ -332,16 +368,37 @@ const PortalMockup = ({ isOpen, onClose }) => {
                                                 <div className="absolute top-0 right-0 p-8 opacity-5">
                                                     <FileText size={120} />
                                                 </div>
-                                                <div className="flex justify-between items-center mb-10">
-                                                    <h4 className="text-ivory font-bold uppercase tracking-widest text-xs">Unit Test & Half-Yearly Performance</h4>
+                                                <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-10">
+                                                    <h4 className="text-ivory font-bold uppercase tracking-widest text-[10px] md:text-xs">Unit Test & Half-Yearly Performance</h4>
                                                     <button
-                                                        onClick={() => toast.success('Transcript generation started. Secure download active.', { icon: '📄' })}
-                                                        className="bg-white/10 hover:bg-white/20 text-ivory text-[10px] font-bold px-6 py-3 rounded-xl tracking-widest uppercase transition-all"
+                                                        onClick={handleDownloadTranscript}
+                                                        className="w-full md:w-auto bg-white/10 hover:bg-white/20 text-ivory text-[10px] font-bold px-6 py-3 rounded-xl tracking-widest uppercase transition-all"
                                                     >
                                                         Download Transcript
                                                     </button>
                                                 </div>
-                                                <div className="overflow-x-auto">
+                                                <div className="grid grid-cols-1 md:hidden gap-4">
+                                                    {(studentData?.academicRecords || []).map((record, idx) => (
+                                                        <div key={idx} className="glass p-6 rounded-2xl border border-white/5 space-y-4">
+                                                            <div className="flex justify-between items-center border-b border-white/5 pb-3">
+                                                                <h5 className="text-ivory font-bold">{record.subject}</h5>
+                                                                <span className="text-champagne font-serif font-bold text-lg">{record.predicted}%</span>
+                                                            </div>
+                                                            <div className="grid grid-cols-2 gap-4">
+                                                                <div>
+                                                                    <p className="text-ivory/20 text-[8px] uppercase tracking-wider font-bold mb-1">Unit Test (25)</p>
+                                                                    <p className="text-champagne font-mono">{record.unitTest}</p>
+                                                                </div>
+                                                                <div>
+                                                                    <p className="text-ivory/20 text-[8px] uppercase tracking-wider font-bold mb-1">Half-Yearly (80)</p>
+                                                                    <p className="text-ivory font-mono">{record.halfYearly}</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    ))}
+                                                </div>
+
+                                                <div className="hidden md:block overflow-x-auto">
                                                     <table className="w-full text-left">
                                                         <thead>
                                                             <tr className="border-b border-white/5">
@@ -435,6 +492,69 @@ const PortalMockup = ({ isOpen, onClose }) => {
                     </div>
                 </motion.div>
             </motion.div>
+
+            {/* Hidden Transcript Template for PDF Generation */}
+            <div id="transcript-template" style={{ display: 'none', background: 'white', color: 'black', padding: '60px', fontFamily: 'serif', width: '800px', position: 'relative' }}>
+                {/* Logo Watermark */}
+                <div style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', opacity: '0.05', pointerEvents: 'none' }}>
+                    <img src={logoImg} alt="" style={{ width: '400px' }} />
+                </div>
+
+                <div style={{ position: 'relative', zIndex: '1' }}>
+                    <div style={{ textAlign: 'center', marginBottom: '40px', borderBottom: '2px solid #D4AF37', paddingBottom: '20px' }}>
+                        <h1 style={{ color: '#1a1a1a', fontSize: '32px', marginBottom: '10px' }}>Athenia High School</h1>
+                        <p style={{ textTransform: 'uppercase', letterSpacing: '3px', fontSize: '12px', color: '#D4AF37' }}>Official Scholastic Transcript</p>
+                    </div>
+
+                    <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '40px' }}>
+                        <div>
+                            <p style={{ margin: '5px 0' }}><strong>Scholar Name:</strong> {studentData?.name}</p>
+                            <p style={{ margin: '5px 0' }}><strong>Scholastic ID:</strong> {credentials.id}</p>
+                        </div>
+                        <div style={{ textAlign: 'right' }}>
+                            <p style={{ margin: '5px 0' }}><strong>Academic Year:</strong> 2024-2025</p>
+                            <p style={{ margin: '5px 0' }}><strong>Class/Stream:</strong> {studentData?.class} / {studentData?.stream}</p>
+                        </div>
+                    </div>
+
+                    <table style={{ width: '100%', borderCollapse: 'collapse', marginBottom: '40px' }}>
+                        <thead>
+                            <tr style={{ background: '#f8f9fa' }}>
+                                <th style={{ padding: '12px', border: '1px solid #dee2e6', textAlign: 'left' }}>Subject</th>
+                                <th style={{ padding: '12px', border: '1px solid #dee2e6', textAlign: 'center' }}>Unit Test (25)</th>
+                                <th style={{ padding: '12px', border: '1px solid #dee2e6', textAlign: 'center' }}>Half-Yearly (80)</th>
+                                <th style={{ padding: '12px', border: '1px solid #dee2e6', textAlign: 'center' }}>Predicted (%)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {(studentData?.academicRecords || []).map((record, idx) => (
+                                <tr key={idx}>
+                                    <td style={{ padding: '12px', border: '1px solid #dee2e6' }}>{record.subject}</td>
+                                    <td style={{ padding: '12px', border: '1px solid #dee2e6', textAlign: 'center' }}>{record.unitTest}</td>
+                                    <td style={{ padding: '12px', border: '1px solid #dee2e6', textAlign: 'center' }}>{record.halfYearly}</td>
+                                    <td style={{ padding: '12px', border: '1px solid #dee2e6', textAlign: 'center', fontWeight: 'bold' }}>{record.predicted}%</td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+
+                    <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: '100px' }}>
+                        <div style={{ textAlign: 'center' }}>
+                            <div style={{ borderBottom: '1px solid black', width: '200px', marginBottom: '10px' }}></div>
+                            <p style={{ fontSize: '12px' }}>Scholastic Dean's Signature</p>
+                        </div>
+                        <div style={{ textAlign: 'center' }}>
+                            <div style={{ borderBottom: '1px solid black', width: '200px', marginBottom: '10px' }}></div>
+                            <p style={{ fontSize: '12px' }}>Institutional Seal</p>
+                        </div>
+                    </div>
+
+                    <div style={{ marginTop: '60px', textAlign: 'center', fontSize: '10px', color: '#666' }}>
+                        <p>This document is a certified scholastic record issued by Athenia High School.</p>
+                        <p>A-256 Bit Authentication Active | Scholastic Verifier Hash: {Math.random().toString(36).substring(7).toUpperCase()}</p>
+                    </div>
+                </div>
+            </div>
         </AnimatePresence>
     );
 };
