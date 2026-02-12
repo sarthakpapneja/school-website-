@@ -14,6 +14,8 @@ const SmoothScroll = () => {
             touchMultiplier: 2,
         });
 
+        window.atheniaLenis = lenis;
+
         function raf(time) {
             lenis.raf(time);
             requestAnimationFrame(raf);
@@ -23,6 +25,7 @@ const SmoothScroll = () => {
 
         return () => {
             lenis.destroy();
+            window.atheniaLenis = null;
         };
     }, []);
 

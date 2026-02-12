@@ -1,11 +1,16 @@
-import { motion } from 'framer-motion';
 import { ArrowRight, Play, Sparkles } from 'lucide-react';
+import logoImg from '../assets/logo.jpeg';
 
 const Hero = ({ onExploreClick, onVideoClick }) => {
     return (
         <section className="relative h-screen w-full overflow-hidden flex items-center justify-center bg-midnight" id="home">
             {/* Simple Background */}
             <div className="absolute inset-0 z-0 bg-midnight" />
+
+            {/* Logo Watermark */}
+            <div className="absolute inset-0 z-1 pointer-events-none flex items-center justify-center opacity-[0.03]">
+                <img src={logoImg} alt="" className="w-full h-full object-contain scale-110" />
+            </div>
 
             {/* Hero Content */}
             <div className="relative z-20 text-center px-6 max-w-7xl mx-auto mt-20">

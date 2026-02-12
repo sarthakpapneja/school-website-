@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { X, Lock, ShieldCheck, Mail, Key, LayoutDashboard, Calendar, FileText, CreditCard, ChevronRight, Bell, User, LogOut } from 'lucide-react';
 import toast from 'react-hot-toast';
 import axios from 'axios';
+import logoImg from '../assets/logo.jpeg';
 
 const PortalMockup = ({ isOpen, onClose }) => {
     const [isAuthenticating, setIsAuthenticating] = useState(false);
@@ -15,8 +16,10 @@ const PortalMockup = ({ isOpen, onClose }) => {
     useEffect(() => {
         if (isOpen) {
             document.body.style.overflow = 'hidden';
+            window.atheniaLenis?.stop();
         } else {
             document.body.style.overflow = 'unset';
+            window.atheniaLenis?.start();
             // Reset state on close but keep session logic if authenticated
             if (!isAuthenticated) {
                 setCredentials({ id: '', key: '' });
@@ -132,9 +135,14 @@ const PortalMockup = ({ isOpen, onClose }) => {
                     initial={{ opacity: 0, scale: 0.9, y: 30 }}
                     animate={{ opacity: 1, scale: 1, y: 0 }}
                     exit={{ opacity: 0, scale: 0.9, y: 30 }}
-                    className="bg-midnight-light border border-white/10 rounded-[3.5rem] w-full max-w-5xl max-h-[90vh] flex flex-col shadow-2xl relative my-auto overflow-hidden"
+                    className="bg-midnight-light border border-white/10 rounded-[2.5rem] lg:rounded-[4rem] w-full max-w-5xl max-h-[90vh] flex flex-col shadow-2xl relative my-auto overflow-hidden"
                     onClick={(e) => e.stopPropagation()}
+                    data-lenis-prevent
                 >
+                    {/* Background Logo Watermark */}
+                    <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-[0.05] flex items-center justify-center">
+                        <img src={logoImg} alt="" className="w-full h-full object-contain scale-[1.3] mix-blend-overlay" />
+                    </div>
                     {/* Close Button */}
                     <button onClick={onClose} className="absolute top-4 right-4 lg:top-8 lg:right-8 z-50 p-3 glass rounded-full text-ivory/50 hover:text-champagne transition-colors">
                         <X size={20} />
