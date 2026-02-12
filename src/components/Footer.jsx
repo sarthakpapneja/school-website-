@@ -55,9 +55,9 @@ const Footer = ({ onPortalClick, onRequestProspectus, onPoliciesClick }) => {
                         <h4 className="font-serif text-xl font-bold text-ivory mb-10">Quick Links</h4>
                         <ul className="flex flex-col gap-5">
                             {[
-                                { name: 'About Athenia', action: () => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' }) },
-                                { name: 'Academic Life', action: () => document.getElementById('academics')?.scrollIntoView({ behavior: 'smooth' }) },
-                                { name: 'Admissions', action: () => document.getElementById('admissions')?.scrollIntoView({ behavior: 'smooth' }) },
+                                { name: 'About Athenia', action: () => { document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' }); window.scrollTo({ top: document.getElementById('about')?.offsetTop - 100, behavior: 'smooth' }); } },
+                                { name: 'Academic Life', action: () => { document.getElementById('academics')?.scrollIntoView({ behavior: 'smooth' }); window.scrollTo({ top: document.getElementById('academics')?.offsetTop - 100, behavior: 'smooth' }); } },
+                                { name: 'Admissions', action: () => { document.getElementById('admissions')?.scrollIntoView({ behavior: 'smooth' }); window.scrollTo({ top: document.getElementById('admissions')?.offsetTop - 100, behavior: 'smooth' }); } },
                                 { name: 'Student Portal', action: onPortalClick },
                                 { name: 'Careers', action: () => toast.success('Careers opening soon! Check back later.') }
                             ].map((item) => (

@@ -132,7 +132,7 @@ const PortalMockup = ({ isOpen, onClose }) => {
                     onClick={(e) => e.stopPropagation()}
                 >
                     {/* Close Button */}
-                    <button onClick={onClose} className="absolute top-8 right-8 z-50 p-3 glass rounded-full text-ivory/50 hover:text-champagne transition-colors">
+                    <button onClick={onClose} className="absolute top-4 right-4 lg:top-8 lg:right-8 z-50 p-3 glass rounded-full text-ivory/50 hover:text-champagne transition-colors">
                         <X size={20} />
                     </button>
 
@@ -200,14 +200,15 @@ const PortalMockup = ({ isOpen, onClose }) => {
                             /* DASHBOARD VIEW */
                             <div className="flex flex-col lg:flex-row w-full flex-1 min-h-0 overflow-hidden">
                                 {/* Sidebar */}
-                                <div className="w-full lg:w-64 border-r border-white/5 p-8 flex flex-col gap-4 overflow-y-auto">
-                                    <div className="mb-12 flex items-center gap-3">
-                                        <div className="w-10 h-10 bg-champagne/10 rounded-xl flex items-center justify-center text-champagne">
-                                            <User size={20} />
+                                <div className="w-full lg:w-64 border-b lg:border-b-0 lg:border-r border-white/5 p-6 lg:p-8 flex flex-col gap-4 overflow-y-auto max-h-[30vh] lg:max-h-full">
+                                    <div className="mb-6 lg:mb-12 flex items-center gap-3">
+                                        <div className="w-8 h-8 lg:w-10 lg:h-10 bg-champagne/10 rounded-lg lg:rounded-xl flex items-center justify-center text-champagne">
+                                            <User size={16} className="lg:hidden" />
+                                            <User size={20} className="hidden lg:block" />
                                         </div>
                                         <div>
-                                            <h4 className="text-ivory font-bold text-sm">{studentData?.name || 'Scholar'}</h4>
-                                            <p className="text-[10px] text-champagne/60 tracking-wider">Class {studentData?.class || 'XII'} - {studentData?.stream || 'Science'} Stream</p>
+                                            <h4 className="text-ivory font-bold text-xs lg:text-sm">{studentData?.name || 'Scholar'}</h4>
+                                            <p className="text-[8px] lg:text-[10px] text-champagne/60 tracking-wider">Class {studentData?.class || 'XII'} - {studentData?.stream || 'Science'}</p>
                                         </div>
                                     </div>
 
