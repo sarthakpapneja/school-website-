@@ -95,17 +95,17 @@ const PortalMockup = ({ isOpen, onClose }) => {
                     <div className="flex flex-col lg:flex-row flex-1 overflow-hidden min-h-0">
                         {!isAuthenticated ? (
                             /* LOGIN VIEW */
-                            <div className="w-full flex flex-col items-center justify-center p-12 lg:p-20">
+                            <div className="w-full flex-1 flex flex-col items-center justify-center p-6 lg:p-20 overflow-y-auto min-h-0">
                                 <motion.div
                                     animate={isAuthenticating ? { scale: [1, 1.1, 1], rotate: [0, 360] } : {}}
                                     transition={{ duration: 2, repeat: Infinity }}
-                                    className="w-20 h-20 bg-champagne rounded-3xl flex items-center justify-center text-midnight mb-12 shadow-[0_0_40px_rgba(212,175,55,0.2)]"
+                                    className="w-16 h-16 lg:w-20 lg:h-20 bg-champagne rounded-2xl lg:rounded-3xl flex items-center justify-center text-midnight mb-8 lg:mb-12 shadow-[0_0_40px_rgba(212,175,55,0.2)]"
                                 >
-                                    {isAuthenticating ? <ShieldCheck size={40} /> : <Lock size={40} />}
+                                    {isAuthenticating ? <ShieldCheck size={32} /> : <Lock size={32} />}
                                 </motion.div>
 
-                                <span className="text-champagne font-bold text-xs tracking-[0.5em] uppercase mb-4 text-center block">Secure Gateway</span>
-                                <h2 className="font-serif text-4xl font-bold text-ivory mb-12 leading-tight text-center">
+                                <span className="text-champagne font-bold text-[10px] lg:text-xs tracking-[0.5em] uppercase mb-4 text-center block">Secure Gateway</span>
+                                <h2 className="font-serif text-2xl lg:text-4xl font-bold text-ivory mb-8 lg:mb-12 leading-tight text-center">
                                     Athenia <br /><span className="text-champagne italic">Unified Portal</span>
                                 </h2>
 
@@ -143,7 +143,7 @@ const PortalMockup = ({ isOpen, onClose }) => {
                                     <button
                                         type="submit"
                                         disabled={isAuthenticating}
-                                        className="w-full bg-champagne text-midnight py-6 rounded-2xl font-bold tracking-widest uppercase text-xs hover:bg-white transition-all shadow-2xl shadow-champagne/20 flex items-center justify-center gap-4 group disabled:opacity-50"
+                                        className="w-full bg-champagne text-midnight py-5 lg:py-6 rounded-2xl font-bold tracking-widest uppercase text-[10px] lg:text-xs hover:bg-white transition-all shadow-2xl shadow-champagne/20 flex items-center justify-center gap-4 group disabled:opacity-50 mb-6 lg:mb-0"
                                     >
                                         {isAuthenticating ? 'Decrypting Access...' : 'Authenticate Entry'}
                                         {!isAuthenticating && <ShieldCheck size={20} className="group-hover:scale-110 transition-transform" />}
@@ -196,11 +196,11 @@ const PortalMockup = ({ isOpen, onClose }) => {
                                 </div>
 
                                 {/* Main Content */}
-                                <div className="flex-1 p-8 lg:p-16 overflow-y-auto min-h-0">
-                                    <div className="flex justify-between items-end mb-12">
+                                <div className="flex-1 p-6 lg:p-16 overflow-y-auto min-h-0">
+                                    <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end mb-8 lg:mb-12 gap-4">
                                         <div>
                                             <span className="text-champagne font-bold text-[10px] tracking-[0.5em] uppercase mb-2 block">Student Sanctuary</span>
-                                            <h2 className="font-serif text-3xl font-bold text-ivory">Portal / <span className="text-champagne italic">{activeTab}</span></h2>
+                                            <h2 className="font-serif text-2xl lg:text-3xl font-bold text-ivory">Portal / <span className="text-champagne italic">{activeTab}</span></h2>
                                         </div>
                                         <div className="text-right">
                                             <p className="text-ivory/40 text-[10px] uppercase font-bold tracking-widest">Session</p>
