@@ -110,6 +110,7 @@ const PortalMockup = ({ isOpen, onClose }) => {
 
     const handleLogout = () => {
         setIsAuthenticated(false);
+        setIsAuthenticating(false);
         setStudentData(null);
         setActiveTab('Overview');
         setCredentials({ id: '', key: '' });
