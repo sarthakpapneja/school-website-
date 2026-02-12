@@ -160,9 +160,9 @@ const PortalMockup = ({ isOpen, onClose }) => {
                                     {isAuthenticating ? <ShieldCheck size={24} /> : <Lock size={24} />}
                                 </motion.div>
 
-                                <span className="text-champagne font-bold text-[8px] lg:text-xs tracking-[0.5em] uppercase mb-3 lg:mb-4 text-center block">Secure Gateway</span>
-                                <h2 className="font-serif text-xl lg:text-4xl font-bold text-ivory mb-6 lg:mb-12 leading-tight text-center">
-                                    Athenia <br /><span className="text-champagne italic">Unified Portal</span>
+                                <span className="text-champagne font-bold text-[8px] lg:text-xs tracking-[0.5em] uppercase mb-4 text-center block opacity-60">Scholastic Sanctuary</span>
+                                <h2 className="font-serif text-3xl lg:text-5xl font-bold text-ivory mb-12 lg:mb-16 leading-tight text-center tracking-tighter">
+                                    Athenia <br /><span className="text-champagne italic artisanal-underline">Unified Portal</span>
                                 </h2>
 
                                 <form onSubmit={handleLogin} className="w-full max-w-md space-y-8">
