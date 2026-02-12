@@ -37,27 +37,71 @@ const PortalMockup = ({ isOpen, onClose }) => {
         setIsAuthenticating(true);
 
         try {
+            // Priority 1: Try real API
             const response = await axios.post('http://localhost:5001/api/portal/login', credentials);
 
             if (response.data.success) {
                 setStudentData(response.data.student);
                 setIsAuthenticated(true);
-                setActiveTab('Overview'); // Reset to overview on login
-                toast.success(`Welcome, Scholar ${response.data.student.name}`, {
-                    icon: '🦅',
-                    style: {
-                        borderRadius: '1rem',
-                        background: '#161B22',
-                        color: '#D4AF37',
-                        border: '1px solid rgba(212,175,55,0.2)'
-                    },
-                });
+                setActiveTab('Overview');
+                toast.success(`Welcome, Scholar ${response.data.student.name}`, { icon: '🦅' });
+                return;
             }
         } catch (error) {
-            console.error('Portal Auth Error:', error);
-            toast.error(error.response?.data?.error || 'Authentication Failed. Please check your credentials.');
+            console.log('API unreachable or error, trying local fallback...');
+
+            // Priority 2: Production/Demo Demo Fallback
+            // Check for valid demo credentials: ATH2024001 / wisdom789
+            if (credentials.id.toUpperCase() === 'ATH2024001' && credentials.key === 'wisdom789') {
+                const mockStudent = {
+                    name: "A. Papneja",
+                    class: "XII",
+                    stream: "Science",
+                    stats: { attendance: "98%", result: "96.4%", rank: "#12" },
+                    schedule: [
+                        { time: '08:00 AM', subject: 'Physics (Electrodynamics)', location: 'Lab 1' },
+                        { time: '09:45 AM', subject: 'Mathematics (Calculus)', location: 'Room 204' },
+                        { time: '11:15 AM', subject: 'English Core', location: 'Lecture Hall' },
+                        { time: '01:30 PM', subject: 'Computer Science (Python)', location: 'IT Wing' }
+                    ],
+                    fullSchedule: {
+                        Monday: [
+                            { time: '08:00 - 09:30', subject: 'Physics', teacher: 'Dr. Sharma' },
+                            { time: '09:45 - 11:15', subject: 'Mathematics', teacher: 'Mrs. Gupta' },
+                            { time: '11:30 - 13:00', subject: 'Chemistry', teacher: 'Mr. Verma' }
+                        ]
+                    },
+                    academicRecords: [
+                        { subject: 'Physics', unitTest: 23, halfYearly: 74, predicted: 95 },
+                        { subject: 'Mathematics', unitTest: 25, halfYearly: 78, predicted: 98 }
+                    ],
+                    feeStatus: {
+                        pending: 12500,
+                        lastPayment: { amount: 45000, date: '2024-01-15' },
+                        history: [
+                            { quarter: 'Q1 (Apr-Jun)', amount: 45000, status: 'Paid', date: '2024-04-10' }
+                        ]
+                    },
+                    circulars: [
+                        { id: 1, title: 'Annual Sports Day 2024', date: '2024-02-10', highlight: true }
+                    ]
+                };
+
+                setTimeout(() => {
+                    setStudentData(mockStudent);
+                    setIsAuthenticated(true);
+                    setActiveTab('Overview');
+                    toast.success(`Welcome, Scholar ${mockStudent.name}`, { icon: '🦅' });
+                    setIsAuthenticating(false);
+                }, 1500);
+                return;
+            }
+
+            toast.error('Authentication Failed. Please check your credentials.');
         } finally {
-            setIsAuthenticating(false);
+            if (credentials.id.toUpperCase() !== 'ATH2024001' || credentials.key !== 'wisdom789') {
+                setIsAuthenticating(false);
+            }
         }
     };
 
@@ -99,13 +143,13 @@ const PortalMockup = ({ isOpen, onClose }) => {
                                 <motion.div
                                     animate={isAuthenticating ? { scale: [1, 1.1, 1], rotate: [0, 360] } : {}}
                                     transition={{ duration: 2, repeat: Infinity }}
-                                    className="w-16 h-16 lg:w-20 lg:h-20 bg-champagne rounded-2xl lg:rounded-3xl flex items-center justify-center text-midnight mb-8 lg:mb-12 shadow-[0_0_40px_rgba(212,175,55,0.2)]"
+                                    className="w-12 h-12 lg:w-20 lg:h-20 bg-champagne rounded-xl lg:rounded-3xl flex items-center justify-center text-midnight mb-6 lg:mb-12 shadow-[0_0_40px_rgba(212,175,55,0.2)]"
                                 >
-                                    {isAuthenticating ? <ShieldCheck size={32} /> : <Lock size={32} />}
+                                    {isAuthenticating ? <ShieldCheck size={24} /> : <Lock size={24} />}
                                 </motion.div>
 
-                                <span className="text-champagne font-bold text-[10px] lg:text-xs tracking-[0.5em] uppercase mb-4 text-center block">Secure Gateway</span>
-                                <h2 className="font-serif text-2xl lg:text-4xl font-bold text-ivory mb-8 lg:mb-12 leading-tight text-center">
+                                <span className="text-champagne font-bold text-[8px] lg:text-xs tracking-[0.5em] uppercase mb-3 lg:mb-4 text-center block">Secure Gateway</span>
+                                <h2 className="font-serif text-xl lg:text-4xl font-bold text-ivory mb-6 lg:mb-12 leading-tight text-center">
                                     Athenia <br /><span className="text-champagne italic">Unified Portal</span>
                                 </h2>
 
@@ -134,8 +178,8 @@ const PortalMockup = ({ isOpen, onClose }) => {
                                                 type="password"
                                                 value={credentials.key}
                                                 onChange={(e) => setCredentials({ ...credentials, key: e.target.value })}
-                                                placeholder="••••••••••••"
-                                                className="w-full bg-white/5 border border-white/10 rounded-2xl pl-16 pr-6 py-5 text-ivory focus:border-champagne focus:outline-none transition-all font-light"
+                                                placeholder="••••••••"
+                                                className="w-full bg-white/5 border border-white/10 rounded-2xl pl-16 pr-6 py-4 lg:py-5 text-ivory focus:border-champagne focus:outline-none transition-all font-light text-sm lg:text-base"
                                             />
                                         </div>
                                     </div>
