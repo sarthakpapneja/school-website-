@@ -7,7 +7,6 @@ import Features from './components/Features';
 import Message from './components/Message';
 import About from './components/About';
 import BentoGrid from './components/BentoGrid';
-import BentoGrid from './components/BentoGrid';
 import Academics from './components/Academics';
 import Gallery from './components/Gallery';
 import HallOfFame from './components/HallOfFame';
