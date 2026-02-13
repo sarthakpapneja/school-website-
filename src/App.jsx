@@ -39,6 +39,7 @@ function App() {
   const [activeFeature, setActiveFeature] = useState(null);
   const [isProspectusOpen, setIsProspectusOpen] = useState(false);
   const [isPoliciesOpen, setIsPoliciesOpen] = useState(false);
+  const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
 
   // Global actions
   const openApply = () => setIsApplyOpen(true);
@@ -76,7 +77,12 @@ function App() {
       />
       <AuroraBackground />
 
-      <Navbar onApplyClick={openApply} onPortalClick={openPortal} onPoliciesClick={openPolicies} />
+      <Navbar
+        onApplyClick={openApply}
+        onPortalClick={openPortal}
+        onPoliciesClick={openPolicies}
+        onMobileMenuChange={setIsMobileNavOpen}
+      />
 
       <Hero onExploreClick={openApply} onVideoClick={openVideo} />
 
@@ -100,7 +106,7 @@ function App() {
       <ImpactCTA onApply={openApply} onRequestProspectus={openProspectus} />
       <Footer onPortalClick={openPortal} onRequestProspectus={openProspectus} onPoliciesClick={openPolicies} />
 
-      <Chatbot isPortalOpen={isPortalOpen} />
+      <Chatbot isPortalOpen={isPortalOpen} isMobileMenuOpen={isMobileNavOpen} />
 
       <ApplicationModal
         isOpen={isApplyOpen}

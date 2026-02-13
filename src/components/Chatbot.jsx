@@ -86,7 +86,7 @@ const FAQ_FLOWS = {
     scholarship_apply: { message: "Indicate your interest during the application modal submission or mention it during the school visit.", options: [{ label: 'Back to Start', next: 'start' }] },
 };
 
-const Chatbot = ({ isPortalOpen }) => {
+const Chatbot = ({ isPortalOpen, isMobileMenuOpen }) => {
     const [isOpen, setIsOpen] = useState(false);
     const [messages, setMessages] = useState([
         { type: 'bot', text: FAQ_FLOWS.start.message, options: FAQ_FLOWS.start.options }
@@ -95,12 +95,12 @@ const Chatbot = ({ isPortalOpen }) => {
     const [inputValue, setInputValue] = useState('');
     const [isTyping, setIsTyping] = useState(false);
 
-    // Close chatbot if portal opens
+    // Close chatbot if portal or mobile menu opens
     useEffect(() => {
-        if (isPortalOpen && isOpen) {
+        if ((isPortalOpen || isMobileMenuOpen) && isOpen) {
             setIsOpen(false);
         }
-    }, [isPortalOpen, isOpen]);
+    }, [isPortalOpen, isMobileMenuOpen, isOpen]);
 
     useEffect(() => {
         if (scrollRef.current) {
@@ -168,8 +168,8 @@ const Chatbot = ({ isPortalOpen }) => {
         pushBotMessage(intent);
     };
 
-    // Hide chatbot icon and window while the portal is open
-    if (isPortalOpen) return null;
+    // Hide chatbot icon and window while the portal or mobile menu is open
+    if (isPortalOpen || isMobileMenuOpen) return null;
 
     return (
         <div className="fixed bottom-4 right-4 sm:bottom-8 sm:right-8 z-[1000] font-sans">

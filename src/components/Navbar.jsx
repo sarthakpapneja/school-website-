@@ -34,7 +34,7 @@ const NavLink = ({ href, children, mobile = false, onClick }) => {
     );
 };
 
-const Navbar = ({ onApplyClick, onPortalClick, onPoliciesClick }) => {
+const Navbar = ({ onApplyClick, onPortalClick, onPoliciesClick, onMobileMenuChange }) => {
     const [isScrolled, setIsScrolled] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -112,7 +112,11 @@ const Navbar = ({ onApplyClick, onPortalClick, onPoliciesClick }) => {
                 {/* Mobile Toggle */}
                 <button
                     className="md:hidden text-ivory z-50 relative w-10 h-10 flex items-center justify-center rounded-full glass"
-                    onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                    onClick={() => {
+                        const next = !isMobileMenuOpen;
+                        setIsMobileMenuOpen(next);
+                        onMobileMenuChange && onMobileMenuChange(next);
+                    }}
                 >
                     {isMobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
                 </button>
@@ -139,7 +143,14 @@ const Navbar = ({ onApplyClick, onPortalClick, onPoliciesClick }) => {
                                     animate={{ opacity: 1, x: 0 }}
                                     transition={{ delay: 0.1 * idx, duration: 0.5 }}
                                 >
-                                    <NavLink href={link.href} mobile onClick={() => setIsMobileMenuOpen(false)}>
+                                <NavLink
+                                    href={link.href}
+                                    mobile
+                                    onClick={() => {
+                                        setIsMobileMenuOpen(false);
+                                        onMobileMenuChange && onMobileMenuChange(false);
+                                    }}
+                                >
                                         {link.name}
                                     </NavLink>
                                 </motion.div>
@@ -156,6 +167,7 @@ const Navbar = ({ onApplyClick, onPortalClick, onPoliciesClick }) => {
                                 onClick={() => {
                                     onPoliciesClick();
                                     setIsMobileMenuOpen(false);
+                                    onMobileMenuChange && onMobileMenuChange(false);
                                 }}
                                 className="w-full py-4 glass rounded-xl text-ivory uppercase tracking-widest text-sm font-bold flex items-center justify-center gap-2 hover:bg-white/10"
                             >
@@ -165,6 +177,7 @@ const Navbar = ({ onApplyClick, onPortalClick, onPoliciesClick }) => {
                                 onClick={() => {
                                     onPortalClick();
                                     setIsMobileMenuOpen(false);
+                                    onMobileMenuChange && onMobileMenuChange(false);
                                 }}
                                 className="w-full py-4 glass rounded-xl text-ivory uppercase tracking-widest text-sm font-bold flex items-center justify-center gap-2 hover:bg-white/10"
                             >
@@ -174,6 +187,7 @@ const Navbar = ({ onApplyClick, onPortalClick, onPoliciesClick }) => {
                                 onClick={() => {
                                     onApplyClick();
                                     setIsMobileMenuOpen(false);
+                                    onMobileMenuChange && onMobileMenuChange(false);
                                 }}
                                 className="w-full py-4 bg-champagne rounded-xl text-midnight uppercase tracking-widest text-sm font-bold shadow-lg shadow-champagne/20"
                             >
