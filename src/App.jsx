@@ -35,6 +35,7 @@ function App() {
   });
   const [isApplyOpen, setIsApplyOpen] = useState(false);
   const [isVideoOpen, setIsVideoOpen] = useState(false);
+  const [activeVideo, setActiveVideo] = useState(null);
   const [isPortalOpen, setIsPortalOpen] = useState(false);
   const [isMessageOpen, setIsMessageOpen] = useState(false);
   const [activeFeature, setActiveFeature] = useState(null);
@@ -46,7 +47,10 @@ function App() {
 
   // Global actions
   const openApply = () => setIsApplyOpen(true);
-  const openVideo = () => setIsVideoOpen(true);
+  const openVideo = (videoData = null) => {
+    setActiveVideo(videoData);
+    setIsVideoOpen(true);
+  };
   const openPortal = () => setIsPortalOpen(true);
   const openMessage = () => setIsMessageOpen(true);
   const openFeature = (feature) => setActiveFeature(feature);
@@ -121,6 +125,7 @@ function App() {
       <VideoModal
         isOpen={isVideoOpen}
         onClose={() => setIsVideoOpen(false)}
+        videoData={activeVideo}
       />
 
       <PortalMockup

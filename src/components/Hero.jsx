@@ -41,15 +41,20 @@ const Hero = ({ onExploreClick, onVideoClick }) => {
                     </button>
 
                     <button
-                        onClick={onVideoClick}
+                        onClick={() => onVideoClick({
+                            id: "8KXkychdCcE",
+                            title: "25 Years of Legacy",
+                            subtitle: "Silver Jubilee Celebration"
+                        })}
                         className="flex items-center gap-5 text-ivory group hover:text-champagne transition-colors"
                     >
-                        <div className="w-16 h-16 rounded-full border border-white/20 flex items-center justify-center group-hover:border-champagne group-hover:bg-champagne/10 group-hover:scale-110 transition-all">
+                        <div className="w-16 h-16 rounded-full border border-white/20 flex items-center justify-center group-hover:border-champagne group-hover:bg-champagne/10 group-hover:scale-110 transition-all relative">
+                            <div className="absolute -top-1 -right-1 bg-champagne text-midnight text-[8px] font-bold px-2 py-0.5 rounded-full z-10 animate-bounce">25</div>
                             <Play size={24} fill="currentColor" stroke="none" className="ml-1" />
                         </div>
                         <div className="text-left">
-                            <span className="font-bold text-xs tracking-widest uppercase block mb-1">Preview</span>
-                            <span className="text-ivory/40 text-[10px] uppercase font-bold group-hover:text-champagne/60 transition-colors">Campus Glimpse</span>
+                            <span className="font-bold text-xs tracking-widest uppercase block mb-1">Watch Heritage Film</span>
+                            <span className="text-ivory/40 text-[10px] uppercase font-bold group-hover:text-champagne/60 transition-colors">Journey of 25 Years</span>
                         </div>
                     </button>
                 </div>

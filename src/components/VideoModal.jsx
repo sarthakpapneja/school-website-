@@ -1,8 +1,16 @@
 import { motion, AnimatePresence } from 'framer-motion';
 import { X } from 'lucide-react';
 
-const VideoModal = ({ isOpen, onClose }) => {
+const VideoModal = ({ isOpen, onClose, videoData }) => {
     if (!isOpen) return null;
+
+    const defaultVideo = {
+        id: "aw42egcY7Bk",
+        title: "A Glimpse of Athenia",
+        subtitle: "Heritage Film"
+    };
+
+    const video = videoData || defaultVideo;
 
     return (
         <AnimatePresence>
@@ -29,15 +37,15 @@ const VideoModal = ({ isOpen, onClose }) => {
 
                     <iframe
                         className="w-full h-full"
-                        src="https://www.youtube.com/embed/aw42egcY7Bk?autoplay=1&si=aM1fUWzmdJmXkF5K&rel=0"
-                        title="Heritage Film"
+                        src={`https://www.youtube.com/embed/${video.id}?autoplay=1&rel=0`}
+                        title={video.title}
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                         allowFullScreen
                     ></iframe>
 
                     <div className="absolute bottom-0 left-0 w-full bg-gradient-to-t from-midnight/80 to-transparent p-12 pointer-events-none">
                         <span className="text-champagne font-bold text-xs tracking-[0.5em] uppercase mb-2 block opacity-60">Now Playing</span>
-                        <h3 className="font-serif text-4xl font-bold text-ivory">A Glimpse of <span className="text-champagne italic">Athenia</span></h3>
+                        <h3 className="font-serif text-4xl font-bold text-ivory">{video.title} <span className="text-champagne italic">{video.subtitle}</span></h3>
                     </div>
                 </motion.div>
             </motion.div>
