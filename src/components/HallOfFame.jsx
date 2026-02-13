@@ -37,7 +37,7 @@ const HallOfFame = () => {
                         <div className="absolute inset-0 bg-gradient-to-t from-midnight via-transparent to-transparent opacity-90 group-hover:opacity-70 transition-opacity duration-500 z-10" />
                         <img
                             src="https://heyzine.com/flip-book/bd2d473786.html/cover" /* Placeholder or screenshot */
-                            onError={(e) => e.target.src = "https://images.unsplash.com/photo-1531545514256-b1400bc00f31?q=80&w=1974&auto=format&fit=crop"}
+                            onError={(e) => { e.target.onerror = null; e.target.src = '/assets/students_stairs.jpg'; }}
                             alt="Hall of Fame Vol 1"
                             className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 grayscale group-hover:grayscale-0"
                         />
@@ -65,7 +65,7 @@ const HallOfFame = () => {
                         <div className="absolute inset-0 bg-gradient-to-t from-midnight via-transparent to-transparent opacity-90 group-hover:opacity-70 transition-opacity duration-500 z-10" />
                         <img
                             src="https://heyzine.com/flip-book/675ceaf5ff.html/cover"
-                            onError={(e) => e.target.src = "https://images.unsplash.com/photo-1461896836934-ffe607ba8211?q=80&w=2070&auto=format&fit=crop"}
+                            onError={(e) => { e.target.onerror = null; e.target.src = '/assets/campus_court_real.jpg'; }}
                             alt="Sports Acheivements"
                             className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 grayscale group-hover:grayscale-0"
                         />
@@ -92,8 +92,8 @@ const HallOfFame = () => {
                     >
                         <div className="absolute inset-0 bg-gradient-to-t from-midnight via-transparent to-transparent opacity-90 group-hover:opacity-70 transition-opacity duration-500 z-10" />
                         <img
-                            src="https://images.unsplash.com/photo-1506880018603-83d5b814b5a6?q=80&w=2070&auto=format&fit=crop"
-                            onError={(e) => e.target.src = "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?q=80&w=2070&auto=format&fit=crop"}
+                            src="/assets/campus_facade_real.jpg"
+                            onError={(e) => { e.target.onerror = null; e.target.src = '/assets/campus_facade_real.jpg'; }}
                             alt="Episteme 2024-25"
                             className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 grayscale group-hover:grayscale-0"
                         />

@@ -5,33 +5,33 @@ import Lightbox from './Lightbox';
 
 const images = [
     {
-        url: 'https://images.unsplash.com/photo-1562774053-701939374585?q=80&w=1986&auto=format&fit=crop',
+        url: '/assets/campus_facade_real.jpg',
         title: 'The Grand Hall',
         desc: 'Our heritage architecture meets modern innovation.',
         span: 'md:col-span-2 md:row-span-2'
     },
     {
-        url: 'https://images.unsplash.com/photo-1532094349884-543bc11b234d?q=80&w=2070&auto=format&fit=crop',
-        title: 'Precision Labs',
-        desc: 'Advanced research environment for global scholars.',
+        url: '/assets/campus_corridor_real.jpg',
+        title: 'Academic Corridors',
+        desc: 'Open, light-filled corridors connecting learning spaces.',
         span: 'md:col-span-1 md:row-span-1'
     },
     {
-        url: 'https://images.unsplash.com/photo-1509062522246-3755977927d7?q=80&w=2132&auto=format&fit=crop',
-        title: 'Library Sessions',
-        desc: 'Curated knowledge in a boutique sanctuary.',
+        url: '/assets/students_stairs.jpg',
+        title: 'Student Life',
+        desc: 'Joyful moments shared by our scholars.',
         span: 'md:col-span-1 md:row-span-2'
     },
     {
-        url: 'https://images.unsplash.com/photo-1627556592933-ffe99c1cd9eb?q=80&w=2070&auto=format&fit=crop',
-        title: 'Graduation Day',
-        desc: 'The celebration of a visual legacy.',
+        url: '/assets/campus_balcony_sunset.jpg',
+        title: 'Evening Courtyard',
+        desc: 'A quiet sunset across the campus greens.',
         span: 'md:col-span-1 md:row-span-1'
     },
     {
-        url: 'https://images.unsplash.com/photo-1576267423048-15c0040fec78?q=80&w=2070&auto=format&fit=crop',
+        url: '/assets/campus_court_real.jpg',
         title: 'Athletic Estate',
-        desc: 'Holistic physical mastery on campus.',
+        desc: 'Expansive courts for holistic physical mastery.',
         span: 'md:col-span-1 md:row-span-1'
     }
 ];

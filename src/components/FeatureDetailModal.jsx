@@ -7,22 +7,22 @@ const FeatureDetailModal = ({ isOpen, onClose, feature }) => {
     const content = {
         "Holistic Mastery": {
             fullDesc: "Our curriculum transcends standard parameters. We integrate neural-science backed learning protocols with classical philosophy to ensure students master not just the 'how', but the 'why' of global systems.",
-            image: "https://images.unsplash.com/photo-1509062522246-3755977927d7?q=80&w=2132&auto=format&fit=crop",
+            image: "/assets/students_stairs.jpg",
             modules: ["Cognitive Logic", "Emotional Resilience", "Ethical Leadership"]
         },
         "Global Ready": {
             fullDesc: "Preparation for the 22nd century requires more than coding. It requires spatial computing, AI ethical frameworks, and the ability to navigate complex geopolitical landscapes through our Silicon Valley partnerships.",
-            image: "https://images.unsplash.com/photo-1581092918056-0c4c3acd378a?q=80&w=2070&auto=format&fit=crop",
+            image: "/assets/campus_facade_real.jpg",
             modules: ["AI & Logic Labs", "Geopolitical Strategy", "Quantum Computing"]
         },
         "Elite Mentors": {
             fullDesc: "Our educators are practitioners at the pinnacle of their fields. From former Ivy League deans to Silicon Valley innovators, our faculty provides artisanal mentorship that shapes character alongside intellect.",
-            image: "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?q=80&w=2070&auto=format&fit=crop",
+            image: "/assets/campus_corridor_real.jpg",
             modules: ["Artisanal Mentorship", "Peer-to-Peer Labs", "Executive Pathways"]
         }
     }[feature.title] || {
         fullDesc: feature.desc,
-        image: "https://images.unsplash.com/photo-1541339907198-e08759dfc3f0?q=80&w=2070",
+        image: "/assets/campus_balcony_sunset.jpg",
         modules: ["Foundational Wisdom", "Heritage", "Innovation"]
     };
 

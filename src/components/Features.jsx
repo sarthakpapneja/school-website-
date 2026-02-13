@@ -67,8 +67,8 @@ const Features = ({ onLearnMore }) => {
             <div className="absolute right-0 top-0 w-1/2 h-full hidden md:block opacity-20 pointer-events-none">
                 <div className="absolute inset-0 bg-gradient-to-r from-midnight via-midnight/80 to-transparent z-10" />
                 <img
-                    src="https://images.unsplash.com/photo-1541339907198-e08756dedf3f?q=80&w=2070&auto=format&fit=crop"
-                    alt="Campus Library"
+                    src="/assets/campus_corridor_real.jpg"
+                    alt="Athenia campus corridor"
                     className="w-full h-full object-cover"
                 />
             </div>
