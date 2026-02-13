@@ -172,14 +172,14 @@ const Chatbot = ({ isPortalOpen }) => {
     if (isPortalOpen) return null;
 
     return (
-        <div className="fixed bottom-8 right-8 z-[1000] font-sans">
+        <div className="fixed bottom-4 right-4 sm:bottom-8 sm:right-8 z-[1000] font-sans">
             <AnimatePresence>
                 {isOpen ? (
                     <motion.div
                         initial={{ opacity: 0, scale: 0.9, y: 20, transformOrigin: 'bottom right' }}
                         animate={{ opacity: 1, scale: 1, y: 0 }}
                         exit={{ opacity: 0, scale: 0.9, y: 20 }}
-                        className="bg-midnight-light border border-white/10 w-[380px] h-[550px] rounded-[2.5rem] shadow-2xl flex flex-col overflow-hidden backdrop-blur-3xl"
+                        className="bg-midnight-light border border-white/10 w-[calc(100vw-2.5rem)] max-w-sm h-[70vh] sm:w-[380px] sm:h-[550px] rounded-[1.75rem] sm:rounded-[2.5rem] shadow-2xl flex flex-col overflow-hidden backdrop-blur-3xl"
                     >
                         {/* Header */}
                         <div className="p-6 bg-champagne text-midnight flex justify-between items-center">
