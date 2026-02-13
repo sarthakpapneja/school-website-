@@ -29,7 +29,7 @@ const Card = ({ title, icon: Icon, image, span, delay, desc }) => (
                 <Icon size={24} />
             </div>
 
-            <h3 className="font-serif text-3xl md:text-4xl font-bold text-ivory mb-2 group-hover:text-champagne transition-colors leading-tight drop-shadow-lg">
+            <h3 className="font-serif text-2xl md:text-3xl font-bold text-ivory mb-2 group-hover:text-champagne transition-colors leading-tight drop-shadow-lg">
                 {title}
             </h3>
 
