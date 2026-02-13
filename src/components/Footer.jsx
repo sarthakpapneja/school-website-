@@ -5,7 +5,7 @@ import axios from 'axios';
 import toast from 'react-hot-toast';
 import { useState } from 'react';
 
-const Footer = ({ onPortalClick, onRequestProspectus, onPoliciesClick, onDisclosureClick }) => {
+const Footer = ({ onPortalClick, onRequestProspectus, onPoliciesClick, onDisclosureClick, onPrivacyClick }) => {
     const [email, setEmail] = useState('');
     const [loading, setLoading] = useState(false);
 
@@ -138,8 +138,8 @@ const Footer = ({ onPortalClick, onRequestProspectus, onPoliciesClick, onDisclos
                     <div className="flex gap-10">
                         <button onClick={onDisclosureClick} className="hover:text-champagne transition-colors uppercase tracking-widest text-[10px] font-bold">Mandatory Disclosure</button>
                         <button onClick={onPoliciesClick} className="hover:text-champagne transition-colors uppercase tracking-widest text-[10px] font-bold">Institutional Policies</button>
-                        <li><button onClick={onRequestProspectus} className="hover:text-champagne transition-colors text-left uppercase tracking-widest text-[10px] font-bold">Request Prospectus</button></li>
-                        <a href="#" className="hover:text-champagne transition-colors">Privacy Policy</a>
+                        <button onClick={onRequestProspectus} className="hover:text-champagne transition-colors text-left uppercase tracking-widest text-[10px] font-bold">Request Prospectus</button>
+                        <button onClick={onPrivacyClick} className="hover:text-champagne transition-colors uppercase tracking-widest text-[10px] font-bold">Privacy Policy</button>
                     </div>
                 </div>
             </div>

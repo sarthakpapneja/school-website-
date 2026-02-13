@@ -26,6 +26,7 @@ import ProspectusModal from './components/ProspectusModal';
 import Chatbot from './components/Chatbot';
 import PoliciesModal from './components/PoliciesModal';
 import DisclosureModal from './components/DisclosureModal';
+import PrivacyModal from './components/PrivacyModal';
 
 function App() {
   const [loading, setLoading] = useState(true); // Keep for potential future use or prop drilling
@@ -41,6 +42,7 @@ function App() {
   const [isPoliciesOpen, setIsPoliciesOpen] = useState(false);
   const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
   const [isDisclosureOpen, setIsDisclosureOpen] = useState(false);
+  const [isPrivacyOpen, setIsPrivacyOpen] = useState(false);
 
   // Global actions
   const openApply = () => setIsApplyOpen(true);
@@ -51,6 +53,7 @@ function App() {
   const openProspectus = () => setIsProspectusOpen(true);
   const openPolicies = () => setIsPoliciesOpen(true);
   const openDisclosure = () => setIsDisclosureOpen(true);
+  const openPrivacy = () => setIsPrivacyOpen(true);
 
   const handlePreloaderComplete = () => {
     setLoading(false);
@@ -106,7 +109,7 @@ function App() {
       <Gallery />
       <HallOfFame />
       <ImpactCTA onApply={openApply} onRequestProspectus={openProspectus} />
-      <Footer onPortalClick={openPortal} onRequestProspectus={openProspectus} onPoliciesClick={openPolicies} onDisclosureClick={openDisclosure} />
+      <Footer onPortalClick={openPortal} onRequestProspectus={openProspectus} onPoliciesClick={openPolicies} onDisclosureClick={openDisclosure} onPrivacyClick={openPrivacy} />
 
       <Chatbot isPortalOpen={isPortalOpen} isMobileMenuOpen={isMobileNavOpen} />
 
@@ -149,6 +152,11 @@ function App() {
       <DisclosureModal
         isOpen={isDisclosureOpen}
         onClose={() => setIsDisclosureOpen(false)}
+      />
+
+      <PrivacyModal
+        isOpen={isPrivacyOpen}
+        onClose={() => setIsPrivacyOpen(false)}
       />
     </div>
   );
