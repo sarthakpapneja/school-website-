@@ -48,7 +48,6 @@ const Navbar = ({ onApplyClick, onPortalClick, onPoliciesClick, onMobileMenuChan
 
     const navLinks = [
         { name: 'Philosophy', href: '#philosophy' },
-        { name: 'Admissions', href: '#admissions' },
         { name: 'Academics', href: '#academics' },
         { name: 'Heritage', href: '#heritage' },
         { name: 'Contact', href: '#contact' },
@@ -143,14 +142,14 @@ const Navbar = ({ onApplyClick, onPortalClick, onPoliciesClick, onMobileMenuChan
                                     animate={{ opacity: 1, x: 0 }}
                                     transition={{ delay: 0.1 * idx, duration: 0.5 }}
                                 >
-                                <NavLink
-                                    href={link.href}
-                                    mobile
-                                    onClick={() => {
-                                        setIsMobileMenuOpen(false);
-                                        onMobileMenuChange && onMobileMenuChange(false);
-                                    }}
-                                >
+                                    <NavLink
+                                        href={link.href}
+                                        mobile
+                                        onClick={() => {
+                                            setIsMobileMenuOpen(false);
+                                            onMobileMenuChange && onMobileMenuChange(false);
+                                        }}
+                                    >
                                         {link.name}
                                     </NavLink>
                                 </motion.div>

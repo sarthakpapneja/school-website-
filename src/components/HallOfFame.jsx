@@ -36,8 +36,7 @@ const HallOfFame = () => {
                     >
                         <div className="absolute inset-0 bg-gradient-to-t from-midnight via-transparent to-transparent opacity-90 group-hover:opacity-70 transition-opacity duration-500 z-10" />
                         <img
-                            src="https://heyzine.com/flip-book/bd2d473786.html/cover" /* Placeholder or screenshot */
-                            onError={(e) => { e.target.onerror = null; e.target.src = '/assets/students_stairs.jpg'; }}
+                            src="/assets/school_images/hall_of_fame_mockup.png"
                             alt="Hall of Fame Vol 1"
                             className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 grayscale group-hover:grayscale-0"
                         />
@@ -64,8 +63,7 @@ const HallOfFame = () => {
                     >
                         <div className="absolute inset-0 bg-gradient-to-t from-midnight via-transparent to-transparent opacity-90 group-hover:opacity-70 transition-opacity duration-500 z-10" />
                         <img
-                            src="https://heyzine.com/flip-book/675ceaf5ff.html/cover"
-                            onError={(e) => { e.target.onerror = null; e.target.src = '/assets/campus_court_real.jpg'; }}
+                            src="/assets/school_images/sports_legacy_mockup.png"
                             alt="Sports Acheivements"
                             className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 grayscale group-hover:grayscale-0"
                         />
@@ -92,8 +90,7 @@ const HallOfFame = () => {
                     >
                         <div className="absolute inset-0 bg-gradient-to-t from-midnight via-transparent to-transparent opacity-90 group-hover:opacity-70 transition-opacity duration-500 z-10" />
                         <img
-                            src="/assets/campus_facade_real.jpg"
-                            onError={(e) => { e.target.onerror = null; e.target.src = '/assets/campus_facade_real.jpg'; }}
+                            src="/assets/school_images/episteme_mockup.png"
                             alt="Episteme 2024-25"
                             className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 grayscale group-hover:grayscale-0"
                         />
