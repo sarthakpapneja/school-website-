@@ -5,33 +5,33 @@ import Lightbox from './Lightbox';
 
 const images = [
     {
-        url: '/assets/campus_facade_real.jpg',
-        title: 'The Grand Hall',
-        desc: 'Our heritage architecture meets modern innovation.',
+        url: '/assets/school_images/f1908a_2ee20303608a47e0b5ece311143eb394~mv2.jpg',
+        title: 'Academic Excellence',
+        desc: 'Nurturing bright minds in our modern facilities.',
         span: 'md:col-span-2 md:row-span-2'
     },
     {
-        url: '/assets/campus_corridor_real.jpg',
-        title: 'Academic Corridors',
-        desc: 'Open, light-filled corridors connecting learning spaces.',
+        url: '/assets/school_images/f1908a_526db937afe5496cb5124b9e385396bb~mv2.jpeg',
+        title: 'Modern Architecture',
+        desc: 'A safe and supportive environment for learning.',
         span: 'md:col-span-1 md:row-span-1'
     },
     {
-        url: '/assets/students_stairs.jpg',
-        title: 'Student Life',
-        desc: 'Joyful moments shared by our scholars.',
+        url: '/assets/school_images/f1908a_4c6496e862b64ee9bdf431ea643f6a5f~mv2.jpeg',
+        title: 'Holistic Growth',
+        desc: 'Nurturing physical, emotional, and mental wellbeing.',
         span: 'md:col-span-1 md:row-span-2'
     },
     {
-        url: '/assets/campus_balcony_sunset.jpg',
-        title: 'Evening Courtyard',
-        desc: 'A quiet sunset across the campus greens.',
+        url: '/assets/school_images/f1908a_29f25d2073bd4d95a7635df32b9278c5~mv2.jpeg',
+        title: 'Campus Life',
+        desc: 'Vibrant energy and joyful learning moments.',
         span: 'md:col-span-1 md:row-span-1'
     },
     {
-        url: '/assets/campus_court_real.jpg',
-        title: 'Athletic Estate',
-        desc: 'Expansive courts for holistic physical mastery.',
+        url: '/assets/school_images/f1908a_ecb548c109fd47dbb7d29796ca3bf6f0~mv2.jpeg',
+        title: 'Elite Facilities',
+        desc: 'Setting global standards in school infrastructure.',
         span: 'md:col-span-1 md:row-span-1'
     }
 ];

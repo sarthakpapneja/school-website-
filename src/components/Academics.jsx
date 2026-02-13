@@ -7,28 +7,28 @@ const departments = [
         name: 'Science & Technology Wing',
         description: 'Advanced research in Physics, Chemistry, and Biology within our NCERT-aligned laboratories.',
         icon: <FlaskConical className="text-champagne" size={24} />,
-        image: "/assets/campus_corridor_real.jpg"
+        image: "/assets/school_images/f1908a_ecb548c109fd47dbb7d29796ca3bf6f0~mv2.jpeg"
     },
     {
         id: 'humanities',
         name: 'Liberal Arts & Social Sciences',
         description: 'Critical analysis of History, Geography, and Political Science to understand the global human condition.',
         icon: <Globe className="text-champagne" size={24} />,
-        image: "/assets/campus_facade_real.jpg"
+        image: "/assets/school_images/f1908a_7c2f4d5635154a0ab0b9a109208f6427~mv2.jpeg"
     },
     {
         id: 'arts',
         name: 'Creative & Performing Arts',
         description: 'Nurturing creative expression through Fine Arts, Music, and Dramatic performance as per CBSE guidelines.',
         icon: <Palette className="text-champagne" size={24} />,
-        image: "/assets/campus_balcony_sunset.jpg"
+        image: "/assets/school_images/f1908a_6bd5ab92e0f44a088ceb86333dc985b4~mv2.jpeg"
     },
     {
         id: 'classics',
         name: 'Value Education & Holistic Growth',
         description: 'Developing character and leadership through timeless wisdom and personality development, aligned with NEP 2020.',
         icon: <BookOpen className="text-champagne" size={24} />,
-        image: "/assets/students_stairs.jpg"
+        image: "/assets/school_images/f1908a_2ee20303608a47e0b5ece311143eb394~mv2.jpg"
     }
 ];
 

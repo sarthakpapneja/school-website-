@@ -4,8 +4,15 @@ import logoImg from '../assets/logo.jpeg';
 const Hero = ({ onExploreClick, onVideoClick }) => {
     return (
         <section className="relative h-screen w-full overflow-hidden flex items-center justify-center bg-midnight" id="home">
-            {/* Simple Background */}
-            <div className="absolute inset-0 z-0 bg-midnight" />
+            {/* Authentic School Background */}
+            <div className="absolute inset-0 z-0 overflow-hidden">
+                <img
+                    src="/assets/school_images/f1908a_2521df09d3e747a8b26bed634de401c8~mv2.jpeg"
+                    alt="Athenia High School Campus"
+                    className="w-full h-full object-cover opacity-30 scale-105 active:scale-100 transition-transform duration-[10s]"
+                />
+                <div className="absolute inset-0 bg-gradient-to-b from-midnight/60 via-midnight/40 to-midnight" />
+            </div>
 
 
             {/* Hero Content */}
@@ -21,8 +28,8 @@ const Hero = ({ onExploreClick, onVideoClick }) => {
                     </h1>
                 </div>
 
-                <h2 className="font-serif text-4xl md:text-6xl text-ivory mb-10 font-display italic">
-                    Seek Wisdom
+                <h2 className="font-serif text-2xl md:text-3xl text-ivory/80 mb-10 font-display max-w-2xl mx-auto leading-relaxed">
+                    Fostering a learning environment where students <span className="text-champagne">explore, reach their potential</span>, and make an <span className="text-champagne">impact on the world</span>.
                 </h2>
 
                 <div className="flex flex-col sm:flex-row items-center justify-center gap-10">

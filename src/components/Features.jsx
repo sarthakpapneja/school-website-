@@ -44,18 +44,18 @@ const FeatureCard = ({ icon: Icon, title, desc, delay, onClick }) => {
 
 const features = [
     {
-        title: "Global University Placement Cell",
-        description: "Strong placement record in premier Indian and International institutions, with dedicated guidance for Class XII.",
+        title: "Holistic Mentorship",
+        description: "Education that aims at the nurturing of the child's physical, emotional, mental, and spiritual personality.",
         icon: <Trophy size={28} className="text-champagne" />
     },
     {
-        title: "Cultural Exchange & Global Exposure",
-        description: "International exchange programs, MUN collaborations, and cross-border academic initiatives.",
+        title: "Visionary Pedagogy",
+        description: "Fostering a learning environment where students explore their potential and make an impact on the world.",
         icon: <Globe2 size={28} className="text-champagne" />
     },
     {
-        title: "Boutique Mentorship",
-        description: "A 4:1 student-faculty ratio ensures hyper-personalized academic guidance for competitive excellence.",
+        title: "Character & Leadership",
+        description: "Acknowledged as an institution that develops ethical leadership and character through dedicated service.",
         icon: <Users size={28} className="text-champagne" />
     }
 ];
@@ -63,12 +63,12 @@ const features = [
 const Features = ({ onLearnMore }) => {
     return (
         <section className="py-32 bg-midnight relative overflow-hidden" id="philosophy">
-            {/* Background Blend */}
+            {/* Authentic Visual Backdrop */}
             <div className="absolute right-0 top-0 w-1/2 h-full hidden md:block opacity-20 pointer-events-none">
                 <div className="absolute inset-0 bg-gradient-to-r from-midnight via-midnight/80 to-transparent z-10" />
                 <img
-                    src="/assets/campus_corridor_real.jpg"
-                    alt="Athenia campus corridor"
+                    src="/assets/school_images/f1908a_ecb548c109fd47dbb7d29796ca3bf6f0~mv2.jpeg"
+                    alt="Athenia campus estate"
                     className="w-full h-full object-cover"
                 />
             </div>

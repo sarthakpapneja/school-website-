@@ -71,35 +71,45 @@ const About = () => {
                     </motion.div>
 
                     <Section title="Mission">
-                        <p>
-                            SEEK WISDOM AND STRIVE FOR SOCIAL, ETHICAL AND EMOTIONAL LEARNING OF THE CHILD.
+                        <p className="text-2xl font-serif text-champagne italic mb-6">
+                            "Seek Wisdom and strive for social, ethical and emotional learning of the child."
                         </p>
                         <p>
-                            Athenia High is synonymous with quality education and is a pioneer in mooting all-round development.
-                            It fosters an education system which aims at the flowering of the child's physical, emotional, mental and spiritual personality.
-                            Our endeavour is to impart education which looks beyond the frontiers of formal education. It is, in fact, a preparation for lifelong learning.
+                            Athenia High School's mission is to impart education that aims at the nurturing of the child's physical, emotional, mental, and spiritual personality.
                         </p>
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12 bg-midnight p-8 rounded-3xl border border-white/5">
-                            <div>
-                                <h5 className="text-champagne font-bold uppercase tracking-widest text-xs mb-4">We Aim At</h5>
+                        <p>
+                            Our endeavour is to impart education which looks beyond the frontiers of formal education. It is, in fact, a preparation for lifelong learning, where every student is encouraged to reach their full potential.
+                        </p>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-12">
+                            <img
+                                src="/assets/school_images/f1908a_7c2f4d5635154a0ab0b9a109208f6427~mv2.jpeg"
+                                alt="Students in Classroom"
+                                className="rounded-3xl w-full h-64 object-cover border border-white/10"
+                            />
+                            <div className="bg-midnight p-8 rounded-3xl border border-white/5 flex flex-col justify-center">
+                                <h5 className="text-champagne font-bold uppercase tracking-widest text-xs mb-4">Core Focus</h5>
                                 <ul className="space-y-3">
-                                    <li className="flex items-center gap-3"><Globe size={16} className="text-champagne" /> Maintaining a global perspective</li>
-                                    <li className="flex items-center gap-3"><Users size={16} className="text-champagne" /> Embracing cultural diversity</li>
+                                    <li className="flex items-center gap-3"><Globe size={16} className="text-champagne" /> Global Perspective</li>
+                                    <li className="flex items-center gap-3"><Users size={16} className="text-champagne" /> Character Development</li>
+                                    <li className="flex items-center gap-3"><Brain size={16} className="text-champagne" /> Intellectual Maturity</li>
                                 </ul>
                             </div>
                         </div>
                     </Section>
 
                     <Section title="Vision">
-                        <p className="text-2xl font-serif text-champagne italic mb-8">"TEACH WITH PASSION – TRAIN WITH A VISION"</p>
+                        <p className="text-2xl font-serif text-champagne italic mb-8">"Teach with Passion – Train with a Vision"</p>
                         <p>
-                            Our vision aligns with shifts in the global economy, society, and environment. We believe in letting actions speak louder than words.
-                            We are widely acknowledged as a secular institution which develops character and ethical leadership.
+                            Our vision is to foster a learning environment where students explore, reach their potential, and make an impact on the world.
                         </p>
                         <p>
-                            Knowledge acquired from education is not merely for the cultivation of our sensibilities or a step towards elevated employment
-                            but must be used in the service of humanity.
+                            We are widely acknowledged as an institution that develops character and ethical leadership. Knowledge acquired from education is not merely for the cultivation of our sensibilities or a step towards elevated employment but must be used in the service of humanity.
                         </p>
+                        <img
+                            src="/assets/school_images/f1908a_6bd5ab92e0f44a088ceb86333dc985b4~mv2.jpeg"
+                            alt="School Architecture"
+                            className="rounded-3xl w-full h-96 object-cover border border-white/10 mt-12"
+                        />
                     </Section>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-24">

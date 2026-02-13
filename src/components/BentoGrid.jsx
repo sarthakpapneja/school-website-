@@ -52,34 +52,34 @@ const Card = ({ title, icon: Icon, image, span, delay, desc }) => (
 const BentoGrid = () => {
     const items = [
         {
-            title: "13-Acre Estate",
+            title: "Campus Vitality",
             icon: Laptop,
-            desc: "A sprawling 52,680 sq.m. estate where nature and innovation coexist in perfect harmony.",
-            image: "/assets/campus_masterplan.jpg",
+            desc: "A sprawling estate designed where nature and innovation coexist in perfect harmony.",
+            image: "/assets/school_images/f1908a_7da401b2e34244bb8beea41036470393~mv2.jpg",
             span: "md:col-span-2 md:row-span-2",
             delay: 0.1
         },
         {
-            title: "Heritage Architecture",
+            title: "Safe Environment",
             icon: Microscope,
-            desc: "Exposed brick facades that breathe, designed for natural cooling and timeless aesthetics.",
-            image: "/assets/campus_facade_real.jpg",
+            desc: "A supportive space sensitive to student needs, fostering security and exploration.",
+            image: "/assets/school_images/f1908a_a00b83a53664428fa016cb592f3968b1~mv2.jpeg",
             span: "md:col-span-1 md:row-span-1",
             delay: 0.2
         },
         {
-            title: "Open-Air Corridors",
+            title: "Visionary Training",
             icon: ArrowUpRight,
-            desc: "Walkways bathed in sunlight, connecting minds to the elements.",
-            image: "/assets/campus_corridor_real.jpg",
+            desc: "Teaching with passion and training with a vision for the future.",
+            image: "/assets/school_images/f1908a_37d4449a23cf4c34b0142071f1d48cf7~mv2.jpg",
             span: "md:col-span-1 md:row-span-1",
             delay: 0.3
         },
         {
-            title: "Sports & Vitality",
+            title: "Holistic Foundations",
             icon: Dumbbell,
-            desc: "Expansive courts and grounds for holistic physical development under the open sky.",
-            image: "/assets/campus_court_real.jpg",
+            desc: "Nurturing the child's physical, emotional, and mental personality through active learning.",
+            image: "/assets/school_images/f1908a_1ca23415adcf4c6084038c47711bb9d5~mv2.jpeg",
             span: "md:col-span-2 md:row-span-1",
             delay: 0.4
         }
