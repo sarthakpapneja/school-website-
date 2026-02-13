@@ -26,6 +26,7 @@ import SmoothScroll from './components/SmoothScroll';
 import ProspectusModal from './components/ProspectusModal';
 import Chatbot from './components/Chatbot';
 import PoliciesModal from './components/PoliciesModal';
+import DisclosureModal from './components/DisclosureModal';
 
 function App() {
   const [loading, setLoading] = useState(true); // Keep for potential future use or prop drilling
@@ -40,6 +41,7 @@ function App() {
   const [isProspectusOpen, setIsProspectusOpen] = useState(false);
   const [isPoliciesOpen, setIsPoliciesOpen] = useState(false);
   const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
+  const [isDisclosureOpen, setIsDisclosureOpen] = useState(false);
 
   // Global actions
   const openApply = () => setIsApplyOpen(true);
@@ -49,6 +51,7 @@ function App() {
   const openFeature = (feature) => setActiveFeature(feature);
   const openProspectus = () => setIsProspectusOpen(true);
   const openPolicies = () => setIsPoliciesOpen(true);
+  const openDisclosure = () => setIsDisclosureOpen(true);
 
   const handlePreloaderComplete = () => {
     setLoading(false);
@@ -104,7 +107,7 @@ function App() {
       <Gallery />
       <HallOfFame />
       <ImpactCTA onApply={openApply} onRequestProspectus={openProspectus} />
-      <Footer onPortalClick={openPortal} onRequestProspectus={openProspectus} onPoliciesClick={openPolicies} />
+      <Footer onPortalClick={openPortal} onRequestProspectus={openProspectus} onPoliciesClick={openPolicies} onDisclosureClick={openDisclosure} />
 
       <Chatbot isPortalOpen={isPortalOpen} isMobileMenuOpen={isMobileNavOpen} />
 
@@ -142,6 +145,11 @@ function App() {
       <PoliciesModal
         isOpen={isPoliciesOpen}
         onClose={() => setIsPoliciesOpen(false)}
+      />
+
+      <DisclosureModal
+        isOpen={isDisclosureOpen}
+        onClose={() => setIsDisclosureOpen(false)}
       />
     </div>
   );

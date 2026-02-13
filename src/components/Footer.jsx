@@ -5,7 +5,7 @@ import axios from 'axios';
 import toast from 'react-hot-toast';
 import { useState } from 'react';
 
-const Footer = ({ onPortalClick, onRequestProspectus, onPoliciesClick }) => {
+const Footer = ({ onPortalClick, onRequestProspectus, onPoliciesClick, onDisclosureClick }) => {
     const [email, setEmail] = useState('');
     const [loading, setLoading] = useState(false);
 
@@ -121,8 +121,9 @@ const Footer = ({ onPortalClick, onRequestProspectus, onPoliciesClick }) => {
                 <div className="pt-16 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-8 text-ivory/20 text-sm font-light tracking-widest uppercase">
                     <p>&copy; 2026 Athenia High School. All rights reserved.</p>
                     <div className="flex gap-10">
+                        <button onClick={onDisclosureClick} className="hover:text-champagne transition-colors uppercase tracking-widest text-[10px] font-bold">Mandatory Disclosure</button>
                         <button onClick={onPoliciesClick} className="hover:text-champagne transition-colors uppercase tracking-widest text-[10px] font-bold">Institutional Policies</button>
-                        <li><button onClick={onRequestProspectus} className="hover:text-champagne transition-colors text-left">Request Prospectus</button></li>
+                        <li><button onClick={onRequestProspectus} className="hover:text-champagne transition-colors text-left uppercase tracking-widest text-[10px] font-bold">Request Prospectus</button></li>
                         <a href="#" className="hover:text-champagne transition-colors">Privacy Policy</a>
                     </div>
                 </div>
