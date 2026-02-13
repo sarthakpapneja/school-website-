@@ -26,13 +26,29 @@ const ApplicationModal = ({ isOpen, onClose }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         setLoading(true);
-        // Simulate API call
-        await new Promise(resolve => setTimeout(resolve, 2000));
 
-        // Success state
-        toast.success('Legacy request submitted!');
-        setStep(4);
-        setLoading(false);
+        const payload = {
+            access_key: import.meta.env.VITE_WEB3FORMS_KEY || 'YOUR_ACCESS_KEY_HERE',
+            subject: `New Aspiration: ${formData.studentName} for Grade ${formData.grade}`,
+            from_name: 'Athenia High Portal',
+            ...formData
+        };
+
+        try {
+            const response = await axios.post('https://api.web3forms.com/submit', payload);
+
+            if (response.data.success) {
+                toast.success('Legacy request submitted!');
+                setStep(4);
+            } else {
+                toast.error('Portal transmission failed. Please try again.');
+            }
+        } catch (error) {
+            console.error('Portal Error:', error);
+            toast.error('Celestial error occurred. Please try again.');
+        } finally {
+            setLoading(false);
+        }
     };
 
     if (!isOpen) return null;
