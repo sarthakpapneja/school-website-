@@ -4,31 +4,31 @@ import { BookOpen, FlaskConical, Globe, Palette } from 'lucide-react';
 const departments = [
     {
         id: 'stem',
-        name: 'Science & Technology Wing',
-        description: 'Advanced research in Physics, Chemistry, and Biology within our NCERT-aligned laboratories.',
+        name: 'Science & Research Lab',
+        description: 'Advanced experimentation in Chemistry and Physics within our NCERT-aligned laboratories.',
         icon: <FlaskConical className="text-champagne" size={24} />,
-        image: "/assets/school_images/f1908a_7c2f4d5635154a0ab0b9a109208f6427~mv2.jpeg" // Focus on learning/classroom
+        image: "/assets/school_images/f1908a_37d4449a23cf4c34b0142071f1d48cf7~mv2.jpg" // Chemistry Lab
     },
     {
         id: 'humanities',
-        name: 'Liberal Arts & Social Sciences',
-        description: 'Critical analysis of History, Geography, and Political Science to understand the global human condition.',
+        name: 'Liberal Arts & Society',
+        description: 'Collaborative analysis of History and Geography to understand the global human condition.',
         icon: <Globe className="text-champagne" size={24} />,
-        image: "/assets/school_images/f1908a_2ee20303608a47e0b5ece311143eb394~mv2.jpg" // Students in academic setting
+        image: "/assets/school_images/f1908a_2ee20303608a47e0b5ece311143eb394~mv2.jpg" // Students on stairs
     },
     {
         id: 'arts',
-        name: 'Creative & Performing Arts',
-        description: 'Nurturing creative expression through Fine Arts, Music, and Dramatic performance as per CBSE guidelines.',
+        name: 'Creative & Performance',
+        description: 'Nurturing theatrical expression and confidence through our signature "Athenia Express" protocols.',
         icon: <Palette className="text-champagne" size={24} />,
-        image: "/assets/school_images/f1908a_37d4449a23cf4c34b0142071f1d48cf7~mv2.jpg" // Hopefully more expressive
+        image: "/assets/school_images/f1908a_ecb548c109fd47dbb7d29796ca3bf6f0~mv2.jpeg" // Athenia Express photo
     },
     {
         id: 'classics',
-        name: 'Value Education & Holistic Growth',
-        description: 'Developing character and leadership through timeless wisdom and personality development, aligned with NEP 2020.',
+        name: 'Outdoor Learning & Growth',
+        description: 'Developing character through nature-integrated learning and personality development, aligned with NEP 2020.',
         icon: <BookOpen className="text-champagne" size={24} />,
-        image: "/assets/school_images/f1908a_ecb548c109fd47dbb7d29796ca3bf6f0~mv2.jpeg" // Peaceful campus environment
+        image: "/assets/school_images/f1908a_7c2f4d5635154a0ab0b9a109208f6427~mv2.jpeg" // Group in forest
     }
 ];
 
