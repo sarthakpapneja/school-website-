@@ -14,12 +14,27 @@ const Footer = ({ onPortalClick, onRequestProspectus, onPoliciesClick, onDisclos
         if (!email) return;
         setLoading(true);
 
-        // Simulate API call
-        setTimeout(() => {
-            toast.success('Joined the inner circle!');
-            setEmail('');
+        const payload = {
+            access_key: import.meta.env.VITE_WEB3FORMS_KEY || 'YOUR_ACCESS_KEY_HERE',
+            subject: 'New Inner Circle Subscription',
+            from_name: 'Athenia High Web',
+            email: email
+        };
+
+        try {
+            const response = await axios.post('https://api.web3forms.com/submit', payload);
+            if (response.data.success) {
+                toast.success('Joined the inner circle!');
+                setEmail('');
+            } else {
+                toast.error('Subscription failed. Please try again.');
+            }
+        } catch (error) {
+            console.error('Newsletter Error:', error);
+            toast.error('Connection error. Please try again.');
+        } finally {
             setLoading(false);
-        }, 1500);
+        }
     };
 
 
