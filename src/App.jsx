@@ -100,7 +100,7 @@ function App() {
       <ImpactCTA onApply={openApply} onRequestProspectus={openProspectus} />
       <Footer onPortalClick={openPortal} onRequestProspectus={openProspectus} onPoliciesClick={openPolicies} />
 
-      <Chatbot />
+      <Chatbot isPortalOpen={isPortalOpen} />
 
       <ApplicationModal
         isOpen={isApplyOpen}

@@ -42,6 +42,41 @@ const FAQ_FLOWS = {
             { label: 'Back to Start', next: 'start' }
         ]
     },
+    transport: {
+        message: "Athenia operates safe, GPS-enabled transport across key city routes. Detailed stop-wise routes are shared at the time of admission.",
+        options: [
+            { label: 'Admissions FAQs', next: 'admissions' },
+            { label: 'Back to Start', next: 'start' }
+        ]
+    },
+    timings: {
+        message: "The regular school day runs approximately from 8:00 AM to 2:00 PM, with special schedules for junior classes and examination days.",
+        options: [
+            { label: 'Class Schedule', next: 'schedule' },
+            { label: 'Back to Start', next: 'start' }
+        ]
+    },
+    contact: {
+        message: "You can reach the Athenia Admissions Office via the contact details on the website footer. Share your name, class of interest, and a callback number for a curated response.",
+        options: [
+            { label: 'Admissions 2024-25', next: 'admissions' },
+            { label: 'Back to Start', next: 'start' }
+        ]
+    },
+    schedule: {
+        message: "Our timetable balances core academics, labs, sports, and value education. Detailed daily schedule is shared in the Parent Portal after admission.",
+        options: [
+            { label: 'Curriculum & Academics', next: 'curriculum' },
+            { label: 'Back to Start', next: 'start' }
+        ]
+    },
+    curriculum: {
+        message: "Athenia follows a CBSE-aligned curriculum with a strong focus on research-based learning, Olympiad preparation, and communication skills.",
+        options: [
+            { label: 'Scholarships', next: 'scholarships' },
+            { label: 'Back to Start', next: 'start' }
+        ]
+    },
     // Leaf nodes
     process: { message: "1. Online Registration. 2. Interactive Session with Principal. 3. Document Verification. 4. Admission Confirmation.", options: [{ label: 'Back to Start', next: 'start' }] },
     documents: { message: "Birth Certificate, Aadhaar Card, Previous Report Card, and 4 Passport Photos are required.", options: [{ label: 'Back to Start', next: 'start' }] },
@@ -51,27 +86,90 @@ const FAQ_FLOWS = {
     scholarship_apply: { message: "Indicate your interest during the application modal submission or mention it during the school visit.", options: [{ label: 'Back to Start', next: 'start' }] },
 };
 
-const Chatbot = () => {
+const Chatbot = ({ isPortalOpen }) => {
     const [isOpen, setIsOpen] = useState(false);
     const [messages, setMessages] = useState([
         { type: 'bot', text: FAQ_FLOWS.start.message, options: FAQ_FLOWS.start.options }
     ]);
     const scrollRef = useRef(null);
+    const [inputValue, setInputValue] = useState('');
+    const [isTyping, setIsTyping] = useState(false);
+
+    // Close chatbot if portal opens
+    useEffect(() => {
+        if (isPortalOpen && isOpen) {
+            setIsOpen(false);
+        }
+    }, [isPortalOpen, isOpen]);
 
     useEffect(() => {
         if (scrollRef.current) {
             scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
         }
-    }, [messages]);
+    }, [messages, isTyping]);
+
+    const resolveIntentFromText = (rawText) => {
+        const text = rawText.toLowerCase();
+
+        if (text.includes('admission') || text.includes('apply') || text.includes('seat')) return 'admissions';
+        if (text.includes('fee') || text.includes('fees') || text.includes('payment')) return 'fees';
+        if (text.includes('scholar')) return 'scholarships';
+        if (text.includes('age') || text.includes('criteria')) return 'age';
+        if (text.includes('bus') || text.includes('transport') || text.includes('route')) return 'transport';
+        if (text.includes('time') || text.includes('timing') || text.includes('hours')) return 'timings';
+        if (text.includes('contact') || text.includes('phone') || text.includes('call')) return 'contact';
+        if (text.includes('schedule') || text.includes('timetable')) return 'schedule';
+        if (text.includes('curriculum') || text.includes('subject') || text.includes('academics')) return 'curriculum';
+
+        return null;
+    };
+
+    const pushBotMessage = (flowKey, fallbackText) => {
+        const flow = flowKey ? FAQ_FLOWS[flowKey] : null;
+        const botPayload = flow
+            ? { type: 'bot', text: flow.message, options: flow.options }
+            : {
+                type: 'bot',
+                text:
+                    fallbackText ||
+                    "I couldn't perfectly understand that, but I can help with admissions, fees, scholarships, transport, age criteria, or curriculum. Choose an option below to continue.",
+                options: FAQ_FLOWS.start.options
+            };
+
+        setIsTyping(true);
+        setTimeout(() => {
+            setMessages(prev => [...prev, botPayload]);
+            setIsTyping(false);
+        }, 600);
+    };
 
     const handleOptionClick = (option) => {
         const nextFlow = FAQ_FLOWS[option.next];
         setMessages(prev => [
             ...prev,
-            { type: 'user', text: option.label },
-            { type: 'bot', text: nextFlow.message, options: nextFlow.options }
+            { type: 'user', text: option.label }
         ]);
+        pushBotMessage(option.next);
     };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        if (!inputValue.trim() || isTyping) return;
+
+        const userText = inputValue.trim();
+        setInputValue('');
+
+        setMessages(prev => [
+            ...prev,
+            { type: 'user', text: userText }
+        ]);
+
+        const intent = resolveIntentFromText(userText);
+        pushBotMessage(intent);
+    };
+
+    // Hide chatbot icon and window while the portal is open
+    if (isPortalOpen) return null;
 
     return (
         <div className="fixed bottom-8 right-8 z-[1000] font-sans">
@@ -126,20 +224,46 @@ const Chatbot = () => {
                                     </div>
                                 </motion.div>
                             ))}
+
+                            {isTyping && (
+                                <motion.div
+                                    initial={{ opacity: 0, x: -10 }}
+                                    animate={{ opacity: 1, x: 0 }}
+                                    className="flex justify-start"
+                                >
+                                    <div className="max-w-[70%] p-3 rounded-2xl text-[10px] leading-relaxed bg-white/5 text-ivory/60 border border-white/5 flex items-center gap-2">
+                                        <span className="inline-flex gap-1">
+                                            <span className="w-1.5 h-1.5 rounded-full bg-champagne/70 animate-bounce" />
+                                            <span className="w-1.5 h-1.5 rounded-full bg-champagne/50 animate-bounce [animation-delay:120ms]" />
+                                            <span className="w-1.5 h-1.5 rounded-full bg-champagne/30 animate-bounce [animation-delay:240ms]" />
+                                        </span>
+                                        <span>Crafting a response...</span>
+                                    </div>
+                                </motion.div>
+                            )}
                         </div>
 
-                        {/* Footer Input Placeholder */}
-                        <div className="p-6 pt-0">
+                        {/* Footer Input */}
+                        <form className="p-6 pt-0" onSubmit={handleSubmit}>
                             <div className="relative">
-                                <input 
-                                    disabled
-                                    placeholder="Type a message..." 
-                                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-[10px] text-ivory/20 focus:outline-none"
+                                <input
+                                    value={inputValue}
+                                    onChange={(e) => setInputValue(e.target.value)}
+                                    placeholder="Ask about admissions, fees, transport..."
+                                    className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-[10px] text-ivory focus:outline-none placeholder:text-ivory/30"
                                 />
-                                <Send size={16} className="absolute right-4 top-1/2 -translate-y-1/2 text-ivory/10" />
+                                <button
+                                    type="submit"
+                                    disabled={!inputValue.trim() || isTyping}
+                                    className="absolute right-2 top-1/2 -translate-y-1/2 p-2 rounded-full bg-champagne/90 text-midnight disabled:opacity-40 hover:bg-white transition-colors"
+                                >
+                                    <Send size={14} />
+                                </button>
                             </div>
-                            <p className="text-[8px] text-center mt-4 text-ivory/20 uppercase tracking-[0.2em]">Seek Wisdom, Empower Minds</p>
-                        </div>
+                            <p className="text-[8px] text-center mt-4 text-ivory/20 uppercase tracking-[0.2em]">
+                                Ask in your own words or use the quick options above.
+                            </p>
+                        </form>
                     </motion.div>
                 ) : (
                     <motion.button
